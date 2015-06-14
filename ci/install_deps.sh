@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 echo -e "\n\n### Installing App Engine SDK"
 cd ci
@@ -7,4 +7,4 @@ unzip -q ./appengine_sdk.zip
 cd ..
 
 echo -e "\n\n### Installing pip requirements"
-pip install -t lib -r requirements.txt
+pip install -r requirements.txt

@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 echo -e  "\n\n### Cleaning up"
 rm -rf ./ci/google_appengine
