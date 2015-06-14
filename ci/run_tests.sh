@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 echo -e "\n\n### Adding SDK to Python path"
 export PYTHONPATH="${PYTHONPATH}:$(pwd)/ci/google_appengine"
