@@ -13,3 +13,12 @@ libraries:
   version: "2.6"
 - name: markupsafe
   version: "0.15"
+
+skip_files:
+- ^(.*/)?#.*#$
+- ^(.*/)?.*~$
+- ^(.*/)?.*\.py[co]$
+- ^(.*/)?.*/RCS/.*$
+- ^(.*/)?\..*$
+- appengine_sdk.zip
+- (google_appengine/.*)|
