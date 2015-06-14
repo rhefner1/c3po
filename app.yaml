@@ -21,4 +21,4 @@ skip_files:
 - ^(.*/)?.*/RCS/.*$
 - ^(.*/)?\..*$
 - appengine_sdk.zip
-- (google_appengine/.*)|
+- ^(.*/)?.*google_appengine/.*$
