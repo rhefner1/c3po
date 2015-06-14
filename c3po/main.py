@@ -6,7 +6,7 @@ from flask import abort, Flask, request
 
 from c3po.message import Message
 
-SUCCESS = ("", 200)
+SUCCESS = ('', 200)
 
 APP = Flask(__name__)
 APP.config['DEBUG'] = True
@@ -30,7 +30,8 @@ def message():
 
     try:
         msg.process_message()
-    except ValueError:
+    except ValueError as error:
+        logging.debug("Failed processing message because: %s", error.message)
         abort(400)
 
     return SUCCESS
@@ -39,7 +40,7 @@ def message():
 @APP.route('/test')
 def test():
     """Says hello!"""
-    return "Hello!"
+    return 'Hello!'
 
 
 @APP.errorhandler(404)
