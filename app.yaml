@@ -6,7 +6,7 @@ threadsafe: yes
 
 handlers:
 - url: .*
-  script: main.app
+  script: c3po.main.app
 
 libraries:
 - name: jinja2
