@@ -1,2 +1,4 @@
 language: python
-script: ./ci/run_ci.sh
+install: ./ci/install_deps.sh
+script: ./ci/run_tests.sh
+after_script: ./ci/cleanup.sh
