@@ -2,7 +2,7 @@ application: c3po-bot
 version: 1
 runtime: python27
 api_version: 1
-threadsafe: false
+threadsafe: yes
 
 handlers:
 - url: .*
