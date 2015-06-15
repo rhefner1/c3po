@@ -7,3 +7,6 @@ Here's what I can do:
  - 
 
 I was lovingly created by [Ryan Hefner](http://r.hefner1.com)
+
+## Travis Status
+![Travis Build Status](https://api.travis-ci.org/rhefner1/c3po.svg)
