@@ -6,5 +6,5 @@ curl -o ./appengine_sdk.zip https://storage.googleapis.com/appengine-sdks/featur
 unzip -q ./appengine_sdk.zip
 cd ..
 
-echo -e "\n\n### Installing pip requirements"
+echo -e "\n### Installing pip requirements"
 pip install -r requirements.txt
