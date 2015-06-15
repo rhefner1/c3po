@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-echo -e "\n\n### Adding SDK to Python path"
+echo -e "### Adding SDK to Python path"
 export PYTHONPATH="${PYTHONPATH}:$(pwd)/ci/google_appengine"
 export PYTHONPATH="${PYTHONPATH}:$(pwd)/ci/google_appengine/lib/yaml-3.10"
 echo "Current PYTHONPATH: ${PYTHONPATH}"
