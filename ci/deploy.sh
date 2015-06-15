@@ -2,7 +2,7 @@
 
 if [[ $TRAVIS_BRANCH == "master" && $TRAVIS_PULL_REQUEST == false ]]
 then
-    echo -e "\n\n### Installing pip requirements to lib directory"
+    echo -e "### Installing pip requirements to lib directory"
     pip install -t lib -r requirements.txt
 
     echo -e "\n\n### Deploying to App Engine"
