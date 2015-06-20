@@ -6,7 +6,7 @@ threadsafe: yes
 
 handlers:
 - url: .*
-  script: c3po.main.app
+  script: c3po.main.APP
   secure: always
 
 libraries:

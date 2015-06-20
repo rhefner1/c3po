@@ -1,15 +1,18 @@
-from flask import abort, Flask, request
+"""Handles the web routing for incoming API calls"""
+
 import logging
+
+from flask import abort, Flask, request
 
 from c3po.message import Message
 
 SUCCESS = ("", 200)
 
-app = Flask(__name__)
-app.config['DEBUG'] = True
+APP = Flask(__name__)
+APP.config['DEBUG'] = True
 
 
-@app.route('/', methods=['POST'])
+@APP.route('/', methods=['POST'])
 def message():
     """Processes a message and returns a response."""
     group_id = request.form['group_id']
@@ -19,9 +22,9 @@ def message():
     if not group_id or not name or not text:
         abort(400)
 
-    logging.info("Group ID: %s" % group_id)
-    logging.info("Name: %s" % name)
-    logging.info("Text: %s" % text)
+    logging.info("Group ID: %s", group_id)
+    logging.info("Name: %s", name)
+    logging.info("Text: %s", text)
 
     msg = Message(group_id, name, text)
 
@@ -33,13 +36,13 @@ def message():
     return SUCCESS
 
 
-@app.route('/test')
+@APP.route('/test')
 def test():
     """Says hello!"""
     return "Hello!"
 
 
-@app.errorhandler(404)
-def page_not_found(e):
+@APP.errorhandler(404)
+def page_not_found(error):
     """Return a custom 404 error."""
     return 'Sorry, nothing at this URL.', 404
