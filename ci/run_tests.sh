@@ -7,3 +7,5 @@ echo "Current PYTHONPATH: ${PYTHONPATH}"
 
 echo -e "\n### Running unit tests"
 python -m unittest discover
+pylint c3po
+pylint tests
