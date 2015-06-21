@@ -7,5 +7,5 @@ echo "Current PYTHONPATH: ${PYTHONPATH}"
 
 echo -e "\n### Running unit tests"
 python -m unittest discover
-pylint c3po
-pylint tests
+pylint c3po --disable=no-member --disable too-few-public-methods --disable unused-argument
+pylint tests --disable=no-member --disable too-few-public-methods --disable unused-argument --disable missing-docstring --disable protected-access
