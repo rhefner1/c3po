@@ -1,3 +1,5 @@
+"""Defines the Settings model"""
+
 from google.appengine.ext import ndb
 
 
