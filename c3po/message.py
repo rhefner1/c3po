@@ -2,12 +2,19 @@
 
 import logging
 import re
+import urllib
+
+from google.appengine.api import urlfetch
 
 from c3po import responders
 from c3po import settings
 
+GROUPME_API_ENDPOINT = 'https://api.groupme.com'
+GROUPME_API_HEADERS = {'Content-Type': 'application/x-www-form-urlencoded'}
+GROUPME_API_PATH = '/v3/bots/post'
+
 MENTIONED_MAP = {
-    "(hi|hello)": responders.hello
+    '(hi|hello)': responders.hello
 }
 
 NOT_MENTIONED_MAP = {
@@ -27,6 +34,18 @@ class Message(object):
         self.name = name
         self.text = text
 
+    def _generate_api_post_body(self, response):
+        """Generates the request body to be sent"""
+        bot_id = self._get_bot_id()
+        logging.info("Sending to bot_id: %s", bot_id)
+
+        body = {
+            'bot_id': bot_id,
+            'text': response
+        }
+
+        return urllib.urlencode(body)
+
     @staticmethod
     def _generate_regex(regex):
         """Generates the regex needed to find the correct responder."""
@@ -45,7 +64,7 @@ class Message(object):
                 "Found multiple Settings objects with group_id: %s. Cannot"
                 "continue." % self.group_id)
 
-        return results.fetch(1)[0]
+        return results.fetch(1)[0].bot_id
 
     def process_message(self):
         """Finds the responder and uses it to send a response."""
@@ -72,6 +91,18 @@ class Message(object):
         """Sends the given response to the API."""
         logging.info("Sending this response: %s", response)
 
-        bot_id = self._get_bot_id()
-        logging.info("Sending to bot_id: %s", bot_id)
-        return
+        post_body = self._generate_api_post_body(response)
+        result = urlfetch.fetch(url=GROUPME_API_ENDPOINT + GROUPME_API_PATH,
+                                payload=post_body,
+                                method=urlfetch.POST,
+                                headers=GROUPME_API_HEADERS)
+
+        if result.status_code != 202:
+            logging.debug(
+                "GroupMe API was called with body: %s", str(post_body))
+            logging.debug("GroupMe API call content: %s", result.content)
+            raise RuntimeError(
+                "GroupMe API call returned status: %s. Log has more details." %
+                str(result.status_code))
+        else:
+            logging.info('GroupMe API call returned successfully.')
