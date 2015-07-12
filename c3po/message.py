@@ -5,7 +5,18 @@ import logging
 import re
 
 REGEX_MENTIONED = r'(C-3PO|c3po)'
-REGEX_PRE = r'(\s+)'
+
+# Regex matching either:
+#   1) beginning of string
+#   2) one or many whitespace chars
+REGEX_PRE = r'(^|\s+)'
+
+# Regex matching either:
+#   1) end of string
+#   2) any whitespace
+#   3) a '?' character
+#   4) a '.' character
+#   5) a '!' character
 REGEX_POST = r'($|\s+|\?+|\.+|\!+)'
 
 
