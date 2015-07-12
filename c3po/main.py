@@ -2,48 +2,48 @@
 
 import logging
 
-from flask import abort, Flask, request
+import flask
 
-from c3po.message import Message
+from c3po import message
+
+APP = flask.Flask(__name__)
+APP.config['DEBUG'] = True
 
 SUCCESS = ('', 200)
 
-APP = Flask(__name__)
-APP.config['DEBUG'] = True
-
 
 @APP.route('/', methods=['POST'])
-def message():
+def handle_message():
     """Processes a message and returns a response."""
-    group_id = request.form['group_id']
-    name = request.form['name']
-    text = request.form['text']
+    group_id = flask.request.form['group_id']
+    name = flask.request.form['name']
+    text = flask.request.form['text']
 
     if not group_id or not name or not text:
-        abort(400)
+        flask.abort(400)
 
     logging.info("Group ID: %s", group_id)
     logging.info("Name: %s", name)
     logging.info("Text: %s", text)
 
-    msg = Message(group_id, name, text)
+    msg = message.Message(group_id, name, text)
 
     try:
         msg.process_message()
     except ValueError as error:
         logging.debug("Failed processing message because: %s", error.message)
-        abort(400)
+        flask.abort(500)
 
     return SUCCESS
 
 
-@APP.route('/test')
-def test():
-    """Says hello!"""
-    return 'Hello!'
+@APP.route('/ping')
+def ping():
+    """Sample web handler to see if the server is alive."""
+    return 'pong'
 
 
 @APP.errorhandler(404)
 def page_not_found(error):
     """Return a custom 404 error."""
-    return 'Sorry, nothing at this URL.', 404
+    return 'Sorry, nothing at this URL. Error msg: %s' % error, 404

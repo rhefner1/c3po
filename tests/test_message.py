@@ -4,10 +4,7 @@ import mock
 from google.appengine.api import urlfetch
 
 from c3po import message
-
-GROUP_ID = 'abc'
-NAME = 'Billy'
-TEXT = ''
+from tests import fakes
 
 
 class TestRegex(unittest.TestCase):
@@ -19,12 +16,14 @@ class TestRegex(unittest.TestCase):
 
 class TestGeneratePostBody(unittest.TestCase):
     def setUp(self):
-        self.msg = message.Message(GROUP_ID, NAME, TEXT)
+        settings_patcher = mock.patch('c3po.message.Message._get_settings')
+        self.addCleanup(settings_patcher.stop)
+        self.mock_settings = settings_patcher.start()
+        self.mock_settings.return_value = fakes.FakeBaseResponseMgr()
 
-    @mock.patch('c3po.message.Message._get_bot_id')
-    def test_generate_api_post_body(self, mock_get_bot_id):
-        mock_get_bot_id.return_value = '123'
+        self.msg = message.Message(fakes.GROUP_ID, fakes.NAME, fakes.TEXT)
 
+    def test_generate_api_post_body(self):
         actual_post_body = self.msg._generate_api_post_body('sample')
         expected_post_body = 'text=sample&bot_id=123'
 
@@ -33,7 +32,12 @@ class TestGeneratePostBody(unittest.TestCase):
 
 class TestSendResponse(unittest.TestCase):
     def setUp(self):
-        self.msg = message.Message(GROUP_ID, NAME, TEXT)
+        settings_patcher = mock.patch('c3po.message.Message._get_settings')
+        self.addCleanup(settings_patcher.stop)
+        self.mock_settings = settings_patcher.start()
+        self.mock_settings.return_value = fakes.FakeBaseResponseMgr()
+
+        self.msg = message.Message(fakes.GROUP_ID, fakes.NAME, fakes.TEXT)
 
     @mock.patch('c3po.message.Message._generate_api_post_body')
     @mock.patch('google.appengine.api.urlfetch.fetch')
