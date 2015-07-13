@@ -12,7 +12,8 @@ TEXT = ''
 class FakeBaseResponseMgr(mock.Mock):
     def __init__(self):
         super(FakeBaseResponseMgr, self).__init__()
-        self.bot_id = BOT_ID
+        self.groupme_conf = mock.Mock()
+        self.groupme_conf.bot_id = BOT_ID
 
     @staticmethod
     def get_response_mgr():
@@ -22,7 +23,7 @@ class FakeBaseResponseMgr(mock.Mock):
 class FakeBeastsResponseMgr(mock.Mock):
     def __init__(self):
         super(FakeBeastsResponseMgr, self).__init__()
-        self.bot_id = BOT_ID
+        self.groupme_conf.bot_id = BOT_ID
 
     @staticmethod
     def get_response_mgr():

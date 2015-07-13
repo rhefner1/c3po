@@ -2,6 +2,7 @@
 
 from google.appengine.ext import ndb
 
+from c3po.provider.groupme import db as groupme_db
 from c3po.response_mgr import beasts
 
 RESPONSE_MGR_MAP = {
@@ -11,9 +12,9 @@ RESPONSE_MGR_MAP = {
 
 class Settings(ndb.Model):
     """Models the mapping between group ID and bot ID."""
-    group_id = ndb.StringProperty()
-    bot_id = ndb.StringProperty()
-    response_mgr_name = ndb.StringProperty()
+    groupme_conf = ndb.StructuredProperty(groupme_db.GroupmeConf)
+    provider_name = ndb.StringProperty(required=True)
+    response_mgr_name = ndb.StringProperty(required=True)
 
     def get_response_mgr(self):
         """Maps and initializes the response manager."""

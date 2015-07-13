@@ -5,8 +5,11 @@ api_version: 1
 threadsafe: yes
 
 handlers:
+- url: /groupme
+  script: c3po.provider.groupme.receive.APP
+
 - url: .*
-  script: c3po.main.APP
+  script: c3po.http_handler.APP
   secure: always
 
 libraries:

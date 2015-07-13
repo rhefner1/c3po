@@ -1,10 +1,10 @@
-"""Handles the web routing for incoming API calls"""
+"""Handles message receiving for GroupMe provider."""
 
 import logging
 
 import flask
 
-from c3po import message
+from c3po.provider.groupme import send
 
 APP = flask.Flask(__name__)
 APP.config['DEBUG'] = True
@@ -12,8 +12,8 @@ APP.config['DEBUG'] = True
 SUCCESS = ('', 200)
 
 
-@APP.route('/', methods=['POST'])
-def handle_message():
+@APP.route('/groupme', methods=['POST'])
+def receive_message():
     """Processes a message and returns a response."""
     group_id = flask.request.form['group_id']
     name = flask.request.form['name']
@@ -26,7 +26,7 @@ def handle_message():
     logging.info("Name: %s", name)
     logging.info("Text: %s", text)
 
-    msg = message.Message(group_id, name, text)
+    msg = send.GroupmeMessage(group_id, name, text)
 
     try:
         msg.process_message()
@@ -35,15 +35,3 @@ def handle_message():
         flask.abort(500)
 
     return SUCCESS
-
-
-@APP.route('/ping')
-def ping():
-    """Sample web handler to see if the server is alive."""
-    return 'pong'
-
-
-@APP.errorhandler(404)
-def page_not_found(error):
-    """Return a custom 404 error."""
-    return 'Sorry, nothing at this URL. Error msg: %s' % error, 404
