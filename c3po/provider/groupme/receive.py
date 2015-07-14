@@ -33,11 +33,6 @@ def receive_message():
         return SUCCESS
 
     msg = send.GroupmeMessage(group_id, name, text)
-
-    try:
-        msg.process_message()
-    except ValueError as error:
-        logging.debug("Failed processing message because: %s", error.message)
-        flask.abort(500)
+    msg.process_message()
 
     return SUCCESS
