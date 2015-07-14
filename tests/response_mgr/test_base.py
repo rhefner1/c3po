@@ -34,6 +34,12 @@ class TestBaseResponders(unittest.TestCase):
 
         self.mock_send.assert_called_with('pong')
 
+    def test_wolf(self):
+        self.msg.text = 'c3po wolf'
+        self.msg.process_message()
+
+        self.mock_send.assert_called_with('PACK!')
+
 
 if __name__ == '__main__':
     unittest.main()
