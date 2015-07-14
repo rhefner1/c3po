@@ -13,6 +13,7 @@ class BaseResponseManager(object):
             '(hi|hello)': self.hello,
             'motivate (.+)': self.motivate,
             'ping': self.ping,
+            'thank( you|s)': self.thanks,
             'wolf': self.wolf,
         }
 
@@ -34,13 +35,18 @@ class BaseResponseManager(object):
     def motivate(chunks):
         """Motivates a person!"""
         name = chunks[2]
-        random_motivation = random.choice(text_chunks.motiviations)
+        random_motivation = random.choice(text_chunks.MOTIVATIONS)
         return random_motivation % name
 
     @staticmethod
     def ping(_):
         """Pongs back."""
         return 'pong'
+
+    @staticmethod
+    def thanks(_):
+        """You're welcome!"""
+        return "%s!" % random.choice(text_chunks.THANKS_RESPONSES)
 
     @staticmethod
     def wolf(_):
