@@ -45,7 +45,7 @@ class Message(object):
                 logging.info("Responder selected: %s", str(responder))
                 return full_regex, responder
 
-        return None
+        return None, None
 
     @staticmethod
     def _generate_regex(regex):
@@ -54,8 +54,7 @@ class Message(object):
 
     def process_message(self):
         """Finds the responder and uses it to send a response."""
-        full_regex = None
-        responder = None
+        full_regex, responder = None, None
         if re.search(REGEX_MENTIONED, self.text.lower()):
             # Check for matches where C-3PO is mentioned
             full_regex, responder = self._get_responder(
