@@ -6,6 +6,7 @@ class BaseResponseManager(object):
 
     def __init__(self):
         self.mentioned_map = {
+            'created you': self.creator,
             '(hi|hello)': self.hello,
             'ping': self.ping,
             'wolf': self.wolf,
@@ -14,6 +15,11 @@ class BaseResponseManager(object):
         self.not_mentioned_map = {
 
         }
+
+    @staticmethod
+    def creator(_):
+        """Tells who the real creator is."""
+        return 'My friend @Hef (and some of his friends) brought me to life!'
 
     @staticmethod
     def hello(_):

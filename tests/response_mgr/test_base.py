@@ -21,6 +21,13 @@ class TestBaseResponders(unittest.TestCase):
 
         self.msg = send.GroupmeMessage(fakes.GROUP_ID, fakes.NAME, '')
 
+    def test_creator(self):
+        self.msg.text = 'c3po who created you?'
+        self.msg.process_message()
+
+        self.mock_send.assert_called_with(
+            'My friend @Hef (and some of his friends) brought me to life!')
+
     def test_hello(self):
         self.msg.text = 'c3po hello'
         self.msg.process_message()
