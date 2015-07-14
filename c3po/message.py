@@ -1,17 +1,8 @@
 """Contains the data model for a Message and the actions to process it."""
 
+import abc
 import logging
 import re
-import urllib
-
-from google.appengine.api import urlfetch
-
-from c3po import settings
-
-GROUPME_API_ENDPOINT = 'https://api.groupme.com'
-GROUPME_API_HEADERS = {'Content-Type': 'application/x-www-form-urlencoded'}
-GROUPME_API_PATH = '/v3/bots/post'
-GROUPME_API_FULL = "%s%s" % (GROUPME_API_ENDPOINT, GROUPME_API_PATH)
 
 REGEX_MENTIONED = r'(C-3PO|c3po)'
 REGEX_PRE = r'(\s+)'
@@ -23,30 +14,17 @@ class Message(object):
     response. Overridden and extended by a provider to get provider-specific
     send logic."""
 
-    def __init__(self, group_id, name, text):
-        msg_settings = self._get_settings(group_id)
+    __metaclass__ = abc.ABCMeta
 
-        self.bot_id = msg_settings.bot_id
+    def __init__(self, name, text):
         self.name = name
-        self.response_mgr = msg_settings.get_response_mgr()
+        self.response_mgr = None
         self.text = text
 
-    @staticmethod
-    def _get_settings(group_id):
+    @abc.abstractmethod
+    def _get_settings(self, group_id):
         """Finds the Settings object associated with group_id."""
-        results = settings.Settings.query(
-            settings.Settings.group_id == group_id)
-
-        if results.count() <= 0:
-            raise ValueError(
-                "No Settings objects found matching group_id: %s. "
-                "Cannot continue." % group_id)
-        elif results.count() > 1:
-            raise RuntimeError(
-                "Found multiple Settings objects with group_id: %s. "
-                "Cannot continue." % group_id)
-
-        return results.fetch(1)[0]
+        return
 
     def _get_responder(self, responder_map):
         """Returns the responder that is registered for the given text."""
@@ -56,15 +34,6 @@ class Message(object):
                 return responder
 
         return None
-
-    def _generate_api_post_body(self, response):
-        """Generates the request body to be sent"""
-        body = {
-            'bot_id': self.bot_id,
-            'text': response
-        }
-
-        return urllib.urlencode(body)
 
     @staticmethod
     def _generate_regex(regex):
@@ -89,25 +58,9 @@ class Message(object):
             return
 
         response = responder(self.text)
-        self._send_response(response)
+        self._send_message(response)
 
-    def _send_response(self, response):
+    @abc.abstractmethod
+    def _send_message(self, response):
         """Sends the given response to the API."""
-        logging.info("Sending this response: '%s' to bot_id: '%s'",
-                     response, self.bot_id)
-
-        post_body = self._generate_api_post_body(response)
-        result = urlfetch.fetch(url=GROUPME_API_FULL,
-                                payload=post_body,
-                                method=urlfetch.POST,
-                                headers=GROUPME_API_HEADERS)
-
-        if result.status_code != 202:
-            logging.debug(
-                "GroupMe API was called with body: %s", str(post_body))
-            logging.debug("GroupMe API call content: %s", result.content)
-            raise RuntimeError(
-                "GroupMe API call returned status: %s. Log has more details." %
-                str(result.status_code))
-        else:
-            logging.info('GroupMe API call returned successfully.')
+        return
