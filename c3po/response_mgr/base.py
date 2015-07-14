@@ -7,7 +7,8 @@ class BaseResponseManager(object):
     def __init__(self):
         self.mentioned_map = {
             '(hi|hello)': self.hello,
-            '(ping)': self.ping,
+            'ping': self.ping,
+            'wolf': self.wolf,
         }
 
         self.not_mentioned_map = {
@@ -23,3 +24,8 @@ class BaseResponseManager(object):
     def ping(_):
         """Pongs back."""
         return 'pong'
+
+    @staticmethod
+    def wolf(_):
+        """Wolf... pack!"""
+        return 'PACK!'
