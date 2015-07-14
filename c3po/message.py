@@ -40,9 +40,10 @@ class Message(object):
     def _get_responder(self, responder_map):
         """Returns the responder that is registered for the given text."""
         for regex, responder in responder_map.iteritems():
-            if re.search(self._generate_regex(regex), self.text.lower()):
+            full_regex = self._generate_regex(regex)
+            if re.search(full_regex, self.text.lower()):
                 logging.info("Responder selected: %s", str(responder))
-                return responder
+                return full_regex, responder
 
         return None
 
@@ -53,22 +54,24 @@ class Message(object):
 
     def process_message(self):
         """Finds the responder and uses it to send a response."""
+        full_regex = None
         responder = None
         if re.search(REGEX_MENTIONED, self.text.lower()):
             # Check for matches where C-3PO is mentioned
-            responder = self._get_responder(
+            full_regex, responder = self._get_responder(
                 self.response_mgr.mentioned_map)
 
         if not responder:
             # Now checking for the rest of the cases
-            responder = self._get_responder(
+            full_regex, responder = self._get_responder(
                 self.response_mgr.not_mentioned_map)
 
-        if not responder:
+        if not full_regex or not responder:
             logging.info("No responder found for text: '%s'", self.text)
             return
 
-        response = responder(self.text)
+        chunks = re.split(full_regex, self.text)
+        response = responder(chunks)
         self._send_message(response)
 
     @abc.abstractmethod

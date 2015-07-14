@@ -35,6 +35,16 @@ class TestBaseResponders(unittest.TestCase):
         self.mock_send.assert_called_with(
             'Greetings. I am C-3PO, human cyborg relations.')
 
+    @mock.patch('random.choice')
+    def test_motivate(self, mock_random):
+        mock_random.return_value = "You're awesome, %s!"
+
+        self.msg.text = 'c3po motivate Henry'
+        self.msg.process_message()
+
+        self.mock_send.assert_called_with(
+            "You're awesome, Henry!")
+
     def test_ping(self):
         self.msg.text = 'c3po ping'
         self.msg.process_message()
