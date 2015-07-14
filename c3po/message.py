@@ -4,7 +4,7 @@ import abc
 import logging
 import re
 
-REGEX_MENTIONED = r'(C-3PO|c3po)'
+REGEX_MENTIONED = r'(c-3po|c3po)'
 
 # Regex matching either:
 #   1) beginning of string
