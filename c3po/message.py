@@ -43,7 +43,7 @@ class Message(object):
     def process_message(self):
         """Finds the responder and uses it to send a response."""
         responder = None
-        if re.search(REGEX_MENTIONED, self.text):
+        if re.search(REGEX_MENTIONED, self.text.lower()):
             # Check for matches where C-3PO is mentioned
             responder = self._get_responder(
                 self.response_mgr.mentioned_map)

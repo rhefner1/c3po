@@ -1,6 +1,7 @@
 """Handles message receiving for GroupMe provider."""
 
 import logging
+import json
 
 import flask
 
@@ -15,9 +16,10 @@ SUCCESS = ('', 200)
 @APP.route('/groupme', methods=['POST'])
 def receive_message():
     """Processes a message and returns a response."""
-    group_id = flask.request.form['group_id']
-    name = flask.request.form['name']
-    text = flask.request.form['text']
+    msg_data = json.loads(flask.request.data)
+    group_id = msg_data['group_id']
+    name = msg_data['name']
+    text = msg_data['text']
 
     if not group_id or not name or not text:
         flask.abort(400)
