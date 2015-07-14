@@ -2,6 +2,7 @@
 
 import logging
 import json
+import time
 
 import flask
 
@@ -16,6 +17,8 @@ SUCCESS = ('', 200)
 @APP.route('/groupme', methods=['POST'])
 def receive_message():
     """Processes a message and returns a response."""
+    time.sleep(.1)
+
     msg_data = json.loads(flask.request.data)
     group_id = msg_data['group_id']
     name = msg_data['name']
