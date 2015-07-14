@@ -1,0 +1,31 @@
+import unittest
+
+import mock
+
+from c3po.message import Message
+from tests import fakes
+
+
+class TestBaseResponders(unittest.TestCase):
+    def setUp(self):
+        send_patcher = mock.patch('c3po.message.Message._send_response')
+        self.addCleanup(send_patcher.stop)
+        self.mock_send = send_patcher.start()
+
+        settings_patcher = mock.patch('c3po.message.Message._get_settings')
+        self.addCleanup(settings_patcher.stop)
+        self.mock_settings = settings_patcher.start()
+        self.mock_settings.return_value = fakes.FakeBaseResponseMgr()
+
+        self.msg = Message(fakes.GROUP_ID, fakes.NAME, '')
+
+    def test_hello(self):
+        self.msg.text = 'c3po hello'
+        self.msg.process_message()
+
+        self.mock_send.assert_called_with(
+            'Greetings. I am C-3PO, human cyborg relations.')
+
+
+if __name__ == '__main__':
+    unittest.main()
