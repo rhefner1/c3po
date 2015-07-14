@@ -40,7 +40,7 @@ class Message(object):
     def _get_responder(self, responder_map):
         """Returns the responder that is registered for the given text."""
         for regex, responder in responder_map.iteritems():
-            if re.search(self._generate_regex(regex), self.text):
+            if re.search(self._generate_regex(regex), self.text.lower()):
                 logging.info("Responder selected: %s", str(responder))
                 return responder
 
