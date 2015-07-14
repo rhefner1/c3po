@@ -28,6 +28,10 @@ def receive_message():
     logging.info("Name: %s", name)
     logging.info("Text: %s", text)
 
+    if name == 'C-3PO':
+        logging.info("Ignoring request since it's coming from the bot.")
+        return SUCCESS
+
     msg = send.GroupmeMessage(group_id, name, text)
 
     try:
