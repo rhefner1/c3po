@@ -73,6 +73,20 @@ class TestBaseResponders(unittest.TestCase):
         self.mock_send.assert_called_with(
             "You're welcome!")
 
+    @mock.patch('google.appengine.api.urlfetch.fetch')
+    def test_weather(self, mock_fetch):
+        mock_forecast = mock.Mock()
+        mock_forecast.content = fakes.WEATHER_JSON
+        mock_fetch.return_value = mock_forecast
+
+        self.msg.text = 'c3po weather'
+        self.msg.process_message()
+
+        self.mock_send.assert_called_with("It's currently mostly cloudy with a "
+                                          "temperature of 84.25 degrees (feels "
+                                          "like 92.7). I'm predicting rain "
+                                          "tonight and tomorrow afternoon.")
+
     def test_wolf(self):
         self.msg.text = 'c3po wolf'
         self.msg.process_message()
