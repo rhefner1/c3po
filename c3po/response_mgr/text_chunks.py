@@ -18,16 +18,16 @@ MOTIVATIONS = [
 ]
 
 THANKS_RESPONSES = [
-    "you're welcome",
-    "no problem",
-    "not a problem",
-    "no problem at all",
-    "don't mention it",
-    "it's no bother",
-    "it's my pleasure",
-    "my pleasure",
-    "it's nothing",
-    "think nothing of it",
-    "no, no. thank you!",
-    "sure thing",
+    "You're welcome",
+    "No problem",
+    "Not a problem",
+    "No problem at all",
+    "Don't mention it",
+    "It's no bother",
+    "It's my pleasure",
+    "My pleasure",
+    "It's nothing",
+    "Think nothing of it",
+    "No, no. thank you!",
+    "Sure thing",
 ]

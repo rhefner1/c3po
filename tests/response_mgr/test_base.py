@@ -53,13 +53,13 @@ class TestBaseResponders(unittest.TestCase):
 
     @mock.patch('random.choice')
     def test_thanks(self, mock_random):
-        mock_random.return_value = "you're welcome"
+        mock_random.return_value = "You're welcome"
 
         self.msg.text = 'c3po thanks!'
         self.msg.process_message()
 
         self.mock_send.assert_called_with(
-            "you're welcome!")
+            "You're welcome!")
 
     def test_wolf(self):
         self.msg.text = 'c3po wolf'
