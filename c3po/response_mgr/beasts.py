@@ -14,8 +14,9 @@ class BeastsResponseManager(base.BaseResponseManager):
 
         self.not_mentioned_map.update({
             r'babe wait': self.babe_wait,
-            r'gods of war': self.gods_of_war,
+            r'gods of war': self.gods_of_war,            
             r'i like to party': self.like_to_party,
+            r'legit': self.legit,
             r'safe word': self.safe_word,
         })
 
@@ -28,14 +29,20 @@ class BeastsResponseManager(base.BaseResponseManager):
     def gods_of_war(_msg):
         """GODS OF WAR."""
         return 'May your hammer be mighty.'
-
-    @staticmethod
-    def safe_word(_msg):
-        """The safe word is whiskey."""
-        return 'The safe word is: Whhhiskey.'
-
+    
     @staticmethod
     def like_to_party(msg):
         """Babe wait!."""
         return "%s, I know for a fact you don't party. You do *not* party." \
                % msg.name
+    
+    @staticmethod
+    def legit(_msg):
+        """This is legit."""
+        return "I used to be legit. I was too legit. Too legit to quit. But " \
+               "now, I'm not legit."
+
+    @staticmethod
+    def safe_word(_msg):
+        """The safe word is whiskey."""
+        return 'The safe word is: Whhhiskey.'
