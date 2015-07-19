@@ -30,6 +30,7 @@ class Message(object):
     def __init__(self, name, text):
         self.name = name
         self.response_mgr = None
+        self.msg_settings = None
         self.text = text
 
     @abc.abstractmethod
@@ -70,7 +71,7 @@ class Message(object):
             return
 
         chunks = re.split(full_regex, self.text)
-        response = responder(chunks)
+        response = responder(self.msg_settings, chunks)
         self._send_message(response)
 
     @abc.abstractmethod
