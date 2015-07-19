@@ -13,4 +13,10 @@ class BeastsResponseManager(base.BaseResponseManager):
         })
 
         self.not_mentioned_map.update({
+            r'babe wait': self.babe_wait,
         })
+
+    @staticmethod
+    def babe_wait(_settings, _chunks):
+        """Babe wait!."""
+        return 'Babe! Wait! Babe! No!! BABE! NO! BAAAAAAAAABE!!!'

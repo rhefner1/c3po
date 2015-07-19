@@ -37,10 +37,9 @@ class FakeBaseResponseMgr(mock.Mock):
         return base.BaseResponseManager()
 
 
-class FakeBeastsResponseMgr(mock.Mock):
+class FakeBeastsResponseMgr(FakeBaseResponseMgr):
     def __init__(self):
         super(FakeBeastsResponseMgr, self).__init__()
-        self.groupme_conf.bot_id = BOT_ID
 
     @staticmethod
     def get_response_mgr():
