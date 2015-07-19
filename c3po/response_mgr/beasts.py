@@ -14,6 +14,7 @@ class BeastsResponseManager(base.BaseResponseManager):
 
         self.not_mentioned_map.update({
             r'babe wait': self.babe_wait,
+            r'gods of war': self.gods_of_war,
             r'i like to party': self.like_to_party,
             r'safe word': self.safe_word,
         })
@@ -22,6 +23,11 @@ class BeastsResponseManager(base.BaseResponseManager):
     def babe_wait(_msg):
         """Babe wait!."""
         return 'Babe! Wait! Babe! No!! BABE! NO! BAAAAAAAAABE!!!'
+
+    @staticmethod
+    def gods_of_war(_msg):
+        """GODS OF WAR."""
+        return 'May your hammer be mighty.'
 
     @staticmethod
     def safe_word(_msg):
