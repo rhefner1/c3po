@@ -34,6 +34,14 @@ class TestBeastsResponders(unittest.TestCase):
 
         self.mock_send.assert_called_with('May your hammer be mighty.')
 
+    def test_legit(self):
+        self.msg.text = "that's legit"
+        self.msg.process_message()
+
+        self.mock_send.assert_called_with("I used to be legit. I was too "
+                                          "legit. Too legit to quit. But now, "
+                                          "I'm not legit.")
+
     def test_like_to_party(self):
         self.msg.text = 'i like to party'
         self.msg.process_message()
