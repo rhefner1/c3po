@@ -28,6 +28,13 @@ class TestBeastsResponders(unittest.TestCase):
         self.mock_send.assert_called_with('Babe! Wait! Babe! No!! BABE! NO! '
                                           'BAAAAAAAAABE!!!')
 
+    def test_cool_beans(self):
+        self.msg.text = "that's cool beans dude"
+        self.msg.process_message()
+
+        self.mock_send.assert_called_with('Cool cool beans beans. Cool '
+                                          'be-be-be-beans. Cool beans?')
+
     def test_gods_of_war(self):
         self.msg.text = 'gods of war'
         self.msg.process_message()
