@@ -35,6 +35,12 @@ class TestBeastsResponders(unittest.TestCase):
         self.mock_send.assert_called_with("Billy, I know for a fact you don't "
                                           "party. You do *not* party.")
 
+    def test_safe_word(self):
+        self.msg.text = 'safe word'
+        self.msg.process_message()
+
+        self.mock_send.assert_called_with('The safe word is: Whhhiskey.')
+
 
 if __name__ == '__main__':
     unittest.main()
