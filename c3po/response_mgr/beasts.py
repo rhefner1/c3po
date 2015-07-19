@@ -15,12 +15,18 @@ class BeastsResponseManager(base.BaseResponseManager):
         self.not_mentioned_map.update({
             r'babe wait': self.babe_wait,
             r'i like to party': self.like_to_party,
+            r'safe word': self.safe_word,
         })
 
     @staticmethod
     def babe_wait(_msg):
         """Babe wait!."""
         return 'Babe! Wait! Babe! No!! BABE! NO! BAAAAAAAAABE!!!'
+
+    @staticmethod
+    def safe_word(_msg):
+        """The safe word is whiskey."""
+        return 'The safe word is: Whhhiskey.'
 
     @staticmethod
     def like_to_party(msg):
