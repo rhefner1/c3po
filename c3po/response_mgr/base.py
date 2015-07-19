@@ -9,12 +9,14 @@ class BaseResponseManager(object):
 
     def __init__(self):
         self.mentioned_map = {
-            'created you': self.creator,
-            '(hi|hello)': self.hello,
-            'motivate (.+)': self.motivate,
-            'ping': self.ping,
-            'thank( you|s)': self.thanks,
-            'wolf': self.wolf,
+            r'created you': self.creator,
+            r'(hi|hello)': self.hello,
+            r'motivate (.+)': self.motivate,
+            r'ping': self.ping,
+            r'tell (.+?) to (.+)': self.tell_to,
+            r'tell (.+?)(\s+|\s+that )(he|she) should (.+)': self.tell_should,
+            r'thank( you|s)': self.thanks,
+            r'wolf': self.wolf,
         }
 
         self.not_mentioned_map = {
@@ -42,6 +44,20 @@ class BaseResponseManager(object):
     def ping(_):
         """Pongs back."""
         return 'pong'
+
+    @staticmethod
+    def tell_to(chunks):
+        """Tells someone to do something."""
+        name = chunks[2]
+        action = chunks[3]
+        return "%s, %s!" % (name, action)
+
+    @staticmethod
+    def tell_should(chunks):
+        """Tells someone to do something."""
+        name = chunks[2]
+        action = chunks[5]
+        return "%s, you should %s!" % (name, action)
 
     @staticmethod
     def thanks(_):

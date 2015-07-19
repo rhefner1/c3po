@@ -51,6 +51,18 @@ class TestBaseResponders(unittest.TestCase):
 
         self.mock_send.assert_called_with('pong')
 
+    def test_tell_to(self):
+        self.msg.text = 'c3po tell Joey to pick up the trash'
+        self.msg.process_message()
+
+        self.mock_send.assert_called_with('Joey, pick up the trash!')
+
+    def test_tell_should(self):
+        self.msg.text = 'c3po tell Joey that he should behave'
+        self.msg.process_message()
+
+        self.mock_send.assert_called_with('Joey, you should behave!')
+
     @mock.patch('random.choice')
     def test_thanks(self, mock_random):
         mock_random.return_value = "You're welcome"
