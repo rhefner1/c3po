@@ -28,6 +28,13 @@ class TestBeastsResponders(unittest.TestCase):
         self.mock_send.assert_called_with('Babe! Wait! Babe! No!! BABE! NO! '
                                           'BAAAAAAAAABE!!!')
 
+    def test_like_to_party(self):
+        self.msg.text = 'i like to party'
+        self.msg.process_message()
+
+        self.mock_send.assert_called_with("Billy, I know for a fact you don't "
+                                          "party. You do *not* party.")
+
 
 if __name__ == '__main__':
     unittest.main()

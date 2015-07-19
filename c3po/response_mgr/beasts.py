@@ -14,9 +14,16 @@ class BeastsResponseManager(base.BaseResponseManager):
 
         self.not_mentioned_map.update({
             r'babe wait': self.babe_wait,
+            r'i like to party': self.like_to_party,
         })
 
     @staticmethod
-    def babe_wait(_settings, _chunks):
+    def babe_wait(_msg):
         """Babe wait!."""
         return 'Babe! Wait! Babe! No!! BABE! NO! BAAAAAAAAABE!!!'
+
+    @staticmethod
+    def like_to_party(msg):
+        """Babe wait!."""
+        return "%s, I know for a fact you don't party. You do *not* party." \
+               % msg.name
