@@ -20,9 +20,9 @@ class GroupmeMessage(message.Message):
     def __init__(self, group_id, name, text):
         super(GroupmeMessage, self).__init__(name, text)
 
-        self.msg_settings = self._get_settings(group_id)
-        self.bot_id = self.msg_settings.groupme_conf.bot_id
-        self.response_mgr = self.msg_settings.get_response_mgr()
+        self.settings = self._get_settings(group_id)
+        self.bot_id = self.settings.groupme_conf.bot_id
+        self.response_mgr = self.settings.get_response_mgr()
 
     def _get_settings(self, group_id):
         """Finds the Settings object associated with group_id."""

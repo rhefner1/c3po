@@ -30,8 +30,9 @@ class Message(object):
     def __init__(self, name, text):
         self.name = name
         self.response_mgr = None
-        self.msg_settings = None
+        self.settings = None
         self.text = text
+        self.text_chunks = None
 
     @abc.abstractmethod
     def _get_settings(self, group_id):
@@ -70,8 +71,8 @@ class Message(object):
             logging.info("No responder found for text: '%s'", self.text)
             return
 
-        chunks = re.split(full_regex, self.text)
-        response = responder(self.msg_settings, chunks)
+        self.text_chunks = re.split(full_regex, self.text)
+        response = responder(self)
         self._send_message(response)
 
     @abc.abstractmethod

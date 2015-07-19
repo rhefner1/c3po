@@ -30,52 +30,52 @@ class BaseResponseManager(object):
         }
 
     @staticmethod
-    def creator(_settings, _chunks):
+    def creator(_msg):
         """Tells who the real creator is."""
         return 'My friend @Hef (and some of his friends) brought me to life!'
 
     @staticmethod
-    def hello(_settings, _chunks):
+    def hello(_msg):
         """Says hello!"""
         return 'Greetings. I am C-3PO, human cyborg relations.'
 
     @staticmethod
-    def motivate(_settings, chunks):
+    def motivate(msg):
         """Motivates a person!"""
-        name = chunks[2]
+        name = msg.text_chunks[2]
         random_motivation = random.choice(text_chunks.MOTIVATIONS)
         return random_motivation % name
 
     @staticmethod
-    def ping(_settings, _chunks):
+    def ping(_msg):
         """Pongs back."""
         return 'pong'
 
     @staticmethod
-    def tell_to(_settings, chunks):
+    def tell_to(msg):
         """Tells someone to do something."""
-        name = chunks[2]
-        action = chunks[3]
+        name = msg.text_chunks[2]
+        action = msg.text_chunks[3]
         return "%s, %s!" % (name, action)
 
     @staticmethod
-    def tell_should(_settings, chunks):
+    def tell_should(msg):
         """Tells someone to do something."""
-        name = chunks[2]
-        action = chunks[5]
+        name = msg.text_chunks[2]
+        action = msg.text_chunks[5]
         return "%s, you should %s!" % (name, action)
 
     @staticmethod
-    def thanks(_settings, _chunks):
+    def thanks(_msg):
         """You're welcome!"""
         return "%s!" % random.choice(text_chunks.THANKS_RESPONSES)
 
     @staticmethod
-    def weather(settings, _chunks):
+    def weather(msg):
         """Tells the current weather."""
-        api_key = settings.weather_conf.api_key
-        latitude = settings.weather_conf.latitude
-        longitude = settings.weather_conf.longitude
+        api_key = msg.settings.weather_conf.api_key
+        latitude = msg.settings.weather_conf.latitude
+        longitude = msg.settings.weather_conf.longitude
 
         if not api_key or not latitude or not longitude:
             raise RuntimeError('Cannot retrieve weather because'
@@ -96,6 +96,6 @@ class BaseResponseManager(object):
                % (current, temp, apparent_temp, hourly)
 
     @staticmethod
-    def wolf(_settings, _chunks):
+    def wolf(_msg):
         """Shows the weather."""
         return 'PACK!'
