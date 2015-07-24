@@ -2,6 +2,8 @@ import mock
 
 from c3po.response_mgr import base
 from c3po.response_mgr import beasts
+from c3po.response_mgr import eastside
+from c3po.response_mgr import small_group
 
 BOT_ID = '123'
 GROUP_ID = 'abc'
@@ -37,10 +39,28 @@ class FakeBaseResponseMgr(mock.Mock):
         return base.BaseResponseManager()
 
 
-class FakeBeastsResponseMgr(FakeBaseResponseMgr):
+class FakeSmallGroupResponseMgr(FakeBaseResponseMgr):
+    def __init__(self):
+        super(FakeSmallGroupResponseMgr, self).__init__()
+
+    @staticmethod
+    def get_response_mgr():
+        return small_group.SmallGroupResponseManager()
+
+
+class FakeBeastsResponseMgr(FakeSmallGroupResponseMgr):
     def __init__(self):
         super(FakeBeastsResponseMgr, self).__init__()
 
     @staticmethod
     def get_response_mgr():
         return beasts.BeastsResponseManager()
+
+
+class FakeEastsideResponseMgr(FakeSmallGroupResponseMgr):
+    def __init__(self):
+        super(FakeEastsideResponseMgr, self).__init__()
+
+    @staticmethod
+    def get_response_mgr():
+        return eastside.EastsideResponseManager()
