@@ -51,7 +51,7 @@ class GroupmeMessage(message.Message):
 
         return urllib.urlencode(body)
 
-    def _send_message(self, response):
+    def send_message(self, response):
         """Sends the given response to the API."""
         logging.info("Sending this response: '%s' to bot_id: '%s'",
                      response, self.bot_id)

@@ -3,6 +3,7 @@
 from google.appengine.ext import ndb
 
 from c3po.db import groupme_conf  # pylint: disable=unused-import
+from c3po.db import prayer_request  # pylint: disable=unused-import
 from c3po.db import weather_conf  # pylint: disable=unused-import
 from c3po.response_mgr import beasts
 
@@ -17,6 +18,8 @@ class Settings(ndb.Model):
     response_mgr_name = ndb.StringProperty(required=True)
 
     groupme_conf = ndb.StructuredProperty(groupme_conf.GroupmeConf)
+    prayer_requests = ndb.StructuredProperty(prayer_request.PrayerRequest,
+                                             repeated=True)
     weather_conf = ndb.StructuredProperty(weather_conf.WeatherConf)
 
     def get_response_mgr(self):
