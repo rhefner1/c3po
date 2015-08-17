@@ -56,6 +56,12 @@ class TestBeastsResponders(unittest.TestCase):
         self.mock_send.assert_called_with("Billy, I know for a fact you don't "
                                           "party. You do *not* party.")
 
+    def test_negative(self):
+        self.msg.text = 'this is only a test'
+        self.msg.process_message()
+
+        self.assertFalse(self.mock_send.called)
+
     def test_safe_word(self):
         self.msg.text = 'safe word'
         self.msg.process_message()

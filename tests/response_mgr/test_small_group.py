@@ -41,6 +41,12 @@ class TestSmallGroupResponders(unittest.TestCase):
             "time during the week."
         self.mock_send.assert_called_with(response)
 
+    def test_negative(self):
+        self.msg.text = 'this is only a test'
+        self.msg.process_message()
+
+        self.assertFalse(self.mock_send.called)
+
 
 if __name__ == '__main__':
     unittest.main()
