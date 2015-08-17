@@ -97,5 +97,5 @@ class BaseResponseManager(object):
 
     @staticmethod
     def wolf(_msg):
-        """Shows the weather."""
+        """Represents the best university in the world."""
         return 'PACK!'

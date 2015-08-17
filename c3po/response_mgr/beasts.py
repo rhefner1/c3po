@@ -28,7 +28,7 @@ class BeastsResponseManager(base.BaseResponseManager):
 
     @staticmethod
     def cool_beans(_msg):
-        """Babe wait!."""
+        """Cool beans."""
         return 'Cool cool beans beans. Cool be-be-be-beans. Cool beans?'
 
     @staticmethod
@@ -44,7 +44,7 @@ class BeastsResponseManager(base.BaseResponseManager):
 
     @staticmethod
     def like_to_party(msg):
-        """Babe wait!."""
+        """No, I like to party!"""
         return "%s, I know for a fact you don't party. You do *not* party." \
                % msg.name
 
