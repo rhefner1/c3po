@@ -9,7 +9,7 @@ from tests import fakes
 class TestEastsideResponders(unittest.TestCase):
     def setUp(self):
         send_patcher = mock.patch(
-            'c3po.provider.groupme.send.GroupmeMessage._send_message')
+            'c3po.provider.groupme.send.GroupmeMessage.send_message')
         self.addCleanup(send_patcher.stop)
         self.mock_send = send_patcher.start()
 

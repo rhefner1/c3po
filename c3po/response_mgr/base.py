@@ -42,7 +42,7 @@ class BaseResponseManager(object):
     @staticmethod
     def motivate(msg):
         """Motivates a person!"""
-        name = msg.text_chunks[2]
+        name = msg.text_chunks[1]
         random_motivation = random.choice(text_chunks.MOTIVATIONS)
         return random_motivation % name
 
@@ -54,15 +54,15 @@ class BaseResponseManager(object):
     @staticmethod
     def tell_to(msg):
         """Tells someone to do something."""
-        name = msg.text_chunks[2]
-        action = msg.text_chunks[3]
+        name = msg.text_chunks[1]
+        action = msg.text_chunks[2]
         return "%s, %s!" % (name, action)
 
     @staticmethod
     def tell_should(msg):
         """Tells someone to do something."""
-        name = msg.text_chunks[2]
-        action = msg.text_chunks[5]
+        name = msg.text_chunks[1]
+        action = msg.text_chunks[4]
         return "%s, you should %s!" % (name, action)
 
     @staticmethod

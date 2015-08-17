@@ -42,10 +42,15 @@ class FakeBaseResponseMgr(mock.Mock):
 class FakeSmallGroupResponseMgr(FakeBaseResponseMgr):
     def __init__(self):
         super(FakeSmallGroupResponseMgr, self).__init__()
+        self.prayer_requests = []
 
     @staticmethod
     def get_response_mgr():
         return small_group.SmallGroupResponseManager()
+
+    @staticmethod
+    def put():
+        pass
 
 
 class FakeBeastsResponseMgr(FakeSmallGroupResponseMgr):

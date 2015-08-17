@@ -1,5 +1,13 @@
 """Contains chunks of text to be used in the responders."""
 
+ACKNOWLEDGEMENTS = [
+    'Got it.',
+    'Roger that.',
+    'Copy that.',
+    'Noted.',
+    "I'll remember that.",
+]
+
 MOTIVATIONS = [
     "Keep on rocking, %s!",
     "Keep up the great work, %s!",
@@ -14,7 +22,7 @@ MOTIVATIONS = [
     "You have a great sense of style, %s!",
     "Your smile brightens the room, %s!",
     "You make me want to be a better person, %s!",
-    "I like your aura, %s!"
+    "I like your aura, %s!",
 ]
 
 THANKS_RESPONSES = [
