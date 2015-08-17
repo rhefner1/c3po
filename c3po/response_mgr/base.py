@@ -26,13 +26,12 @@ class BaseResponseManager(object):
         }
 
         self.not_mentioned_map = {
-
         }
 
     @staticmethod
     def creator(_msg):
         """Tells who the real creator is."""
-        return 'My friend @Hef (and some of his friends) brought me to life!'
+        return 'My friend Hef (and some of his friends) brought me to life!'
 
     @staticmethod
     def hello(_msg):
