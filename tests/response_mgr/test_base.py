@@ -45,6 +45,12 @@ class TestBaseResponders(unittest.TestCase):
         self.mock_send.assert_called_with(
             "You're awesome, Henry!")
 
+    def test_negative(self):
+        self.msg.text = 'this is only a test'
+        self.msg.process_message()
+
+        self.assertFalse(self.mock_send.called)
+
     def test_ping(self):
         self.msg.text = 'c3po ping'
         self.msg.process_message()
