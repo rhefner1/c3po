@@ -16,8 +16,8 @@ class BeastsResponseManager(small_group.SmallGroupResponseManager):
             r'babe wait': self.babe_wait,
             r'cool beans': self.cool_beans,
             r'gods of war': self.gods_of_war,
-            r'i like to party': self.like_to_party,
             r'legit': self.legit,
+            r'i like to party': self.like_to_party,
             r'safe word': self.safe_word,
         })
 

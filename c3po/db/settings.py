@@ -6,9 +6,11 @@ from c3po.db import groupme_conf  # pylint: disable=unused-import
 from c3po.db import prayer_request  # pylint: disable=unused-import
 from c3po.db import weather_conf  # pylint: disable=unused-import
 from c3po.response_mgr import beasts
+from c3po.response_mgr import eastside
 
 RESPONSE_MGR_MAP = {
-    'beasts': beasts.BeastsResponseManager
+    'beasts': beasts.BeastsResponseManager,
+    'eastside': eastside.EastsideResponseManager,
 }
 
 
