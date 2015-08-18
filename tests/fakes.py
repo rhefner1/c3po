@@ -9,6 +9,36 @@ BOT_ID = '123'
 GROUP_ID = 'abc'
 NAME = 'Billy'
 TEXT = ''
+CLARK_CLOSED = """
+{
+    "Remote":{
+        "getHours":{
+            "closed": "1"
+        }
+    }
+}
+"""
+CLARK_MENU = """
+{
+    "key_1":{
+        "description": "Chicken",
+        "type": "Entree"
+    },
+    "key_2":{
+        "description": "Potato",
+        "type": "Side"
+    }
+}
+"""
+CLARK_OPEN = """
+{
+    "Remote":{
+        "getHours":{
+            "closed": "0"
+        }
+    }
+}
+"""
 WEATHER_JSON = """
 {
    "currently":{
