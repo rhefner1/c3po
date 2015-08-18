@@ -22,6 +22,7 @@ class BaseResponseManager(object):
             r'tell (.+?)(\s+|\s+that )(he|she) should (.+)': self.tell_should,
             r'thank( you|s)': self.thanks,
             r'weather': self.weather,
+            r'what can you do': self.what_can_you_do,
             r'wolf': self.wolf,
         }
 
@@ -93,6 +94,12 @@ class BaseResponseManager(object):
         return "It's currently %s with a temperature of %s degrees (feels " \
                "like %s). I'm predicting %s" \
                % (current, temp, apparent_temp, hourly)
+
+    @staticmethod
+    def what_can_you_do(_msg):
+        """Directs users to README where they can see C-3PO capabilities."""
+        return "Check out this site: " \
+               "https://github.com/rhefner1/c3po/blob/master/README.md"
 
     @staticmethod
     def wolf(_msg):
