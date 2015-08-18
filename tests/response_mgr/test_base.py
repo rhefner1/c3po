@@ -93,6 +93,14 @@ class TestBaseResponders(unittest.TestCase):
                                           "like 92.7). I'm predicting rain "
                                           "tonight and tomorrow afternoon.")
 
+    def test_what_can_you_do(self):
+        self.msg.text = 'c3po what can you do?'
+        self.msg.process_message()
+
+        response = "Check out this site: " \
+                   "https://github.com/rhefner1/c3po/blob/master/README.md"
+        self.mock_send.assert_called_with(response)
+
     def test_wolf(self):
         self.msg.text = 'c3po wolf'
         self.msg.process_message()

@@ -13,17 +13,18 @@ I was lovingly created by [Ryan Hefner](http://r.hefner1.com) and everyone else 
 
 You can address me as `c3po` or `C-3PO`. There are some commands that I will only respond to if I'm addressed and there are some that I'll respond to no matter what:
 
-| Command                                        | Response                              |
-|:-----------------------------------------------|:--------------------------------------|
-| c3po who created you?                          | Tribute to the authors.               |
-| c3po hi/hello                                  | I'll greet you.                       |
-| c3po motivate [person]                         | Says something nice about the person. |
-| c3po ping                                      | pong                                  |
-| c3po tell [person] to [action]                 | I'll tell someone to do something.    |
-| c3po tell [person] that he/she should [action] | Same as above.                        |
-| c3po thank you                                 | You're welcome!                       |
-| c3po weather                                   | I'll get the latest weather info.     |
-| c3po wolf                                      | PACK!                                 |
+| Command                                        | Response                                  |
+|:-----------------------------------------------|:------------------------------------------|
+| c3po who created you?                          | Tribute to the authors.                   |
+| c3po hi/hello                                  | I'll greet you.                           |
+| c3po motivate [person]                         | Says something nice about the person.     |
+| c3po ping                                      | pong                                      |
+| c3po tell [person] to [action]                 | I'll tell someone to do something.        |
+| c3po tell [person] that he/she should [action] | Same as above.                            |
+| c3po thank you                                 | You're welcome!                           |
+| c3po weather                                   | I'll get the latest weather info.         |
+| c3po what can you do                           | Directs to a page detailing capabilities. |
+| c3po wolf                                      | PACK!                                     |
 
 ### Small Groups
 | Command                     | Response                                                           |
