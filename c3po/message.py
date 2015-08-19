@@ -29,7 +29,7 @@ class Message(object):
 
     def __init__(self, name, text):
         self.name = name
-        self.response_mgr = None
+        self.persona = None
         self.settings = None
         self.text = text
         self.text_chunks = None
@@ -60,12 +60,12 @@ class Message(object):
         if re.search(REGEX_MENTIONED, self.text.lower()):
             # Check for matches where C-3PO is mentioned
             regex, responder = self._get_responder(
-                self.response_mgr.mentioned_map)
+                self.persona.mentioned_map)
 
         if not responder:
             # Now checking for the rest of the cases
             regex, responder = self._get_responder(
-                self.response_mgr.not_mentioned_map)
+                self.persona.not_mentioned_map)
 
         if not regex or not responder:
             logging.info("No responder found for text: '%s'", self.text)

@@ -29,7 +29,7 @@ def rate_limit(memcache_key, minutes=30):
     return False
 
 
-class BaseResponseManager(object):
+class BasePersona(object):
     """Contains responder logic to respond to messages."""
 
     def __init__(self):

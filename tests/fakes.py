@@ -1,9 +1,9 @@
 import mock
 
-from c3po.response_mgr import base
-from c3po.response_mgr import beasts
-from c3po.response_mgr import eastside
-from c3po.response_mgr import small_group
+from c3po.persona import base
+from c3po.persona import beasts
+from c3po.persona import eastside
+from c3po.persona import small_group
 
 BOT_ID = '123'
 GROUP_ID = 'abc'
@@ -65,8 +65,8 @@ class FakeBaseResponseMgr(mock.Mock):
         self.weather_conf.longitude = '-78.6389'
 
     @staticmethod
-    def get_response_mgr():
-        return base.BaseResponseManager()
+    def get_persona():
+        return base.BasePersona()
 
 
 class FakeSmallGroupResponseMgr(FakeBaseResponseMgr):
@@ -75,8 +75,8 @@ class FakeSmallGroupResponseMgr(FakeBaseResponseMgr):
         self.prayer_requests = []
 
     @staticmethod
-    def get_response_mgr():
-        return small_group.SmallGroupResponseManager()
+    def get_persona():
+        return small_group.SmallGroupPersona()
 
     @staticmethod
     def put():
@@ -88,8 +88,8 @@ class FakeBeastsResponseMgr(FakeSmallGroupResponseMgr):
         super(FakeBeastsResponseMgr, self).__init__()
 
     @staticmethod
-    def get_response_mgr():
-        return beasts.BeastsResponseManager()
+    def get_persona():
+        return beasts.BeastsPersona()
 
 
 class FakeEastsideResponseMgr(FakeSmallGroupResponseMgr):
@@ -97,5 +97,5 @@ class FakeEastsideResponseMgr(FakeSmallGroupResponseMgr):
         super(FakeEastsideResponseMgr, self).__init__()
 
     @staticmethod
-    def get_response_mgr():
-        return eastside.EastsideResponseManager()
+    def get_persona():
+        return eastside.EastsidePersona()
