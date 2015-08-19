@@ -82,9 +82,9 @@ class SmallGroupPersona(base.BasePersona):
         return random.choice(text_chunks.ACKNOWLEDGEMENTS)
 
     @staticmethod
-    def clark(_msg):
+    def clark(msg):
         """Clark it up."""
-        if base.rate_limit('clark'):
+        if base.rate_limit('clark-' + msg.settings.key.urlsafe()):
             return
 
         if is_clark_closed():
