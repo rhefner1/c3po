@@ -82,13 +82,16 @@ class TestSmallGroupResponders(unittest.TestCase):
 
         self.mock_send.assert_called_with('Got it.')
 
+    @mock.patch('c3po.response_mgr.base.rate_limit')
     @mock.patch('c3po.response_mgr.small_group.get_clark_menu_items')
     @mock.patch('c3po.response_mgr.small_group.get_current_meal')
     @mock.patch('c3po.response_mgr.small_group.is_clark_closed')
-    def test_clark(self, fake_clark_closed, fake_current_meal, fake_clark_menu):
+    def test_clark(self, fake_clark_closed, fake_current_meal, fake_clark_menu,
+                   fake_rate_limit):
         fake_clark_closed.return_value = False
         fake_current_meal.return_value = 'dinner'
         fake_clark_menu.return_value = json.loads(fakes.CLARK_MENU)
+        fake_rate_limit.return_value = False
 
         self.msg.text = 'clark?'
         self.msg.process_message()

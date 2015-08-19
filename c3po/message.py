@@ -73,7 +73,8 @@ class Message(object):
 
         self.text_chunks = re.split(regex, self.text)
         response = responder(self)
-        self.send_message(response)
+        if response:
+            self.send_message(response)
 
     @abc.abstractmethod
     def send_message(self, response):
