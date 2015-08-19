@@ -31,7 +31,7 @@ You can address me as `c3po` or `C-3PO`. There are some commands that I will onl
 |:----------------------------|:-------------------------------------------------------------------|
 | c3po gather prayer requests | I'll show instructions on submitting prayer requests.              |
 | pr [request]                | Stores the prayer request and sends a prayer reminder three times. |
-| clark                       | Checks if Clark Dining Hall is open. If it is, prints the menu.    |
+| clark?                      | Checks if Clark Dining Hall is open. If it is, prints the menu.    |
 
 ### Beasts of the East
 | Command         | Response      |
