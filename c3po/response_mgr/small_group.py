@@ -68,7 +68,7 @@ class SmallGroupResponseManager(base.BaseResponseManager):
 
         self.not_mentioned_map.update({
             r'(^)pr (.+)': self.add_prayer_request,
-            r'clark': self.clark,
+            r'clark?': self.clark,
         })
 
     @staticmethod
