@@ -84,6 +84,9 @@ class SmallGroupResponseManager(base.BaseResponseManager):
     @staticmethod
     def clark(_msg):
         """Clark it up."""
+        if base.rate_limit('clark'):
+            return
+
         if is_clark_closed():
             return "Uh oh! Clark is closed right now."
 
