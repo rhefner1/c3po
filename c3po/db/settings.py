@@ -5,12 +5,16 @@ from google.appengine.ext import ndb
 from c3po.db import groupme_conf  # pylint: disable=unused-import
 from c3po.db import prayer_request  # pylint: disable=unused-import
 from c3po.db import weather_conf  # pylint: disable=unused-import
+from c3po.response_mgr import base
 from c3po.response_mgr import beasts
 from c3po.response_mgr import eastside
+from c3po.response_mgr import small_group
 
 RESPONSE_MGR_MAP = {
+    'base': base.BaseResponseManager,
     'beasts': beasts.BeastsResponseManager,
     'eastside': eastside.EastsideResponseManager,
+    'small_group': small_group.SmallGroupResponseManager,
 }
 
 
