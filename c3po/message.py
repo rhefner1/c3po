@@ -4,8 +4,6 @@ import abc
 import logging
 import re
 
-REGEX_MENTIONED = r'(c-3po|c3po)'
-
 # Regex matching either:
 #   1) beginning of string
 #   2) one or many whitespace chars
@@ -57,7 +55,7 @@ class Message(object):
     def process_message(self):
         """Finds the responder and uses it to send a response."""
         regex, responder = None, None
-        if re.search(REGEX_MENTIONED, self.text.lower()):
+        if re.search(self.settings.bot_mentioned_regex, self.text.lower()):
             # Check for matches where C-3PO is mentioned
             regex, responder = self._get_responder(
                 self.persona.mentioned_map)
