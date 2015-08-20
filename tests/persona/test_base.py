@@ -17,7 +17,7 @@ class TestBaseResponders(unittest.TestCase):
             'c3po.provider.groupme.send.GroupmeMessage._get_settings')
         self.addCleanup(settings_patcher.stop)
         self.mock_settings = settings_patcher.start()
-        self.mock_settings.return_value = fakes.FakeBaseResponseMgr()
+        self.mock_settings.return_value = fakes.FakeBaseSettings()
 
         self.msg = send.GroupmeMessage(fakes.GROUP_ID, fakes.NAME, '')
 

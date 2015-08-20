@@ -53,9 +53,9 @@ WEATHER_JSON = """
 """
 
 
-class FakeBaseResponseMgr(mock.Mock):
+class FakeBaseSettings(mock.Mock):
     def __init__(self):
-        super(FakeBaseResponseMgr, self).__init__()
+        super(FakeBaseSettings, self).__init__()
         self.groupme_conf = mock.Mock()
         self.groupme_conf.bot_id = BOT_ID
 
@@ -69,10 +69,14 @@ class FakeBaseResponseMgr(mock.Mock):
         return base.BasePersona()
 
 
-class FakeSmallGroupResponseMgr(FakeBaseResponseMgr):
+class FakeSmallGroupSettings(FakeBaseSettings):
     def __init__(self):
-        super(FakeSmallGroupResponseMgr, self).__init__()
+        super(FakeSmallGroupSettings, self).__init__()
         self.prayer_requests = []
+
+        fake_key = mock.Mock()
+        fake_key.urlsafe.return_value = "1234"
+        self.key = fake_key
 
     @staticmethod
     def get_persona():
@@ -83,18 +87,18 @@ class FakeSmallGroupResponseMgr(FakeBaseResponseMgr):
         pass
 
 
-class FakeBeastsResponseMgr(FakeSmallGroupResponseMgr):
+class FakeBeastsSettings(FakeSmallGroupSettings):
     def __init__(self):
-        super(FakeBeastsResponseMgr, self).__init__()
+        super(FakeBeastsSettings, self).__init__()
 
     @staticmethod
     def get_persona():
         return beasts.BeastsPersona()
 
 
-class FakeEastsideResponseMgr(FakeSmallGroupResponseMgr):
+class FakeEastsideSettings(FakeSmallGroupSettings):
     def __init__(self):
-        super(FakeEastsideResponseMgr, self).__init__()
+        super(FakeEastsideSettings, self).__init__()
 
     @staticmethod
     def get_persona():
