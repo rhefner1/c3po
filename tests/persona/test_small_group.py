@@ -93,7 +93,7 @@ class TestSmallGroupResponders(unittest.TestCase):
         fake_clark_menu.return_value = json.loads(fakes.CLARK_MENU)
         fake_rate_limit.return_value = False
 
-        self.msg.text = 'clark?'
+        self.msg.text = 'clark anyone?'
         self.msg.process_message()
 
         response = "ClarkAlert for dinner: Chicken."
