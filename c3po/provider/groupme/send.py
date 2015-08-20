@@ -22,7 +22,7 @@ class GroupmeMessage(message.Message):
 
         self.settings = self._get_settings(group_id)
         self.bot_id = self.settings.groupme_conf.bot_id
-        self.response_mgr = self.settings.get_response_mgr()
+        self.persona = self.settings.get_persona()
 
     def _get_settings(self, group_id):
         """Finds the Settings object associated with group_id."""
@@ -77,7 +77,7 @@ class GroupmeMessage(message.Message):
         """Validates that the Settings object contains all GroupMe params."""
         required_fields = [
             msg_settings.provider_name,
-            msg_settings.response_mgr_name,
+            msg_settings.persona_name,
             msg_settings.groupme_conf.group_id,
             msg_settings.groupme_conf.bot_id
         ]

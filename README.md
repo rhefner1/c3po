@@ -56,14 +56,14 @@ The C-3PO codebase is laid out as follows:
 ├── c3po: core code files
 │   ├── db: data models stored in the database
 │   ├── provider: handlers to communicate with a messaging service
-│   ├── response_mgr: defines the different 'personas' that C-3PO can
+│   ├── persona: defines the different 'personas' that C-3PO can
 ├── ci: scripts used by CI
 ├── cron.yaml: regularly scheduled cron jobs
 ├── README.md: the file you're currently reading
 └── tests: unit tests
 ```
 
-Most code contributions will go into `c3po/response_mgr` with tests in `tests/response_mgr` and documentation in `README.md`. Additions to `db` may be necessary if there is a need for persistent data.
+Most code contributions will go into `c3po/persona` with tests in `tests/persona` and documentation in `README.md`. Additions to `db` may be necessary if there is a need for persistent data.
 
 ## Travis Status
 ![Travis Build Status](https://api.travis-ci.org/rhefner1/c3po.svg)

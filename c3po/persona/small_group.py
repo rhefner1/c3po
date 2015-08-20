@@ -8,7 +8,7 @@ from google.appengine.api import urlfetch
 import pytz
 
 from c3po.db import prayer_request
-from c3po.response_mgr import base
+from c3po.persona import base
 from c3po import text_chunks
 
 CLARK_OPEN = 8
@@ -56,11 +56,11 @@ def is_clark_closed():
     return False
 
 
-class SmallGroupResponseManager(base.BaseResponseManager):
+class SmallGroupPersona(base.BasePersona):
     """Adds specific small group functionality to BaseResponder."""
 
     def __init__(self):
-        super(SmallGroupResponseManager, self).__init__()
+        super(SmallGroupPersona, self).__init__()
 
         self.mentioned_map.update({
             r'gather prayer': self.gather_prayer_requests,

@@ -6,7 +6,7 @@ import mock
 
 from c3po.provider.groupme import send
 from tests import fakes
-from c3po.response_mgr import small_group
+from c3po.persona import small_group
 
 
 class TestClarkGetCurrentMeal(unittest.TestCase):
@@ -82,10 +82,10 @@ class TestSmallGroupResponders(unittest.TestCase):
 
         self.mock_send.assert_called_with('Got it.')
 
-    @mock.patch('c3po.response_mgr.base.rate_limit')
-    @mock.patch('c3po.response_mgr.small_group.get_clark_menu_items')
-    @mock.patch('c3po.response_mgr.small_group.get_current_meal')
-    @mock.patch('c3po.response_mgr.small_group.is_clark_closed')
+    @mock.patch('c3po.persona.base.rate_limit')
+    @mock.patch('c3po.persona.small_group.get_clark_menu_items')
+    @mock.patch('c3po.persona.small_group.get_current_meal')
+    @mock.patch('c3po.persona.small_group.is_clark_closed')
     def test_clark(self, fake_clark_closed, fake_current_meal, fake_clark_menu,
                    fake_rate_limit):
         fake_clark_closed.return_value = False

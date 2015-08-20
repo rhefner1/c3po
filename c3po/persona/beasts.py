@@ -1,13 +1,13 @@
 """Responder specifically for for Beasts of the East."""
 
-from c3po.response_mgr import small_group
+from c3po.persona import small_group
 
 
-class BeastsResponseManager(small_group.SmallGroupResponseManager):
+class BeastsPersona(small_group.SmallGroupPersona):
     """Adds specific Beasts of the East functionality to BaseResponder."""
 
     def __init__(self):
-        super(BeastsResponseManager, self).__init__()
+        super(BeastsPersona, self).__init__()
 
         self.mentioned_map.update({
         })
