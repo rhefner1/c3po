@@ -59,6 +59,9 @@ class FakeBaseSettings(mock.Mock):
         self.groupme_conf = mock.Mock()
         self.groupme_conf.bot_id = BOT_ID
 
+        self.bot_name = 'C-3PO'
+        self.bot_mentioned_regex = '(c-3po|c3po)'
+
         self.weather_conf = mock.Mock()
         self.weather_conf.api_key = '1234'
         self.weather_conf.latitude = '35.7806'

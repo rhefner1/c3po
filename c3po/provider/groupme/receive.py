@@ -31,11 +31,12 @@ def receive_message():
     logging.info("Name: %s", name)
     logging.info("Text: %s", text)
 
-    if name == 'C-3PO':
+    msg = send.GroupmeMessage(group_id, name, text)
+
+    if name == msg.settings.bot_name:
         logging.info("Ignoring request since it's coming from the bot.")
         return SUCCESS
 
-    msg = send.GroupmeMessage(group_id, name, text)
     msg.process_message()
 
     return SUCCESS
