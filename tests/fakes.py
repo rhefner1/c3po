@@ -6,7 +6,6 @@ from c3po.persona import eastside
 from c3po.persona import small_group
 
 BOT_ID = '123'
-GROUP_ID = 'abc'
 NAME = 'Billy'
 TEXT = ''
 CLARK_CLOSED = """

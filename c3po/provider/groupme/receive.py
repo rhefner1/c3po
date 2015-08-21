@@ -14,8 +14,8 @@ APP.config['DEBUG'] = True
 SUCCESS = ('', 200)
 
 
-@APP.route('/groupme', methods=['POST'])
-def receive_message():
+@APP.route('/groupme/<bot_id>', methods=['POST'])
+def receive_message(bot_id):
     """Processes a message and returns a response."""
     time.sleep(.1)
 
@@ -24,14 +24,14 @@ def receive_message():
     name = msg_data['name']
     text = msg_data['text']
 
-    if not group_id or not name or not text:
+    if not bot_id or not group_id or not name or not text:
         flask.abort(400)
 
     logging.info("Group ID: %s", group_id)
     logging.info("Name: %s", name)
     logging.info("Text: %s", text)
 
-    msg = send.GroupmeMessage(group_id, name, text)
+    msg = send.GroupmeMessage(bot_id, name, text)
 
     if name == msg.settings.bot_name:
         logging.info("Ignoring request since it's coming from the bot.")
