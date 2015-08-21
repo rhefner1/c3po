@@ -15,8 +15,10 @@ DATE_FORMAT = "%Y-%m-%d %H:%M:%S.%f"
 FORECAST_API_ENDPOINT = "https://api.forecast.io/forecast/%s/%s,%s?units=auto"
 
 
-def rate_limit(memcache_key, minutes=30):
+def rate_limit(settings, key, minutes=5):
     """Rate limits a function by a number of minutes."""
+    memcache_key = "%s-%s" % (key, settings.key.urlsafe())
+
     last_use = memcache.get(memcache_key)
     if last_use:
         delta = datetime.now() - datetime.strptime(last_use, DATE_FORMAT)

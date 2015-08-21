@@ -1,5 +1,6 @@
 """Responder specifically for for Beasts of the East."""
 
+from c3po.persona import base
 from c3po.persona import small_group
 
 
@@ -22,33 +23,45 @@ class BeastsPersona(small_group.SmallGroupPersona):
         })
 
     @staticmethod
-    def babe_wait(_msg):
+    def babe_wait(msg):
         """Babe wait!."""
+        if base.rate_limit(msg.settings, 'babe_wait'):
+            return
         return 'Babe! Wait! Babe! No!! BABE! NO! BAAAAAAAAABE!!!'
 
     @staticmethod
-    def cool_beans(_msg):
+    def cool_beans(msg):
         """Cool beans."""
+        if base.rate_limit(msg.settings, 'cool_beans'):
+            return
         return 'Cool cool beans beans. Cool be-be-be-beans. Cool beans?'
 
     @staticmethod
-    def gods_of_war(_msg):
+    def gods_of_war(msg):
         """GODS OF WAR."""
+        if base.rate_limit(msg.settings, 'gods_of_war'):
+            return
         return 'May your hammer be mighty.'
 
     @staticmethod
-    def legit(_msg):
+    def legit(msg):
         """This is legit."""
+        if base.rate_limit(msg.settings, 'legit'):
+            return
         return "I used to be legit. I was too legit. Too legit to quit. But " \
                "now, I'm not legit."
 
     @staticmethod
     def like_to_party(msg):
         """No, I like to party!"""
+        if base.rate_limit(msg.settings, 'like_to_party'):
+            return
         return "%s, I know for a fact you don't party. You do *not* party." \
                % msg.name
 
     @staticmethod
-    def safe_word(_msg):
+    def safe_word(msg):
         """The safe word is whiskey."""
+        if base.rate_limit(msg.settings, 'safe_word'):
+            return
         return 'The safe word is: Whhhiskey.'

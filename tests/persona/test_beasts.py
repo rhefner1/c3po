@@ -21,27 +21,39 @@ class TestBeastsResponders(unittest.TestCase):
 
         self.msg = send.GroupmeMessage(fakes.GROUP_ID, fakes.NAME, '')
 
-    def test_babe_wait(self):
+    @mock.patch('c3po.persona.base.rate_limit')
+    def test_babe_wait(self, mock_rate):
+        mock_rate.return_value = False
+
         self.msg.text = 'babe wait'
         self.msg.process_message()
 
         self.mock_send.assert_called_with('Babe! Wait! Babe! No!! BABE! NO! '
                                           'BAAAAAAAAABE!!!')
 
-    def test_cool_beans(self):
+    @mock.patch('c3po.persona.base.rate_limit')
+    def test_cool_beans(self, mock_rate):
+        mock_rate.return_value = False
+
         self.msg.text = "that's cool beans dude"
         self.msg.process_message()
 
         self.mock_send.assert_called_with('Cool cool beans beans. Cool '
                                           'be-be-be-beans. Cool beans?')
 
-    def test_gods_of_war(self):
+    @mock.patch('c3po.persona.base.rate_limit')
+    def test_gods_of_war(self, mock_rate):
+        mock_rate.return_value = False
+
         self.msg.text = 'gods of war'
         self.msg.process_message()
 
         self.mock_send.assert_called_with('May your hammer be mighty.')
 
-    def test_legit(self):
+    @mock.patch('c3po.persona.base.rate_limit')
+    def test_legit(self, mock_rate):
+        mock_rate.return_value = False
+
         self.msg.text = "that's legit"
         self.msg.process_message()
 
@@ -49,20 +61,29 @@ class TestBeastsResponders(unittest.TestCase):
                                           "legit. Too legit to quit. But now, "
                                           "I'm not legit.")
 
-    def test_like_to_party(self):
+    @mock.patch('c3po.persona.base.rate_limit')
+    def test_like_to_party(self, mock_rate):
+        mock_rate.return_value = False
+
         self.msg.text = 'i like to party'
         self.msg.process_message()
 
         self.mock_send.assert_called_with("Billy, I know for a fact you don't "
                                           "party. You do *not* party.")
 
-    def test_negative(self):
+    @mock.patch('c3po.persona.base.rate_limit')
+    def test_negative(self, mock_rate):
+        mock_rate.return_value = False
+
         self.msg.text = 'this is only a test'
         self.msg.process_message()
 
         self.assertFalse(self.mock_send.called)
 
-    def test_safe_word(self):
+    @mock.patch('c3po.persona.base.rate_limit')
+    def test_safe_word(self, mock_rate):
+        mock_rate.return_value = False
+
         self.msg.text = 'safe word'
         self.msg.process_message()
 
