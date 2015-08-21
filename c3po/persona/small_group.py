@@ -84,7 +84,7 @@ class SmallGroupPersona(base.BasePersona):
     @staticmethod
     def clark(msg):
         """Clark it up."""
-        if base.rate_limit('clark-' + msg.settings.key.urlsafe()):
+        if base.rate_limit(msg.settings, 'clark', minutes=30):
             return
 
         if is_clark_closed():
