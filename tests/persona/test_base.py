@@ -19,7 +19,7 @@ class TestBaseResponders(unittest.TestCase):
         self.mock_settings = settings_patcher.start()
         self.mock_settings.return_value = fakes.FakeBaseSettings()
 
-        self.msg = send.GroupmeMessage(fakes.GROUP_ID, fakes.NAME, '')
+        self.msg = send.GroupmeMessage(fakes.BOT_ID, fakes.NAME, '')
 
     def test_creator(self):
         self.msg.text = 'c3po who created you?'

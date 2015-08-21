@@ -19,7 +19,7 @@ class TestGeneratePostBody(unittest.TestCase):
         self.mock_settings = settings_patcher.start()
         self.mock_settings.return_value = fakes.FakeBaseResponseMgr()
 
-        self.msg = message.Message(fakes.GROUP_ID, fakes.NAME, fakes.TEXT)
+        self.msg = message.Message(fakes.BOT_ID, fakes.NAME, fakes.TEXT)
 
     def test_generate_api_post_body(self):
         actual_post_body = self.msg.provider._generate_api_post_body('sample')
@@ -35,7 +35,7 @@ class TestSendResponse(unittest.TestCase):
         self.mock_settings = settings_patcher.start()
         self.mock_settings.return_value = fakes.FakeBaseResponseMgr()
 
-        self.msg = message.Message(fakes.GROUP_ID, fakes.NAME, fakes.TEXT)
+        self.msg = message.Message(fakes.BOT_ID, fakes.NAME, fakes.TEXT)
 
     @mock.patch('c3po.message.Message._generate_api_post_body')
     @mock.patch('google.appengine.api.urlfetch.fetch')

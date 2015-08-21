@@ -33,8 +33,8 @@ class Message(object):
         self.text_chunks = None
 
     @abc.abstractmethod
-    def _get_settings(self, group_id):
-        """Finds the Settings object associated with group_id."""
+    def _get_settings(self, bot_id):
+        """Finds the Settings object associated with bot_id."""
         return
 
     def _get_responder(self, responder_map):

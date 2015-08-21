@@ -22,6 +22,12 @@ class Settings(ndb.Model):
     """Models the mapping between group ID and bot ID."""
     provider_name = ndb.StringProperty(required=True)
     persona_name = ndb.StringProperty(required=True)
+
+    # Arbitrary identifier to be included in every callback URL to identify
+    # which bot the callback is for. NOT associated with any particular
+    # provider.
+    bot_id = ndb.StringProperty(required=True)
+
     bot_name = ndb.StringProperty(required=True, default='C-3PO')
     bot_mentioned_regex = ndb.StringProperty(required=True,
                                              default='(c-3po|c3po)')

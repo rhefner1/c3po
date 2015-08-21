@@ -71,7 +71,7 @@ class TestSmallGroupResponders(unittest.TestCase):
         self.mock_settings = settings_patcher.start()
         self.mock_settings.return_value = fakes.FakeSmallGroupSettings()
 
-        self.msg = send.GroupmeMessage(fakes.GROUP_ID, fakes.NAME, '')
+        self.msg = send.GroupmeMessage(fakes.BOT_ID, fakes.NAME, '')
 
     @mock.patch('random.choice')
     def test_add_prayer_request(self, mock_random):

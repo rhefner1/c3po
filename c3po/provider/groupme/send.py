@@ -17,26 +17,26 @@ GROUPME_API_FULL = "%s%s" % (GROUPME_API_ENDPOINT, GROUPME_API_PATH)
 class GroupmeMessage(message.Message):
     """Implements Message for the GroupMe provider."""
 
-    def __init__(self, group_id, name, text):
+    def __init__(self, bot_id, name, text):
         super(GroupmeMessage, self).__init__(name, text)
 
-        self.settings = self._get_settings(group_id)
-        self.bot_id = self.settings.groupme_conf.bot_id
+        self.settings = self._get_settings(bot_id)
+        self.groupme_bot_id = self.settings.groupme_conf.bot_id
         self.persona = self.settings.get_persona()
 
-    def _get_settings(self, group_id):
+    def _get_settings(self, bot_id):
         """Finds the Settings object associated with group_id."""
         results = settings.Settings.query(
-            settings.Settings.groupme_conf.group_id == group_id)
+            settings.Settings.bot_id == bot_id)
 
         if results.count() <= 0:
             raise ValueError(
-                "No Settings objects found matching group_id: %s. "
-                "Cannot continue." % group_id)
+                "No Settings objects found matching bot_id: %s. "
+                "Cannot continue." % bot_id)
         elif results.count() > 1:
             raise RuntimeError(
-                "Found multiple Settings objects with group_id: %s. "
-                "Cannot continue." % group_id)
+                "Found multiple Settings objects with bot_id: %s. "
+                "Cannot continue." % bot_id)
 
         msg_settings = results.fetch(1)[0]
         self._validate_settings(msg_settings)
@@ -45,7 +45,7 @@ class GroupmeMessage(message.Message):
     def _generate_api_post_body(self, response):
         """Generates the request body to be sent"""
         body = {
-            'bot_id': self.bot_id,
+            'bot_id': self.groupme_bot_id,
             'text': response
         }
 
@@ -54,7 +54,7 @@ class GroupmeMessage(message.Message):
     def send_message(self, response):
         """Sends the given response to the API."""
         logging.info("Sending this response: '%s' to bot_id: '%s'",
-                     response, self.bot_id)
+                     response, self.groupme_bot_id)
 
         post_body = self._generate_api_post_body(response)
         result = urlfetch.fetch(url=GROUPME_API_FULL,
