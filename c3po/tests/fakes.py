@@ -1,5 +1,6 @@
 import mock
 
+from c3po import message
 from c3po.persona import base
 from c3po.persona import beasts
 from c3po.persona import eastside
@@ -50,6 +51,21 @@ WEATHER_JSON = """
    }
 }
 """
+
+
+class FakeMessage(message.Message):
+    def __init__(self, name, text):
+        super(FakeMessage, self).__init__(name, text)
+        self.settings = self._get_settings(BOT_ID)
+        self.persona = self.settings.get_persona()
+
+    def _get_settings(self, bot_id):
+        # This is mocked out in tests
+        return FakeBaseSettings()
+
+    def send_message(self, response):
+        # This is mocked out in tests
+        pass
 
 
 class FakeBaseSettings(mock.Mock):

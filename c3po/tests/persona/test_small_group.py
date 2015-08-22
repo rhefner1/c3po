@@ -4,7 +4,6 @@ import unittest
 import freezegun
 import mock
 
-from c3po.provider.groupme import send
 from c3po.tests import fakes
 from c3po.persona import small_group
 
@@ -61,17 +60,17 @@ class TestClarkClosed(unittest.TestCase):
 class TestSmallGroupResponders(unittest.TestCase):
     def setUp(self):
         send_patcher = mock.patch(
-            'c3po.provider.groupme.send.GroupmeMessage.send_message')
+            'c3po.tests.fakes.FakeMessage.send_message')
         self.addCleanup(send_patcher.stop)
         self.mock_send = send_patcher.start()
 
         settings_patcher = mock.patch(
-            'c3po.provider.groupme.send.GroupmeMessage._get_settings')
+            'c3po.tests.fakes.FakeMessage._get_settings')
         self.addCleanup(settings_patcher.stop)
         self.mock_settings = settings_patcher.start()
         self.mock_settings.return_value = fakes.FakeSmallGroupSettings()
 
-        self.msg = send.GroupmeMessage(fakes.BOT_ID, fakes.NAME, '')
+        self.msg = fakes.FakeMessage(fakes.NAME, '')
 
     @mock.patch('random.choice')
     def test_add_prayer_request(self, mock_random):
