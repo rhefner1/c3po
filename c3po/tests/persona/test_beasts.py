@@ -3,7 +3,7 @@ import unittest
 import mock
 
 from c3po.provider.groupme import send
-from tests import fakes
+from c3po.tests import fakes
 
 
 class TestBeastsResponders(unittest.TestCase):

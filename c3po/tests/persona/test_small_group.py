@@ -5,7 +5,7 @@ import freezegun
 import mock
 
 from c3po.provider.groupme import send
-from tests import fakes
+from c3po.tests import fakes
 from c3po.persona import small_group
 
 
