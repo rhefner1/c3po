@@ -5,6 +5,7 @@ from c3po.persona import base
 from c3po.persona import beasts
 from c3po.persona import eastside
 from c3po.persona import small_group
+from c3po.persona import sara_lane
 
 BOT_ID = '123'
 NAME = 'Billy'
@@ -121,3 +122,17 @@ class FakeEastsideSettings(FakeSmallGroupSettings):
     @staticmethod
     def get_persona():
         return eastside.EastsidePersona()
+
+
+class FakeSaraLaneSettings(mock.Mock):
+    def __init__(self):
+        super(FakeSaraLaneSettings, self).__init__()
+        self.groupme_conf = mock.Mock()
+        self.groupme_conf.bot_id = BOT_ID
+
+        self.bot_name = 'SaraBot'
+        self.bot_mentioned_regex = 'sarabot'
+
+    @staticmethod
+    def get_persona():
+        return sara_lane.SaraLanePersona()

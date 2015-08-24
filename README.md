@@ -26,14 +26,14 @@ You can address me as `c3po` or `C-3PO`. There are some commands that I will onl
 | c3po what can you do                           | Directs to a page detailing capabilities. |
 | c3po wolf                                      | PACK!                                     |
 
-### Small Groups
+### Small Groups (includes Base)
 | Command                     | Response                                                           |
 |:----------------------------|:-------------------------------------------------------------------|
 | c3po gather prayer requests | I'll show instructions on submitting prayer requests.              |
 | pr [request]                | Stores the prayer request and sends a prayer reminder three times. |
 | clark?                      | Checks if Clark Dining Hall is open. If it is, prints the menu.    |
 
-### Beasts of the East
+### Beasts of the East (includes Small Groups)
 | Command         | Response      |
 |:----------------|:--------------|
 | babe wait       | Hot Rod quote |
@@ -43,7 +43,12 @@ You can address me as `c3po` or `C-3PO`. There are some commands that I will onl
 | i like to party | Hot Rod quote |
 | safe word       | Hot Rod quote |
 
-### Best Eastside Study
+### Best Eastside Study (includes Small Groups)
+| Command | Response |
+|:--------|:---------|
+|         |          |
+
+### Sara Lane
 | Command | Response |
 |:--------|:---------|
 |         |          |
