@@ -41,7 +41,7 @@ class BasePersona(object):
             r'motivate (.+)': self.motivate,
             r'ping': self.ping,
             r'tell (.+?) to (.+)': self.tell_to,
-            r'tell (.+?)(\s+|\s+that )(he|she) should (.+)': self.tell_should,
+            r'tell (.+?)(\s+|\s+that )(he|she|they) should (.+)': self.tell_should,
             r'thank( you|s)': self.thanks,
             r'weather': self.weather,
             r'what can you do': self.what_can_you_do,
