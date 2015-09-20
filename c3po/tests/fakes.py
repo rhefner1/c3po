@@ -59,6 +59,10 @@ class FakeMessage(message.Message):
         self.settings = self._get_settings(BOT_ID)
         self.persona = self.settings.get_persona()
 
+    def _add_mention(self, response):
+        # This is mocked out in tests
+        return response
+
     def _get_settings(self, bot_id):
         # This is mocked out in tests
         return FakeBaseSettings()

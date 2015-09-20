@@ -33,6 +33,11 @@ class Message(object):
         self.text_chunks = None
 
     @abc.abstractmethod
+    def _add_mention(self, response):
+        """When responding back to a person, mention them."""
+        return
+
+    @abc.abstractmethod
     def _get_settings(self, bot_id):
         """Finds the Settings object associated with bot_id."""
         return
@@ -72,6 +77,7 @@ class Message(object):
         self.text_chunks = re.split(regex, self.text)
         response = responder(self)
         if response:
+            response = self._add_mention(response)
             self.send_message(response)
 
     @abc.abstractmethod
