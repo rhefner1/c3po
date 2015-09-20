@@ -1,8 +1,11 @@
 """Contains the data model for a Message and the actions to process it."""
 
 import abc
+from datetime import datetime
 import logging
 import re
+
+from c3po.db import stored_message
 
 # Regex matching either:
 #   1) beginning of string
@@ -25,12 +28,13 @@ class Message(object):
 
     __metaclass__ = abc.ABCMeta
 
-    def __init__(self, name, text):
+    def __init__(self, name, text, time_sent):
         self.name = name
         self.persona = None
         self.settings = None
         self.text = text
         self.text_chunks = None
+        self.time_sent = time_sent
 
     @abc.abstractmethod
     def _add_mention(self, response):
@@ -72,6 +76,9 @@ class Message(object):
 
         if not regex or not responder:
             logging.info("No responder found for text: '%s'", self.text)
+
+            # Store the message contents
+            self.store_message(False)
             return
 
         self.text_chunks = re.split(regex, self.text)
@@ -80,7 +87,19 @@ class Message(object):
             response = self._add_mention(response)
             self.send_message(response)
 
+        # Store the message contents
+        self.store_message(True)
+
     @abc.abstractmethod
     def send_message(self, response):
         """Sends the given response to the API."""
         return
+
+    def store_message(self, response_triggered):
+        """Stores message data in database."""
+        new_sm = stored_message.StoredMessage(name=self.name,
+                                              response_triggered=response_triggered,
+                                              text=self.text,
+                                              time_sent=datetime.fromtimestamp(self.time_sent),
+                                              settings=self.settings.key)
+        new_sm.put()

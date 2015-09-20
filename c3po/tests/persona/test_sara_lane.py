@@ -18,7 +18,7 @@ class TestSaraLaneResponders(unittest.TestCase):
         self.mock_settings = settings_patcher.start()
         self.mock_settings.return_value = fakes.FakeSaraLaneSettings()
 
-        self.msg = fakes.FakeMessage(fakes.NAME, '')
+        self.msg = fakes.FakeMessage(fakes.NAME, '', fakes.TIME_SENT)
 
 
 if __name__ == '__main__':

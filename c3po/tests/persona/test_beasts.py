@@ -18,7 +18,7 @@ class TestBeastsResponders(unittest.TestCase):
         self.mock_settings = settings_patcher.start()
         self.mock_settings.return_value = fakes.FakeBeastsSettings()
 
-        self.msg = fakes.FakeMessage(fakes.NAME, '')
+        self.msg = fakes.FakeMessage(fakes.NAME, '', fakes.TIME_SENT)
 
     @mock.patch('c3po.persona.base.rate_limit')
     def test_babe_wait(self, mock_rate):

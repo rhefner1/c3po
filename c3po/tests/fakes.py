@@ -10,6 +10,7 @@ from c3po.persona import sara_lane
 BOT_ID = '123'
 NAME = 'Billy'
 TEXT = ''
+TIME_SENT = 1442722989
 CLARK_CLOSED = """
 {
     "Remote":{
@@ -55,8 +56,8 @@ WEATHER_JSON = """
 
 
 class FakeMessage(message.Message):
-    def __init__(self, name, text):
-        super(FakeMessage, self).__init__(name, text)
+    def __init__(self, name, text, time_sent):
+        super(FakeMessage, self).__init__(name, text, time_sent)
         self.settings = self._get_settings(BOT_ID)
         self.persona = self.settings.get_persona()
 
@@ -70,6 +71,10 @@ class FakeMessage(message.Message):
 
     def send_message(self, response):
         # This is mocked out in tests
+        pass
+
+    def store_message(self, response_triggered):
+        # Do nothing here
         pass
 
 
