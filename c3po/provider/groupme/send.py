@@ -17,8 +17,13 @@ GROUPME_API_FULL = "%s%s" % (GROUPME_API_ENDPOINT, GROUPME_API_PATH)
 class GroupmeMessage(message.Message):
     """Implements Message for the GroupMe provider."""
 
-    def __init__(self, bot_id, name, text, time_sent):
-        super(GroupmeMessage, self).__init__(name, text, time_sent)
+    def __init__(self, bot_id, msg_data):
+        name = msg_data['name']
+        picture_url = msg_data['picture_url']
+        text = msg_data['text']
+        time_sent = float(msg_data['created_at'])
+
+        super(GroupmeMessage, self).__init__(name, picture_url, text, time_sent)
 
         self.settings = self._get_settings(bot_id)
         self.groupme_bot_id = self.settings.groupme_conf.bot_id
