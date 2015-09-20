@@ -5,6 +5,31 @@ import mock
 from c3po.tests import fakes
 
 
+class TestAddMention(unittest.TestCase):
+    def setUp(self):
+        send_patcher = mock.patch(
+            'c3po.tests.fakes.FakeMessage.send_message')
+        self.addCleanup(send_patcher.stop)
+        self.mock_send = send_patcher.start()
+
+        settings_patcher = mock.patch(
+            'c3po.tests.fakes.FakeMessage._get_settings')
+        self.addCleanup(settings_patcher.stop)
+        self.mock_settings = settings_patcher.start()
+        self.mock_settings.return_value = fakes.FakeBaseSettings()
+
+        self.msg = fakes.FakeMessage(fakes.NAME, '')
+
+    @mock.patch('c3po.tests.fakes.FakeMessage._add_mention')
+    def test_add_mention(self, fake_add_mention):
+        fake_add_mention.return_value = "%s: %s" % (fakes.NAME, 'pong')
+
+        self.msg.text = 'c3po ping'
+        self.msg.process_message()
+
+        self.mock_send.assert_called_with('Billy: pong')
+
+
 class TestBaseResponders(unittest.TestCase):
     def setUp(self):
         send_patcher = mock.patch(

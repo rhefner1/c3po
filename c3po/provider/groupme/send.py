@@ -22,7 +22,13 @@ class GroupmeMessage(message.Message):
 
         self.settings = self._get_settings(bot_id)
         self.groupme_bot_id = self.settings.groupme_conf.bot_id
+        self.name = name
         self.persona = self.settings.get_persona()
+
+    def _add_mention(self, response):
+        """When responding back to a person, mention them."""
+        if self.name:
+            return "@%s: %s" % (self.name, response)
 
     def _get_settings(self, bot_id):
         """Finds the Settings object associated with group_id."""
