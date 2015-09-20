@@ -5,7 +5,7 @@ from c3po.persona import small_group
 
 
 class BeastsPersona(small_group.SmallGroupPersona):
-    """Adds specific Beasts of the East functionality to BaseResponder."""
+    """Adds specific Beasts of the East functionality."""
 
     def __init__(self):
         super(BeastsPersona, self).__init__()

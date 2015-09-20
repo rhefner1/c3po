@@ -4,7 +4,7 @@ from c3po.persona import small_group
 
 
 class EastsidePersona(small_group.SmallGroupPersona):
-    """Adds specific Best Eastside Study functionality to BaseResponder."""
+    """Adds specific Best Eastside Study functionality."""
 
     def __init__(self):
         super(EastsidePersona, self).__init__()

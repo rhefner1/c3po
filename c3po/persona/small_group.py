@@ -57,7 +57,7 @@ def is_clark_closed():
 
 
 class SmallGroupPersona(base.BasePersona):
-    """Adds specific small group functionality to BaseResponder."""
+    """Adds specific small group functionality."""
 
     def __init__(self):
         super(SmallGroupPersona, self).__init__()
