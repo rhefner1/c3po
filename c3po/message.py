@@ -82,9 +82,10 @@ class Message(object):
             return
 
         self.text_chunks = re.split(regex, self.text)
-        response = responder(self)
+        response, should_mention = responder(self)
         if response:
-            response = self._add_mention(response)
+            if should_mention:
+                response = self._add_mention(response)
             self.send_message(response)
 
         # Store the message contents

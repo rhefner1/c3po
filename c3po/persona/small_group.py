@@ -7,9 +7,10 @@ import random
 from google.appengine.api import urlfetch
 import pytz
 
+from c3po import text_chunks
 from c3po.db import prayer_request
 from c3po.persona import base
-from c3po import text_chunks
+from c3po.persona import util
 
 CLARK_OPEN = 8
 CLARK_BREAKFAST_END = 11
@@ -72,6 +73,7 @@ class SmallGroupPersona(base.BasePersona):
         })
 
     @staticmethod
+    @util.should_mention(True)
     def add_prayer_request(msg):
         """Stores a new prayer request in the database."""
         new_request = prayer_request.PrayerRequest(
@@ -82,6 +84,7 @@ class SmallGroupPersona(base.BasePersona):
         return random.choice(text_chunks.ACKNOWLEDGEMENTS)
 
     @staticmethod
+    @util.should_mention(False)
     def clark(msg):
         """Clark it up."""
         if base.rate_limit(msg.settings, 'clark', minutes=60):
@@ -105,6 +108,7 @@ class SmallGroupPersona(base.BasePersona):
                % (current_meal, ', '.join(entrees))
 
     @staticmethod
+    @util.should_mention(False)
     def gather_prayer_requests(_msg):
         """Sends a note telling people how to submit prayer requests."""
         return "OK everybody. Send a short summary of your request with 'PR' " \
