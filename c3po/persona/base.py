@@ -10,6 +10,7 @@ from google.appengine.api import memcache
 from google.appengine.api import urlfetch
 
 from c3po import text_chunks
+from c3po.persona import util
 
 DATE_FORMAT = "%Y-%m-%d %H:%M:%S.%f"
 FORECAST_API_ENDPOINT = "https://api.forecast.io/forecast/%s/%s,%s?units=auto"
@@ -52,16 +53,19 @@ class BasePersona(object):
         }
 
     @staticmethod
+    @util.should_mention(True)
     def creator(_msg):
         """Tells who the real creator is."""
         return 'My friend Hef (and some of his friends) brought me to life!'
 
     @staticmethod
+    @util.should_mention(True)
     def hello(_msg):
         """Says hello!"""
         return 'Greetings. I am C-3PO, human cyborg relations.'
 
     @staticmethod
+    @util.should_mention(False)
     def motivate(msg):
         """Motivates a person!"""
         name = msg.text_chunks[1]
@@ -69,11 +73,13 @@ class BasePersona(object):
         return random_motivation % name
 
     @staticmethod
+    @util.should_mention(True)
     def ping(_msg):
         """Pongs back."""
         return 'pong'
 
     @staticmethod
+    @util.should_mention(False)
     def tell_to(msg):
         """Tells someone to do something."""
         name = msg.text_chunks[1]
@@ -81,6 +87,7 @@ class BasePersona(object):
         return "%s, %s!" % (name, action)
 
     @staticmethod
+    @util.should_mention(False)
     def tell_should(msg):
         """Tells someone to do something."""
         name = msg.text_chunks[1]
@@ -88,11 +95,13 @@ class BasePersona(object):
         return "%s, you should %s!" % (name, action)
 
     @staticmethod
+    @util.should_mention(True)
     def thanks(_msg):
         """You're welcome!"""
         return "%s!" % random.choice(text_chunks.THANKS_RESPONSES)
 
     @staticmethod
+    @util.should_mention(False)
     def weather(msg):
         """Tells the current weather."""
         api_key = msg.settings.weather_conf.api_key
@@ -118,12 +127,14 @@ class BasePersona(object):
                % (current, temp, apparent_temp, hourly)
 
     @staticmethod
+    @util.should_mention(True)
     def what_can_you_do(_msg):
         """Directs users to README where they can see C-3PO capabilities."""
         return "Check out this site: " \
                "https://github.com/rhefner1/c3po/blob/master/README.md"
 
     @staticmethod
+    @util.should_mention(False)
     def wolf(_msg):
         """Represents the best university in the world."""
         return 'PACK!'
