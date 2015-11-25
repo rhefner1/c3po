@@ -18,7 +18,7 @@ class TestAddMention(unittest.TestCase):
         self.mock_settings = settings_patcher.start()
         self.mock_settings.return_value = fakes.FakeBaseSettings()
 
-        self.msg = fakes.FakeMessage(fakes.NAME, '', fakes.TIME_SENT)
+        self.msg = fakes.FakeMessage(fakes.NAME, None, '', fakes.TIME_SENT)
 
     @mock.patch('c3po.tests.fakes.FakeMessage._add_mention')
     def test_add_mention(self, fake_add_mention):
@@ -43,7 +43,7 @@ class TestBaseResponders(unittest.TestCase):
         self.mock_settings = settings_patcher.start()
         self.mock_settings.return_value = fakes.FakeBaseSettings()
 
-        self.msg = fakes.FakeMessage(fakes.NAME, '', fakes.TIME_SENT)
+        self.msg = fakes.FakeMessage(fakes.NAME, None, '', fakes.TIME_SENT)
 
     def test_creator(self):
         self.msg.text = 'c3po who created you?'

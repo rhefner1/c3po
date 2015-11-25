@@ -16,8 +16,7 @@ TEXT_LIMIT = 30
 def create_message(settings_obj):
     """Creates a message object to use for sending."""
     if settings_obj.provider_name == 'groupme':
-        return groupme_send.GroupmeMessage(settings_obj.bot_id,
-                                           None, None, None)
+        return groupme_send.GroupmeMessage(settings_obj.bot_id, None)
 
 
 @APP.route('/cron/prayer')

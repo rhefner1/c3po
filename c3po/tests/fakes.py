@@ -9,8 +9,15 @@ from c3po.persona import sara_lane
 
 BOT_ID = '123'
 NAME = 'Billy'
+PICTURE_URL = 'https://example.com/image.jpg'
 TEXT = ''
 TIME_SENT = 1442722989
+MSG_DATA = {
+    'name': NAME,
+    'picture_url': PICTURE_URL,
+    'text': TEXT,
+    'created_at': TIME_SENT
+}
 CLARK_CLOSED = """
 {
     "Remote":{
@@ -56,8 +63,8 @@ WEATHER_JSON = """
 
 
 class FakeMessage(message.Message):
-    def __init__(self, name, text, time_sent):
-        super(FakeMessage, self).__init__(name, text, time_sent)
+    def __init__(self, name, picture_url, text, time_sent):
+        super(FakeMessage, self).__init__(name, picture_url, text, time_sent)
         self.settings = self._get_settings(BOT_ID)
         self.persona = self.settings.get_persona()
 

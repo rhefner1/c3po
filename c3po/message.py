@@ -28,10 +28,12 @@ class Message(object):
 
     __metaclass__ = abc.ABCMeta
 
-    def __init__(self, name, text, time_sent):
+    def __init__(self, name, picture_url, text, time_sent):
+
         self.name = name
         self.persona = None
         self.settings = None
+        self.picture_url = picture_url
         self.text = text
         self.text_chunks = None
         self.time_sent = time_sent
@@ -100,6 +102,7 @@ class Message(object):
         """Stores message data in database."""
         new_sm = stored_message.StoredMessage(name=self.name,
                                               response_triggered=response_triggered,
+                                              picture_url=self.picture_url,
                                               text=self.text,
                                               time_sent=datetime.fromtimestamp(self.time_sent),
                                               settings=self.settings.key)
