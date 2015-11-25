@@ -22,9 +22,10 @@ def receive_message(bot_id):
     msg_data = json.loads(flask.request.data)
     group_id = msg_data['group_id']
     name = msg_data['name']
+    picture_url = msg_data['picture_url']
     text = msg_data['text']
 
-    if not bot_id or not group_id or not name or not text:
+    if not bot_id or not group_id or not name or (not text and not picture_url):
         flask.abort(400)
 
     logging.info("Group ID: %s", group_id)
