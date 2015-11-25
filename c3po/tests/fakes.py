@@ -12,12 +12,6 @@ NAME = 'Billy'
 PICTURE_URL = 'https://example.com/image.jpg'
 TEXT = ''
 TIME_SENT = 1442722989
-MSG_DATA = {
-    'name': NAME,
-    'picture_url': PICTURE_URL,
-    'text': TEXT,
-    'created_at': TIME_SENT
-}
 CLARK_CLOSED = """
 {
     "Remote":{
