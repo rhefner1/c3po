@@ -3,7 +3,6 @@
 from google.appengine.ext import ndb
 
 from c3po.db import groupme_conf  # pylint: disable=unused-import
-from c3po.db import prayer_request  # pylint: disable=unused-import
 from c3po.db import weather_conf  # pylint: disable=unused-import
 from c3po.persona import base
 from c3po.persona import beasts
@@ -33,8 +32,6 @@ class Settings(ndb.Model):
                                              default='(c-3po|c3po)')
 
     groupme_conf = ndb.StructuredProperty(groupme_conf.GroupmeConf)
-    prayer_requests = ndb.StructuredProperty(prayer_request.PrayerRequest,
-                                             repeated=True)
     weather_conf = ndb.StructuredProperty(weather_conf.WeatherConf)
 
     def get_persona(self):

@@ -101,7 +101,6 @@ class FakeBaseSettings(mock.Mock):
 class FakeSmallGroupSettings(FakeBaseSettings):
     def __init__(self):
         super(FakeSmallGroupSettings, self).__init__()
-        self.prayer_requests = []
 
         fake_key = mock.Mock()
         fake_key.urlsafe.return_value = "1234"
