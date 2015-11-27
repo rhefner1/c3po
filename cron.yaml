@@ -1,5 +1,1 @@
 cron:
-- description: prayer request reminders
-  url: /cron/prayer
-  schedule: every day 08:30
-  timezone: America/New_York

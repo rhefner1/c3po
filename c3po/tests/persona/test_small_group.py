@@ -1,9 +1,7 @@
 import json
 import unittest
-
 import freezegun
 import mock
-
 from c3po.tests import fakes
 from c3po.persona import small_group
 
@@ -72,15 +70,6 @@ class TestSmallGroupResponders(unittest.TestCase):
 
         self.msg = fakes.FakeMessage(fakes.NAME, None, '', fakes.TIME_SENT)
 
-    @mock.patch('random.choice')
-    def test_add_prayer_request(self, mock_random):
-        mock_random.return_value = "Got it."
-
-        self.msg.text = 'pr for my test tomorrow'
-        self.msg.process_message()
-
-        self.mock_send.assert_called_with('Got it.')
-
     @mock.patch('c3po.persona.base.rate_limit')
     @mock.patch('c3po.persona.small_group.get_clark_menu_items')
     @mock.patch('c3po.persona.small_group.get_current_meal')
@@ -96,17 +85,6 @@ class TestSmallGroupResponders(unittest.TestCase):
         self.msg.process_message()
 
         response = "ClarkAlert for dinner: Chicken."
-        self.mock_send.assert_called_with(response)
-
-    def test_gather_prayer_requests(self):
-        self.msg.text = 'c3po gather prayer requests'
-        self.msg.process_message()
-
-        response = \
-            "OK everybody. Send a short summary of your request with 'PR' " \
-            "at the beginning and then whatever you'd like me to " \
-            "remember. You can send multiple and you can do this at any " \
-            "time during the week."
         self.mock_send.assert_called_with(response)
 
     def test_negative(self):

@@ -2,13 +2,10 @@
 
 from datetime import datetime
 import json
-import random
 
 from google.appengine.api import urlfetch
 import pytz
 
-from c3po import text_chunks
-from c3po.db import prayer_request
 from c3po.persona import base
 from c3po.persona import util
 
@@ -64,24 +61,11 @@ class SmallGroupPersona(base.BasePersona):
         super(SmallGroupPersona, self).__init__()
 
         self.mentioned_map.update({
-            r'gather prayer': self.gather_prayer_requests,
         })
 
         self.not_mentioned_map.update({
-            r'(^)pr (.+)': self.add_prayer_request,
             r'clark(|.+)\?': self.clark,
         })
-
-    @staticmethod
-    @util.should_mention(True)
-    def add_prayer_request(msg):
-        """Stores a new prayer request in the database."""
-        new_request = prayer_request.PrayerRequest(
-            name=msg.name, request=msg.text_chunks[2])
-        msg.settings.prayer_requests.append(new_request)
-        msg.settings.put()
-
-        return random.choice(text_chunks.ACKNOWLEDGEMENTS)
 
     @staticmethod
     @util.should_mention(False)
@@ -106,12 +90,3 @@ class SmallGroupPersona(base.BasePersona):
 
         return "ClarkAlert for %s: %s." \
                % (current_meal, ', '.join(entrees))
-
-    @staticmethod
-    @util.should_mention(False)
-    def gather_prayer_requests(_msg):
-        """Sends a note telling people how to submit prayer requests."""
-        return "OK everybody. Send a short summary of your request with 'PR' " \
-               "at the beginning and then whatever you'd like me to " \
-               "remember. You can send multiple and you can do this at any " \
-               "time during the week."
