@@ -1,6 +1,10 @@
+from datetime import datetime
 import mock
 
+from google.appengine.ext import ndb
+
 from c3po import message
+from c3po.db import settings
 from c3po.persona import base
 from c3po.persona import beasts
 from c3po.persona import eastside
@@ -10,7 +14,7 @@ from c3po.persona import sara_lane
 BOT_ID = '123'
 NAME = 'Billy'
 PICTURE_URL = 'https://example.com/image.jpg'
-TEXT = ''
+TEXT = 'hi'
 TIME_SENT = 1442722989
 CLARK_CLOSED = """
 {
@@ -59,6 +63,7 @@ WEATHER_JSON = """
 class FakeMessage(message.Message):
     def __init__(self, name, picture_url, text, time_sent):
         super(FakeMessage, self).__init__(name, picture_url, text, time_sent)
+
         self.settings = self._get_settings(BOT_ID)
         self.persona = self.settings.get_persona()
 
@@ -79,9 +84,35 @@ class FakeMessage(message.Message):
         pass
 
 
+class FakeStoredMessage(mock.Mock):
+    def __init__(self):
+        super(FakeStoredMessage, self).__init__()
+
+        self.name = NAME
+        self.picture_url = PICTURE_URL
+        self.response_triggered = False
+        self.text = TEXT
+        self.time_sent = datetime.fromtimestamp(TIME_SENT)
+        self.settings = FakeBaseSettings()
+
+
+class FakeNDBQuery(mock.Mock):
+    def __init__(self):
+        super(FakeNDBQuery, self).__init__()
+
+    @staticmethod
+    def count():
+        return 5
+
+    @staticmethod
+    def fetch(**_):
+        return [FakeStoredMessage()]
+
+
 class FakeBaseSettings(mock.Mock):
     def __init__(self):
         super(FakeBaseSettings, self).__init__()
+
         self.groupme_conf = mock.Mock()
         self.groupme_conf.bot_id = BOT_ID
 
@@ -92,6 +123,8 @@ class FakeBaseSettings(mock.Mock):
         self.weather_conf.api_key = '1234'
         self.weather_conf.latitude = '35.7806'
         self.weather_conf.longitude = '-78.6389'
+
+        self.key = ndb.Key(settings.Settings, "ABC123")
 
     @staticmethod
     def get_persona():

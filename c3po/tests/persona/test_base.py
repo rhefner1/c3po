@@ -103,6 +103,16 @@ class TestBaseResponders(unittest.TestCase):
         self.mock_send.assert_called_with(
             "You're welcome!")
 
+    @mock.patch('c3po.db.stored_message.StoredMessage.query')
+    def test_throwback(self, mock_query):
+        mock_query.return_value = fakes.FakeNDBQuery()
+
+        self.msg.text = 'c3po throwback'
+        self.msg.process_message()
+
+        self.mock_send.assert_called_with(
+            'Throwback! On 09/20/2015, Billy said, "hi".')
+
     @mock.patch('google.appengine.api.urlfetch.fetch')
     def test_weather(self, mock_fetch):
         mock_forecast = mock.Mock()

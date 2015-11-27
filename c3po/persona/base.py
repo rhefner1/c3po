@@ -10,6 +10,7 @@ from google.appengine.api import memcache
 from google.appengine.api import urlfetch
 
 from c3po import text_chunks
+from c3po.db import stored_message
 from c3po.persona import util
 
 DATE_FORMAT = "%Y-%m-%d %H:%M:%S.%f"
@@ -44,6 +45,7 @@ class BasePersona(object):
             r'tell (.+?) to (.+)': self.tell_to,
             r'tell (.+?)(\s+|\s+that )(he|she|they) should (.+)': self.tell_should,
             r'thank( you|s)': self.thanks,
+            r'throwback': self.throwback,
             r'weather': self.weather,
             r'what can you do': self.what_can_you_do,
             r'wolf': self.wolf,
@@ -99,6 +101,20 @@ class BasePersona(object):
     def thanks(_msg):
         """You're welcome!"""
         return "%s!" % random.choice(text_chunks.THANKS_RESPONSES)
+
+    @staticmethod
+    @util.should_mention(False)
+    def throwback(msg):
+        """Retrieves a random item from the transcript history and returns."""
+        msg_query = stored_message.StoredMessage.query(
+            stored_message.StoredMessage.settings == msg.settings.key)
+        msg_count = msg_query.count()
+        random_msg = msg_query.fetch(offset=random.randrange(0, msg_count),
+                                     limit=1)[0]
+        time_sent = random_msg.time_sent.strftime('%m/%d/%Y')
+
+        return 'Throwback! On %s, %s said, "%s".' % (
+            time_sent, random_msg.name, random_msg.text)
 
     @staticmethod
     @util.should_mention(False)
