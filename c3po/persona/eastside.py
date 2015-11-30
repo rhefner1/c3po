@@ -36,7 +36,7 @@ class EastsidePersona(small_group.SmallGroupPersona):
     @staticmethod
     @util.should_mention(False)
     def nathan_quote(msg):
-        """Tells who the real creator is."""
+        """Returns a quote from a specific Trello board."""
         trello_key = msg.settings.trello_conf.app_key
         trello_token = msg.settings.trello_conf.token
         nathan_board = msg.settings.trello_conf.nathan_quote_board
