@@ -31,6 +31,7 @@ You can address me as `c3po` or `C-3PO`. There are some commands that I will onl
 | Command | Response                                                        |
 |:--------|:----------------------------------------------------------------|
 | clark?  | Checks if Clark Dining Hall is open. If it is, prints the menu. |
+| case?   | Same as above, but for Case Dining Hall                         |
 
 ### Beasts of the East (includes Small Groups)
 | Command         | Response      |
