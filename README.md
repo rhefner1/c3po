@@ -43,9 +43,9 @@ You can address me as `c3po` or `C-3PO`. There are some commands that I will onl
 | safe word       | Hot Rod quote |
 
 ### Best Eastside Study (includes Small Groups)
-| Command | Response |
-|:--------|:---------|
-|         |          |
+| Command           | Response                          |
+|:------------------|:----------------------------------|
+| c3po nathan quote | Gives a random quote from Nathan! |
 
 ### Sara Lane
 | Command | Response |
