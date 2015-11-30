@@ -16,7 +16,7 @@ NAME = 'Billy'
 PICTURE_URL = 'https://example.com/image.jpg'
 TEXT = 'hi'
 TIME_SENT = 1442722989
-CLARK_CLOSED = """
+DINING_CLOSED = """
 {
     "Remote":{
         "getHours":{
@@ -25,7 +25,7 @@ CLARK_CLOSED = """
     }
 }
 """
-CLARK_MENU = """
+DINING_MENU = """
 {
     "key_1":{
         "description": "Chicken",
@@ -37,7 +37,7 @@ CLARK_MENU = """
     }
 }
 """
-CLARK_OPEN = """
+DINING_OPEN = """
 {
     "Remote":{
         "getHours":{
