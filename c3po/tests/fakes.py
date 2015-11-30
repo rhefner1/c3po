@@ -96,7 +96,7 @@ class FakeStoredMessage(mock.Mock):
         super(FakeStoredMessage, self).__init__()
 
         self.name = NAME
-        self.picture_url = PICTURE_URL
+        self.picture_url = None
         self.response_triggered = False
         self.text = TEXT
         self.time_sent = datetime.fromtimestamp(TIME_SENT)
@@ -114,6 +114,17 @@ class FakeNDBQuery(mock.Mock):
     @staticmethod
     def fetch(**_):
         return [FakeStoredMessage()]
+
+
+class FakeNDBQueryPicture(FakeNDBQuery):
+    def __init__(self):
+        super(FakeNDBQueryPicture, self).__init__()
+
+    @staticmethod
+    def fetch(**_):
+        fake_msg = FakeStoredMessage()
+        fake_msg.picture_url = PICTURE_URL
+        return [fake_msg]
 
 
 class FakeBaseSettings(mock.Mock):

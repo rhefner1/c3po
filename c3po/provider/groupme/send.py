@@ -1,7 +1,7 @@
 """Handles message sending for GroupMe provider."""
 
 import logging
-import urllib
+import json
 
 from google.appengine.api import urlfetch
 
@@ -9,7 +9,6 @@ from c3po import message
 from c3po.db import settings
 
 GROUPME_API_ENDPOINT = 'https://api.groupme.com'
-GROUPME_API_HEADERS = {'Content-Type': 'application/x-www-form-urlencoded'}
 GROUPME_API_PATH = '/v3/bots/post'
 GROUPME_API_FULL = "%s%s" % (GROUPME_API_ENDPOINT, GROUPME_API_PATH)
 
@@ -55,7 +54,12 @@ class GroupmeMessage(message.Message):
             'text': response
         }
 
-        return urllib.urlencode(body)
+        if self.picture_url_to_send:
+            body['attachments'] = [
+                dict(type='image', url=self.picture_url_to_send)
+            ]
+
+        return json.dumps(body)
 
     def send_message(self, response):
         """Sends the given response to the API."""
@@ -65,8 +69,7 @@ class GroupmeMessage(message.Message):
         post_body = self._generate_api_post_body(response)
         result = urlfetch.fetch(url=GROUPME_API_FULL,
                                 payload=post_body,
-                                method=urlfetch.POST,
-                                headers=GROUPME_API_HEADERS)
+                                method=urlfetch.POST)
 
         if result.status_code != 202:
             logging.debug(
