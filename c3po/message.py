@@ -26,6 +26,8 @@ class Message(object):
     response. Overridden and extended by a provider to get provider-specific
     send logic."""
 
+    # pylint: disable=too-many-instance-attributes
+
     __metaclass__ = abc.ABCMeta
 
     def __init__(self, name, picture_url, text, time_sent):
@@ -37,6 +39,8 @@ class Message(object):
         self.text = text
         self.text_chunks = None
         self.time_sent = time_sent
+
+        self.picture_url_to_send = None
 
     @abc.abstractmethod
     def _add_mention(self, response):

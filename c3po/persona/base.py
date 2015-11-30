@@ -113,6 +113,11 @@ class BasePersona(object):
                                      limit=1)[0]
         time_sent = random_msg.time_sent.strftime('%m/%d/%Y')
 
+        if random_msg.picture_url:
+            msg.picture_url_to_send = random_msg.picture_url
+            return 'Throwback! On %s, %s posted this photo.' % (
+                time_sent, random_msg.name)
+
         return 'Throwback! On %s, %s said, "%s".' % (
             time_sent, random_msg.name, random_msg.text)
 
