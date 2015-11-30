@@ -22,14 +22,15 @@ You can address me as `c3po` or `C-3PO`. There are some commands that I will onl
 | c3po tell [person] to [action]                 | I'll tell someone to do something.        |
 | c3po tell [person] that he/she should [action] | Same as above.                            |
 | c3po thank you                                 | You're welcome!                           |
+| c3po throwback                                 | I'll give a random quote from the group.  |
 | c3po weather                                   | I'll get the latest weather info.         |
 | c3po what can you do                           | Directs to a page detailing capabilities. |
 | c3po wolf                                      | PACK!                                     |
 
 ### Small Groups (includes Base)
-| Command                     | Response                                                           |
-|:----------------------------|:-------------------------------------------------------------------|
-| clark?                      | Checks if Clark Dining Hall is open. If it is, prints the menu.    |
+| Command | Response                                                        |
+|:--------|:----------------------------------------------------------------|
+| clark?  | Checks if Clark Dining Hall is open. If it is, prints the menu. |
 
 ### Beasts of the East (includes Small Groups)
 | Command         | Response      |
