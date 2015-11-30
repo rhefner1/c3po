@@ -2,12 +2,17 @@
 
 from datetime import datetime
 import json
+import urllib
 import pytz
-
+from bs4 import BeautifulSoup
 from google.appengine.api import urlfetch
-
 from c3po.persona import base
 from c3po.persona import util
+
+BIBLE_API = "http://www.esvapi.org/v2/rest/verse?key=IP&passage=%s&include-" \
+            "footnotes=false&include-passage-references=false&include-verse-" \
+            "numbers=false"
+BIBLE_RSP_LENGTH = 750
 
 CLARK_OPEN = 8
 CLARK_BREAKFAST_END = 11
@@ -20,6 +25,29 @@ CASE_LUNCH_END = 16
 
 NCSU_DINING_API = \
     'http://www.ncsudining.com/diningapi/?method=%s&location=%s&format=json'
+
+# Regex matching 1 John 2:2-4:
+#  -. any preceding characters
+#  -. case insensitivity flag
+#  1. a book of the Bible
+#  -. whitespace character
+#  2. chapter number
+#  -. : character
+#  3. verse number
+#  -. (optional) - character to signify multiple verses
+#  4. (optional) second verse number
+REGEX_BIBLE = r'(?:.)*(?i)' \
+              r'(genesis|exodus|leviticus|numbers|deuteronomy|joshua|' \
+              r'judges|ruth|1 samuel|2 samuel|1 kings|2 kings|1 chronicles|' \
+              r'2 chronicles|ezra|nehemiah|esther|job|psalms|proverbs|' \
+              r'ecclesiastes|song of solomon|isaiah|jeremiah|lamentations|' \
+              r'ezekiel|daniel|hosea|joel|amos|obadiah|jonah|micah|nahum|' \
+              r'habakkuk|zephaniah|haggai|zechariah|malachi|matthew|mark|' \
+              r'luke|john|acts|romans|1 corinthians|2 corinthians|galatians|' \
+              r'ephesians|philippians|colossians|1 thessalonians|' \
+              r'2 thessalonians|1 timothy|2 timothy|titus|philemon|hebrews|' \
+              r'james|1 peter|2 peter|1 john|2 john|3 john|jude|revelation)' \
+              r'(?:\s)(\d+)(?::)?(\d+)(?:-)?(\d+)?'
 
 
 def get_menu_items(dining_hall, current_meal):
@@ -76,9 +104,51 @@ class SmallGroupPersona(base.BasePersona):
         })
 
         self.not_mentioned_map.update({
+            REGEX_BIBLE: self.bible,
             r'case(|.+)\?': self.case,
             r'clark(|.+)\?': self.clark,
         })
+
+    @staticmethod
+    @util.should_mention(False)
+    def bible(msg):
+        """If a Bible ref is detected, look it up."""
+        # Determining what kind of verse we have
+        verse = "%s %s:%s" % (msg.text_chunks[1].title(),
+                              msg.text_chunks[2],
+                              msg.text_chunks[3])
+
+        # Checking if there is a second verse number
+        if msg.text_chunks[4]:
+            # Making sure the second number is greater than the first
+            if int(msg.text_chunks[4]) <= int(msg.text_chunks[3]):
+                return
+            verse += "-%s" % msg.text_chunks[4]
+
+        # Fetching the verse contents
+        verse_html = urlfetch.fetch(BIBLE_API % urllib.quote_plus(verse))
+
+        # Parsing the verse
+        soup = BeautifulSoup(verse_html.content, 'html.parser')
+
+        # Removing the span that contains a redundant chapter number
+        for tag in soup.findAll('span', {'class': 'chapter-num'}):
+            tag.replaceWith('')
+
+        # Extracting verse text
+        all_verses = [p.get_text() for p in soup.find_all('p')]
+        verses_content = " ".join(all_verses)
+        verses_content = verses_content.encode('ascii', 'ignore')
+
+        # Stripping out extra newlines
+        verses_content = verses_content.replace('\n', ' ')
+
+        # And limiting the response length to a constant
+        if len(verses_content) > BIBLE_RSP_LENGTH:
+            verses_content = verses_content[:BIBLE_RSP_LENGTH]
+            verses_content += ' [...]'
+
+        return "%s | %s" % (verse, verses_content)
 
     @staticmethod
     @util.should_mention(False)
