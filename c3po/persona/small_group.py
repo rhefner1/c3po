@@ -78,10 +78,7 @@ class SmallGroupPersona(base.BasePersona):
             return "Uh oh! Clark is closed right now."
 
         current_meal = get_current_meal()
-        try:
-            all_menu_items = get_clark_menu_items(current_meal)
-        except KeyError:
-            return 'ClarkAlert: Drats, the Clark menu is unavailable.'
+        all_menu_items = get_clark_menu_items(current_meal)
 
         # Filter down some of the options
         entrees = [item['description'] for _, item in all_menu_items.items()
