@@ -46,6 +46,13 @@ CLARK_OPEN = """
     }
 }
 """
+TRELLO_JSON = """
+[
+   {
+      "name":"\\"Sin hub.\\""
+   }
+]
+"""
 WEATHER_JSON = """
 {
    "currently":{
@@ -160,6 +167,11 @@ class FakeBeastsSettings(FakeSmallGroupSettings):
 class FakeEastsideSettings(FakeSmallGroupSettings):
     def __init__(self):
         super(FakeEastsideSettings, self).__init__()
+
+        self.trello_conf = mock.Mock()
+        self.trello_conf.app_key = "ABC"
+        self.trello_conf.token = "DEF"
+        self.trello_conf.nathan_quote_board = "GHI"
 
     @staticmethod
     def get_persona():

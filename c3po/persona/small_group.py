@@ -2,9 +2,9 @@
 
 from datetime import datetime
 import json
+import pytz
 
 from google.appengine.api import urlfetch
-import pytz
 
 from c3po.persona import base
 from c3po.persona import util

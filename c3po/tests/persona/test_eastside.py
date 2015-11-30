@@ -20,6 +20,17 @@ class TestEastsideResponders(unittest.TestCase):
 
         self.msg = fakes.FakeMessage(fakes.NAME, None, '', fakes.TIME_SENT)
 
+    @mock.patch('google.appengine.api.urlfetch.fetch')
+    def test_nathan_quote(self, mock_fetch):
+        mock_cards = mock.Mock()
+        mock_cards.content = fakes.TRELLO_JSON
+        mock_fetch.return_value = mock_cards
+
+        self.msg.text = 'c3po nathan quote'
+        self.msg.process_message()
+
+        self.mock_send.assert_called_with("Here's a Nathan quote: \"Sin hub.\"")
+
     def test_negative(self):
         self.msg.text = 'this is only a test'
         self.msg.process_message()
