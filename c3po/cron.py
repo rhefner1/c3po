@@ -14,5 +14,5 @@ TEXT_LIMIT = 30
 def create_message(settings_obj):
     """Creates a fake message object in which you can call .send_message()."""
     if settings_obj.provider_name == 'groupme':
-        return groupme_send.GroupmeMessage(settings_obj.bot_id, None, None,
-                                           None, None)
+        return groupme_send.GroupmeMessage(None, settings_obj.bot_id, None,
+                                           None, None, None)
