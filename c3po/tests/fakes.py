@@ -1,8 +1,6 @@
 from datetime import datetime
 import mock
-
 from google.appengine.ext import ndb
-
 from c3po import message
 from c3po.db import settings
 from c3po.persona import base
@@ -103,28 +101,29 @@ class FakeStoredMessage(mock.Mock):
         self.settings = FakeBaseSettings()
 
 
+class FakeStoredMessageKey(mock.Mock):
+    def __init__(self, picture):
+        super(FakeStoredMessageKey, self).__init__()
+        self.picture = picture
+
+    def get(self):
+        fake_msg = FakeStoredMessage()
+        if self.picture:
+            fake_msg.picture_url = PICTURE_URL
+        return fake_msg
+
+
 class FakeNDBQuery(mock.Mock):
-    def __init__(self):
+    def __init__(self, picture=False):
         super(FakeNDBQuery, self).__init__()
+        self.picture = picture
 
     @staticmethod
     def count():
         return 5
 
-    @staticmethod
-    def fetch(**_):
-        return [FakeStoredMessage()]
-
-
-class FakeNDBQueryPicture(FakeNDBQuery):
-    def __init__(self):
-        super(FakeNDBQueryPicture, self).__init__()
-
-    @staticmethod
-    def fetch(**_):
-        fake_msg = FakeStoredMessage()
-        fake_msg.picture_url = PICTURE_URL
-        return [fake_msg]
+    def fetch(self, **_):
+        return [FakeStoredMessageKey(self.picture)]
 
 
 class FakeBaseSettings(mock.Mock):

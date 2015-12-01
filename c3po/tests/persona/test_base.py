@@ -115,7 +115,7 @@ class TestBaseResponders(unittest.TestCase):
 
     @mock.patch('c3po.db.stored_message.StoredMessage.query')
     def test_throwback_picture(self, mock_query):
-        mock_query.return_value = fakes.FakeNDBQueryPicture()
+        mock_query.return_value = fakes.FakeNDBQuery(picture=True)
 
         self.msg.text = 'c3po throwback'
         self.msg.process_message()
