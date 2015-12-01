@@ -2,6 +2,7 @@
 
 import logging
 import json
+import time
 
 from google.appengine.api import urlfetch
 
@@ -12,17 +13,21 @@ GROUPME_API_ENDPOINT = 'https://api.groupme.com'
 GROUPME_API_PATH = '/v3/bots/post'
 GROUPME_API_FULL = "%s%s" % (GROUPME_API_ENDPOINT, GROUPME_API_PATH)
 
+TARGET_SEND_TIME = .4
+
 
 class GroupmeMessage(message.Message):
     """Implements Message for the GroupMe provider."""
 
-    def __init__(self, bot_id, name, picture_url, text, time_sent):   # pylint: disable=too-many-arguments
+    def __init__(self, start_time, bot_id, name, picture_url, text, time_sent):
+        # pylint: disable=too-many-arguments
         super(GroupmeMessage, self).__init__(name, picture_url, text, time_sent)
 
         self.settings = self._get_settings(bot_id)
         self.groupme_bot_id = self.settings.groupme_conf.bot_id
         self.name = name
         self.persona = self.settings.get_persona()
+        self.start_time = start_time
 
     def _add_mention(self, response):
         """When responding back to a person, mention them."""
@@ -65,6 +70,12 @@ class GroupmeMessage(message.Message):
         """Sends the given response to the API."""
         logging.info("Sending this response: '%s' to bot_id: '%s'",
                      response, self.groupme_bot_id)
+
+        elapsed_time = time.time() - self.start_time
+        if elapsed_time < TARGET_SEND_TIME:
+            time.sleep(TARGET_SEND_TIME - elapsed_time)
+
+        logging.info("WOMBAT elapsed: %s, now: %s", elapsed_time, time.time() - self.start_time)
 
         post_body = self._generate_api_post_body(response)
         result = urlfetch.fetch(url=GROUPME_API_FULL,

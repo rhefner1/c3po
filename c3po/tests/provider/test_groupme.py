@@ -6,6 +6,8 @@ from google.appengine.api import urlfetch
 from c3po.provider.groupme import send
 from c3po.tests import fakes
 
+FAKE_TIME_STARTED = 1448951940.077249
+
 GROUPME_API_ENDPOINT = 'https://api.groupme.com'
 GROUPME_API_PATH = '/v3/bots/post'
 GROUPME_API_FULL = "%s%s" % (GROUPME_API_ENDPOINT, GROUPME_API_PATH)
@@ -18,9 +20,9 @@ class TestGeneratePostBody(unittest.TestCase):
         self.mock_settings = settings_patcher.start()
         self.mock_settings.return_value = fakes.FakeBaseSettings()
 
-        self.msg = send.GroupmeMessage(fakes.BOT_ID, fakes.NAME,
-                                       fakes.PICTURE_URL, fakes.TEXT,
-                                       fakes.TIME_SENT)
+        self.msg = send.GroupmeMessage(FAKE_TIME_STARTED, fakes.BOT_ID,
+                                       fakes.NAME, fakes.PICTURE_URL,
+                                       fakes.TEXT, fakes.TIME_SENT)
 
     def test_generate_api_post_body(self):
         actual_post_body = self.msg._generate_api_post_body('sample')
@@ -36,9 +38,9 @@ class TestSendResponse(unittest.TestCase):
         self.mock_settings = settings_patcher.start()
         self.mock_settings.return_value = fakes.FakeBaseSettings()
 
-        self.msg = send.GroupmeMessage(fakes.BOT_ID, fakes.NAME,
-                                       fakes.PICTURE_URL, fakes.TEXT,
-                                       fakes.TIME_SENT)
+        self.msg = send.GroupmeMessage(FAKE_TIME_STARTED, fakes.BOT_ID,
+                                       fakes.NAME, fakes.PICTURE_URL,
+                                       fakes.TEXT, fakes.TIME_SENT)
 
     @mock.patch('c3po.provider.groupme.send.GroupmeMessage._generate_api_post_body')
     @mock.patch('google.appengine.api.urlfetch.fetch')
