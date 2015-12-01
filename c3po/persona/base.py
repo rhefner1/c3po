@@ -64,7 +64,7 @@ class BasePersona(object):
     @util.should_mention(True)
     def hello(_msg):
         """Says hello!"""
-        return 'Greetings. I am C-3PO, human cyborg relations.'
+        return 'Greetings. I am C-3PO, human-cyborg relations.'
 
     @staticmethod
     @util.should_mention(False)
