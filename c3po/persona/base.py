@@ -110,7 +110,8 @@ class BasePersona(object):
             stored_message.StoredMessage.settings == msg.settings.key)
         msg_count = msg_query.count()
         random_msg = msg_query.fetch(offset=random.randrange(0, msg_count),
-                                     limit=1)[0]
+                                     limit=1,
+                                     keys_only=True)[0].get()
         time_sent = random_msg.time_sent.strftime('%m/%d/%Y')
 
         if random_msg.picture_url:
