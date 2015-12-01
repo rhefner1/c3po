@@ -17,7 +17,6 @@ SUCCESS = ('', 200)
 @APP.route('/groupme/<bot_id>', methods=['POST'])
 def receive_message(bot_id):
     """Processes a message and returns a response."""
-    time.sleep(.1)
 
     logging.info("Request data: %s", flask.request.data)
 
