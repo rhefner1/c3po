@@ -57,7 +57,7 @@ class TestBaseResponders(unittest.TestCase):
         self.msg.process_message()
 
         self.mock_send.assert_called_with(
-            'Greetings. I am C-3PO, human cyborg relations.')
+            'Greetings. I am C-3PO, human-cyborg relations.')
 
     @mock.patch('random.choice')
     def test_motivate(self, mock_random):
