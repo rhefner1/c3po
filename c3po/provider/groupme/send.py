@@ -75,8 +75,6 @@ class GroupmeMessage(message.Message):
         if elapsed_time < TARGET_SEND_TIME:
             time.sleep(TARGET_SEND_TIME - elapsed_time)
 
-        logging.info("WOMBAT elapsed: %s, now: %s", elapsed_time, time.time() - self.start_time)
-
         post_body = self._generate_api_post_body(response)
         result = urlfetch.fetch(url=GROUPME_API_FULL,
                                 payload=post_body,
