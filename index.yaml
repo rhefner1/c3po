@@ -14,3 +14,9 @@ indexes:
   properties:
   - name: settings
   - name: time_sent
+
+- kind: StoredMessage
+  properties:
+  - name: settings
+  - name: time_sent
+    direction: desc

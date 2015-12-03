@@ -23,16 +23,18 @@ def random_date(start, end):
 def random_message(msg):
     """Returns a random StoredMessage from the datastore."""
     # Get a random target date
-    random_target_date = random_date(msg.settings.throwback_first_date,
-                                     datetime.utcnow() - ONE_DAY)
+    random_target_date = random_date(
+        msg.settings.throwback_first_date + ONE_DAY,
+        datetime.utcnow() - ONE_DAY
+    )
 
     # Run the query finding the first message near the random date
     msg_query = stored_message.StoredMessage.query(
         ndb.AND(
             stored_message.StoredMessage.settings == msg.settings.key,
-            stored_message.StoredMessage.time_sent >= random_target_date
+            stored_message.StoredMessage.time_sent <= random_target_date
         )
-    )
+    ).order(-stored_message.StoredMessage.time_sent)
 
     return msg_query.fetch(limit=1)[0]
 

@@ -118,6 +118,9 @@ class FakeNDBQuery(mock.Mock):
             fake_msg.picture_url = PICTURE_URL
         return [fake_msg]
 
+    def order(self, *_):
+        return self
+
 
 class FakeBaseSettings(mock.Mock):
     def __init__(self):
