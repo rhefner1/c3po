@@ -1,6 +1,5 @@
 """Responder specifically for for Beasts of the East."""
 
-from c3po.persona import base
 from c3po.persona import small_group
 from c3po.persona import util
 
@@ -27,7 +26,7 @@ class BeastsPersona(small_group.SmallGroupPersona):
     @util.should_mention(False)
     def babe_wait(msg):
         """Babe wait!."""
-        if base.rate_limit(msg.settings, 'babe_wait'):
+        if util.rate_limit(msg.settings, 'babe_wait'):
             return
         return 'Babe! Wait! Babe! No!! BABE! NO! BAAAAAAAAABE!!!'
 
@@ -35,7 +34,7 @@ class BeastsPersona(small_group.SmallGroupPersona):
     @util.should_mention(False)
     def cool_beans(msg):
         """Cool beans."""
-        if base.rate_limit(msg.settings, 'cool_beans'):
+        if util.rate_limit(msg.settings, 'cool_beans'):
             return
         return 'Cool cool beans beans. Cool be-be-be-beans. Cool beans?'
 
@@ -43,7 +42,7 @@ class BeastsPersona(small_group.SmallGroupPersona):
     @util.should_mention(False)
     def gods_of_war(msg):
         """GODS OF WAR."""
-        if base.rate_limit(msg.settings, 'gods_of_war'):
+        if util.rate_limit(msg.settings, 'gods_of_war'):
             return
         return 'May your hammer be mighty.'
 
@@ -51,7 +50,7 @@ class BeastsPersona(small_group.SmallGroupPersona):
     @util.should_mention(False)
     def legit(msg):
         """This is legit."""
-        if base.rate_limit(msg.settings, 'legit'):
+        if util.rate_limit(msg.settings, 'legit'):
             return
         return "I used to be legit. I was too legit. Too legit to quit. But " \
                "now, I'm not legit."
@@ -60,7 +59,7 @@ class BeastsPersona(small_group.SmallGroupPersona):
     @util.should_mention(False)
     def like_to_party(msg):
         """No, I like to party!"""
-        if base.rate_limit(msg.settings, 'like_to_party'):
+        if util.rate_limit(msg.settings, 'like_to_party'):
             return
         return "%s, I know for a fact you don't party. You do *not* party." \
                % msg.name
@@ -69,6 +68,6 @@ class BeastsPersona(small_group.SmallGroupPersona):
     @util.should_mention(False)
     def safe_word(msg):
         """The safe word is whiskey."""
-        if base.rate_limit(msg.settings, 'safe_word'):
+        if util.rate_limit(msg.settings, 'safe_word'):
             return
         return 'The safe word is: Whhhiskey.'

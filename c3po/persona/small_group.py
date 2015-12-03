@@ -84,7 +84,7 @@ class SmallGroupPersona(base.BasePersona):
     @util.should_mention(False)
     def case(msg):
         """Case it up."""
-        if base.rate_limit(msg.settings, 'case', minutes=60):
+        if util.rate_limit(msg.settings, 'case', minutes=60):
             return
 
         if is_dining_closed('case'):
@@ -105,7 +105,7 @@ class SmallGroupPersona(base.BasePersona):
     @util.should_mention(False)
     def clark(msg):
         """Clark it up."""
-        if base.rate_limit(msg.settings, 'clark', minutes=60):
+        if util.rate_limit(msg.settings, 'clark', minutes=60):
             return
 
         if is_dining_closed('clark'):

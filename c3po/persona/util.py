@@ -1,11 +1,14 @@
 """Utility functions for personas"""
 from datetime import datetime
 from datetime import timedelta
+import logging
 import random
+from google.appengine.api import memcache
 from google.appengine.ext import ndb
 from c3po.db import stored_message
 
 ONE_DAY = timedelta(days=1)
+DATE_FORMAT = "%Y-%m-%d %H:%M:%S.%f"
 
 
 def random_date(start, end):
@@ -32,6 +35,22 @@ def random_message(msg):
     )
 
     return msg_query.fetch(limit=1)[0]
+
+
+def rate_limit(settings, key, minutes=5):
+    """Rate limits a function by a number of minutes."""
+    memcache_key = "%s-%s" % (key, settings.key.urlsafe())
+
+    last_use = memcache.get(memcache_key)
+    if last_use:
+        delta = datetime.now() - datetime.strptime(last_use, DATE_FORMAT)
+        min_delta = timedelta(minutes=minutes)
+        if delta < min_delta:
+            logging.info("Rate Limit: not sending a response.")
+            return True
+
+    memcache.set(memcache_key, datetime.now().strftime(DATE_FORMAT))
+    return False
 
 
 def should_mention(should_add_mention):

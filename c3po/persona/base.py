@@ -1,33 +1,12 @@
 """Contains the definitions for the responders."""
 
-from datetime import datetime
-from datetime import timedelta
 import json
-import logging
 import random
-from google.appengine.api import memcache
 from google.appengine.api import urlfetch
 from c3po import text_chunks
 from c3po.persona import util
 
-DATE_FORMAT = "%Y-%m-%d %H:%M:%S.%f"
 FORECAST_API_ENDPOINT = "https://api.forecast.io/forecast/%s/%s,%s?units=auto"
-
-
-def rate_limit(settings, key, minutes=5):
-    """Rate limits a function by a number of minutes."""
-    memcache_key = "%s-%s" % (key, settings.key.urlsafe())
-
-    last_use = memcache.get(memcache_key)
-    if last_use:
-        delta = datetime.now() - datetime.strptime(last_use, DATE_FORMAT)
-        min_delta = timedelta(minutes=minutes)
-        if delta < min_delta:
-            logging.info("Rate Limit: not sending a response.")
-            return True
-
-    memcache.set(memcache_key, datetime.now().strftime(DATE_FORMAT))
-    return False
 
 
 class BasePersona(object):
