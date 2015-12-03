@@ -5,12 +5,9 @@ from datetime import timedelta
 import json
 import logging
 import random
-
 from google.appengine.api import memcache
 from google.appengine.api import urlfetch
-
 from c3po import text_chunks
-from c3po.db import stored_message
 from c3po.persona import util
 
 DATE_FORMAT = "%Y-%m-%d %H:%M:%S.%f"
@@ -106,12 +103,7 @@ class BasePersona(object):
     @util.should_mention(False)
     def throwback(msg):
         """Retrieves a random item from the transcript history and returns."""
-        msg_query = stored_message.StoredMessage.query(
-            stored_message.StoredMessage.settings == msg.settings.key)
-        msg_count = msg_query.count()
-        random_msg = msg_query.fetch(offset=random.randrange(0, msg_count),
-                                     limit=1,
-                                     keys_only=True)[0].get()
+        random_msg = util.random_message(msg)
         time_sent = random_msg.time_sent.strftime('%m/%d/%Y')
 
         if random_msg.picture_url:

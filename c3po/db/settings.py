@@ -32,6 +32,9 @@ class Settings(ndb.Model):
     bot_mentioned_regex = ndb.StringProperty(required=True,
                                              default='(c-3po|c3po)')
 
+    # Throwback chooses a random date between this date and current date
+    throwback_first_date = ndb.DateTimeProperty(auto_now_add=True)
+
     # Service Configuration
     groupme_conf = ndb.StructuredProperty(groupme_conf.GroupmeConf)
     trello_conf = ndb.StructuredProperty(trello_conf.TrelloConf)
