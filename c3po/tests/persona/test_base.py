@@ -1,7 +1,6 @@
+from datetime import datetime
 import unittest
-
 import mock
-
 from c3po.tests import fakes
 
 
@@ -104,7 +103,9 @@ class TestBaseResponders(unittest.TestCase):
             "You're welcome!")
 
     @mock.patch('c3po.db.stored_message.StoredMessage.query')
-    def test_throwback_no_picture(self, mock_query):
+    @mock.patch('c3po.persona.util.random_date')
+    def test_throwback_no_picture(self, mock_rnd_date, mock_query):
+        mock_rnd_date.return_value = datetime(2015, 9, 19)
         mock_query.return_value = fakes.FakeNDBQuery()
 
         self.msg.text = 'c3po throwback'
@@ -114,7 +115,9 @@ class TestBaseResponders(unittest.TestCase):
             'Throwback! On 09/20/2015, Billy said, "hi".')
 
     @mock.patch('c3po.db.stored_message.StoredMessage.query')
-    def test_throwback_picture(self, mock_query):
+    @mock.patch('c3po.persona.util.random_date')
+    def test_throwback_picture(self, mock_rnd_date, mock_query):
+        mock_rnd_date.return_value = datetime(2015, 9, 19)
         mock_query.return_value = fakes.FakeNDBQuery(picture=True)
 
         self.msg.text = 'c3po throwback'

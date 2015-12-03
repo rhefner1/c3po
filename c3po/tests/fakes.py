@@ -106,24 +106,17 @@ class FakeStoredMessageKey(mock.Mock):
         super(FakeStoredMessageKey, self).__init__()
         self.picture = picture
 
-    def get(self):
-        fake_msg = FakeStoredMessage()
-        if self.picture:
-            fake_msg.picture_url = PICTURE_URL
-        return fake_msg
-
 
 class FakeNDBQuery(mock.Mock):
     def __init__(self, picture=False):
         super(FakeNDBQuery, self).__init__()
         self.picture = picture
 
-    @staticmethod
-    def count():
-        return 5
-
     def fetch(self, **_):
-        return [FakeStoredMessageKey(self.picture)]
+        fake_msg = FakeStoredMessage()
+        if self.picture:
+            fake_msg.picture_url = PICTURE_URL
+        return [fake_msg]
 
 
 class FakeBaseSettings(mock.Mock):
@@ -140,6 +133,8 @@ class FakeBaseSettings(mock.Mock):
         self.weather_conf.api_key = '1234'
         self.weather_conf.latitude = '35.7806'
         self.weather_conf.longitude = '-78.6389'
+
+        self.throwback_first_date = datetime(2015, 9, 19)
 
         self.key = ndb.Key(settings.Settings, "ABC123")
 
