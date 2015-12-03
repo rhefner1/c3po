@@ -70,7 +70,7 @@ class TestSmallGroupResponders(unittest.TestCase):
 
         self.msg = fakes.FakeMessage(fakes.NAME, None, '', fakes.TIME_SENT)
 
-    @mock.patch('c3po.persona.base.rate_limit')
+    @mock.patch('c3po.persona.util.rate_limit')
     @mock.patch('c3po.persona.small_group.get_menu_items')
     @mock.patch('c3po.persona.small_group.get_current_meal')
     @mock.patch('c3po.persona.small_group.is_dining_closed')
@@ -87,7 +87,7 @@ class TestSmallGroupResponders(unittest.TestCase):
         response = "CaseAlert for dinner: Chicken."
         self.mock_send.assert_called_with(response)
 
-    @mock.patch('c3po.persona.base.rate_limit')
+    @mock.patch('c3po.persona.util.rate_limit')
     @mock.patch('c3po.persona.small_group.get_menu_items')
     @mock.patch('c3po.persona.small_group.get_current_meal')
     @mock.patch('c3po.persona.small_group.is_dining_closed')
