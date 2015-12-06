@@ -12,8 +12,10 @@ indexes:
 
 - kind: StoredMessage
   properties:
+  - name: response_triggered
   - name: settings
   - name: time_sent
+    direction: desc
 
 - kind: StoredMessage
   properties:
