@@ -32,7 +32,8 @@ def random_message(msg):
     msg_query = stored_message.StoredMessage.query(
         ndb.AND(
             stored_message.StoredMessage.settings == msg.settings.key,
-            stored_message.StoredMessage.time_sent <= random_target_date
+            stored_message.StoredMessage.time_sent <= random_target_date,
+            stored_message.StoredMessage.response_triggered == False  # pylint: disable=singleton-comparison
         )
     ).order(-stored_message.StoredMessage.time_sent)
 
