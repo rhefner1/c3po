@@ -15,6 +15,7 @@ You can address me as `c3po` or `C-3PO`. There are some commands that I will onl
 
 | Command                                        | Response                                  |
 |:-----------------------------------------------|:------------------------------------------|
+| c3po choose cheddar, swiss or gouda            | I'll pick one of the choices at random.   |
 | c3po who created you?                          | Tribute to the authors.                   |
 | c3po hi/hello                                  | I'll greet you.                           |
 | c3po motivate [person]                         | Says something nice about the person.     |
