@@ -1,4 +1,4 @@
-"""Contains the definitions for the responders."""
+"""Contains the definitions for the responders common to all personas."""
 
 import json
 import random
@@ -14,6 +14,7 @@ class BasePersona(object):
 
     def __init__(self):
         self.mentioned_map = {
+            r'choose (?:between )?(.+)*': self.choose,
             r'created you': self.creator,
             r'(hi|hello)': self.hello,
             r'motivate (.+)': self.motivate,
@@ -29,6 +30,23 @@ class BasePersona(object):
 
         self.not_mentioned_map = {
         }
+
+    @staticmethod
+    @util.should_mention(True)
+    def choose(msg):
+        """Given a comma-delimited list of items, choose one."""
+        items = [c.strip()
+                 for a in msg.text_chunks[1].split(' or ')
+                 for b in a.split(' and ')
+                 for c in b.split(',')
+                 if c is not '']
+
+        # Check for only one item
+        if len(items) <= 1:
+            return "Whoops, you only gave me one item to choose from (%s)." \
+                   % items[0]
+
+        return random.choice(text_chunks.CHOOSE) % random.choice(items)
 
     @staticmethod
     @util.should_mention(True)

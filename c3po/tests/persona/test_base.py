@@ -1,7 +1,15 @@
 from datetime import datetime
 import unittest
 import mock
+from c3po import text_chunks
 from c3po.tests import fakes
+
+
+def _random_se(*args, **_):
+    if args[0] == text_chunks.CHOOSE:
+        return 'Hmm... I choose %s.'
+    elif args[0] == ['cheddar', 'swiss', 'gouda']:
+        return 'gouda'
 
 
 class TestAddMention(unittest.TestCase):
@@ -43,6 +51,53 @@ class TestBaseResponders(unittest.TestCase):
         self.mock_settings.return_value = fakes.FakeBaseSettings()
 
         self.msg = fakes.FakeMessage(fakes.NAME, None, '', fakes.TIME_SENT)
+
+    def test_choose_0(self):
+        self.msg.text = 'c3po choose cheddar'
+        self.msg.process_message()
+
+        self.mock_send.assert_called_with(
+            'Whoops, you only gave me one item to choose from (cheddar).')
+
+    @mock.patch('random.choice')
+    def test_choose_1(self, mock_random):
+        mock_random.side_effect = _random_se
+
+        self.msg.text = 'c3po choose cheddar, swiss, gouda'
+        self.msg.process_message()
+
+        self.mock_send.assert_called_with(
+            'Hmm... I choose gouda.')
+
+    @mock.patch('random.choice')
+    def test_choose_2(self, mock_random):
+        mock_random.side_effect = _random_se
+
+        self.msg.text = 'c3po choose cheddar, swiss or gouda'
+        self.msg.process_message()
+
+        self.mock_send.assert_called_with(
+            'Hmm... I choose gouda.')
+
+    @mock.patch('random.choice')
+    def test_choose_3(self, mock_random):
+        mock_random.side_effect = _random_se
+
+        self.msg.text = 'c3po choose cheddar, swiss, or gouda'
+        self.msg.process_message()
+
+        self.mock_send.assert_called_with(
+            'Hmm... I choose gouda.')
+
+    @mock.patch('random.choice')
+    def test_choose_4(self, mock_random):
+        mock_random.side_effect = _random_se
+
+        self.msg.text = 'c3po choose between cheddar, swiss and gouda'
+        self.msg.process_message()
+
+        self.mock_send.assert_called_with(
+            'Hmm... I choose gouda.')
 
     def test_creator(self):
         self.msg.text = 'c3po who created you?'
