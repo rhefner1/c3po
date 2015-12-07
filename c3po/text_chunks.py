@@ -47,6 +47,6 @@ THANKS_RESPONSES = [
     "My pleasure",
     "It's nothing",
     "Think nothing of it",
-    "No, no. thank you!",
+    "No problem. Thank you for asking!",
     "Sure thing",
 ]
