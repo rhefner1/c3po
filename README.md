@@ -29,10 +29,11 @@ You can address me as `c3po` or `C-3PO`. There are some commands that I will onl
 | c3po wolf                                      | PACK!                                     |
 
 ### Small Groups (includes Base)
-| Command | Response                                                        |
-|:--------|:----------------------------------------------------------------|
-| clark?  | Checks if Clark Dining Hall is open. If it is, prints the menu. |
-| case?   | Same as above, but for Case Dining Hall                         |
+| Command                                                    | Response                                                                                     |
+|:-----------------------------------------------------------|:---------------------------------------------------------------------------------------------|
+| [any Bible reference] Philippians 4:6 OR Philippians 4:6-7 | Returns the verse in ESV. Can be either a single verse or a range. Capped at 750 characters. |
+| clark?                                                     | Checks if Clark Dining Hall is open. If it is, prints the menu.                              |
+| case?                                                      | Same as above, but for Case Dining Hall                                                      |
 
 ### Beasts of the East (includes Small Groups)
 | Command         | Response      |
