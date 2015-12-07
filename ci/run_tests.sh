@@ -8,5 +8,5 @@ then
     echo "Current PYTHONPATH: ${PYTHONPATH}"
 
     echo -e "\n### Running unit tests"
-    python -m unittest discover
+    nosetests  --with-coverage --cover-package=c3po
 fi
