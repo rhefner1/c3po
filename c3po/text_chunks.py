@@ -28,8 +28,8 @@ MOTIVATIONS = [
 CHOOSE = [
     "Hmm... I choose %s.",
     "I consulted with R2-D2 and he chose %s.",
-    "Master Anakin wants you to choose %s.",
-    "The Force is strong with %s.",
+    "Master Anakin chooses %s.",
+    "The Force is leading me to choose %s.",
     "Han is a bit busy navigating the Falcon, but he says %s.",
     "I'm not entirely fluent in Wookieespeak, but I think Chewie said %s.",
     "R2 may just be a bucket of bolts, but he occasionally has a good idea. "
