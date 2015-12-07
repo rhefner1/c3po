@@ -4,8 +4,10 @@
 # in `lib/` subdirectory.
 #
 # Note: The `lib` directory is added to `sys.path` by `appengine_config.py`.
+coverage
 Flask==0.10
 freezegun
 mock
+nose
 pylint
 pytz
