@@ -70,6 +70,44 @@ class TestSmallGroupResponders(unittest.TestCase):
 
         self.msg = fakes.FakeMessage(fakes.NAME, None, '', fakes.TIME_SENT)
 
+    @mock.patch('google.appengine.api.urlfetch.fetch')
+    def test_bible_0(self, fake_fetch):
+        fake_api_return = mock.Mock()
+        fake_api_return.content = fakes.BIBLE_GENESIS_1
+        fake_fetch.return_value = fake_api_return
+
+        self.msg.text = 'Genesis 1:1'
+        self.msg.process_message()
+
+        self.mock_send.assert_called_with(
+            "Genesis 1:1 | In the beginning, God created the heavens and the "
+            "earth.  (ESV)")
+
+    @mock.patch('google.appengine.api.urlfetch.fetch')
+    def test_bible_1(self, fake_fetch):
+        fake_api_return = mock.Mock()
+        fake_api_return.content = fakes.BIBLE_GENESIS_1
+        fake_fetch.return_value = fake_api_return
+
+        self.msg.text = 'My favorite verse is genesis 1:1. Yours?'
+        self.msg.process_message()
+
+        self.mock_send.assert_called_with(
+            "Genesis 1:1 | In the beginning, God created the heavens and the "
+            "earth.  (ESV)")
+
+    def test_bible_2(self):
+        self.msg.text = 'Genesis 1'
+        self.msg.process_message()
+
+        self.mock_send.assert_not_called()
+
+    def test_bible_3(self):
+        self.msg.text = 'genesis 1:3-1'
+        self.msg.process_message()
+
+        self.mock_send.assert_not_called()
+
     @mock.patch('c3po.persona.util.rate_limit')
     @mock.patch('c3po.persona.small_group.get_menu_items')
     @mock.patch('c3po.persona.small_group.get_current_meal')

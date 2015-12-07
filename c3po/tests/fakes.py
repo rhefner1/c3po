@@ -9,6 +9,12 @@ from c3po.persona import eastside
 from c3po.persona import small_group
 from c3po.persona import sara_lane
 
+BIBLE_GENESIS_1 = '<div class="esv-text"><p class="chapter-first" ' \
+                  'id="p01001001.06-1"><span class="chapter-num" ' \
+                  'id="v01001001-1">1:1&nbsp;</span>In the beginning, ' \
+                  'God created the heavens and the earth.  (<a ' \
+                  'href="http://www.esv.org" class="copyright">ESV</a>)' \
+                  '</p></div>'
 BOT_ID = '123'
 NAME = 'Billy'
 PICTURE_URL = 'https://example.com/image.jpg'
