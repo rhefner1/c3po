@@ -101,6 +101,16 @@ class TestBaseResponders(unittest.TestCase):
         self.mock_send.assert_called_with(
             'Hmm... I choose gouda.')
 
+    @mock.patch('random.choice')
+    def test_choose_5(self, mock_random):
+        mock_random.side_effect = _random_se
+
+        self.msg.text = 'c3po what cheese? Choose cheddar, swiss or gouda'
+        self.msg.process_message()
+
+        self.mock_send.assert_called_with(
+            'Hmm... I choose gouda.')
+
     def test_creator(self):
         self.msg.text = 'c3po who created you?'
         self.msg.process_message()
