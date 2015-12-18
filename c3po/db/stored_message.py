@@ -11,3 +11,4 @@ class StoredMessage(ndb.Model):
     text = ndb.StringProperty()
     time_sent = ndb.DateTimeProperty()
     settings = ndb.KeyProperty()
+    settings_id = ndb.ComputedProperty(lambda self: self.settings.id())

@@ -2,6 +2,7 @@
 
 import json
 import random
+from google.appengine.api import taskqueue
 from google.appengine.api import urlfetch
 from c3po import text_chunks
 from c3po.persona import util
@@ -14,6 +15,7 @@ class BasePersona(object):
 
     def __init__(self):
         self.mentioned_map = {
+            r'analytics': self.analytics,
             r'choose (?:between )?(.+)*': self.choose,
             r'created you': self.creator,
             r'(hi|hello)': self.hello,
@@ -30,6 +32,13 @@ class BasePersona(object):
 
         self.not_mentioned_map = {
         }
+
+    @staticmethod
+    @util.should_mention(True)
+    def analytics(msg):
+        taskqueue.add(url="/analytics/start",
+                      params={'settings_id': msg.settings.get_id()})
+        return "Sure thing! Hang on a sec while I crunch the latest numbers."
 
     @staticmethod
     @util.should_mention(True)

@@ -8,3 +8,17 @@ threadsafe: true
 handlers:
 - url: /analytics/.*
   script: analytics.http_handler.APP
+
+- url: /analyticsctl/.*
+  script: analytics.http_handler.APP
+  login: admin
+
+- url: /_ah/pipeline.*
+  script: mapreduce.lib.pipeline.handlers._APP
+  login: admin
+
+- url: /blobstore/(.*)
+  script: analytics.blobstore_download.app
+
+includes:
+- lib/mapreduce/include.yaml

@@ -1,11 +1,18 @@
 application: c3po-bot
 
 dispatch:
+
+# Analytics module
 - url: /analytics/*
   module: analytics
 
+- url: /mapreduce(/.*)?
+  module: analytics
+
+# Store Data module
 - url: /storedata
   module: history_upload
 
+# Default Module
 - url: .*
   module: default

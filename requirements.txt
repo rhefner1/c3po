@@ -8,6 +8,7 @@ beautifulsoup4
 coverage
 flask
 freezegun
+GoogleAppEngineMapreduce
 mock
 nose
 pylint
