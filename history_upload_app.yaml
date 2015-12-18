@@ -1,0 +1,12 @@
+application: c3po-bot
+module: history-upload
+version: uno
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+- url: /storedata
+  script: history_upload.endpoint.APP
+  secure: always
+  login: admin

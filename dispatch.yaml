@@ -1,0 +1,11 @@
+application: c3po-bot
+
+dispatch:
+- url: /analytics/*
+  module: analytics
+
+- url: /storedata
+  module: history_upload
+
+- url: .*
+  module: default

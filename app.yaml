@@ -12,16 +12,6 @@ handlers:
   script: google.appengine.ext.admin.application
   login: admin
 
-- url: /cron/.*
-  script: c3po.cron.APP
-  secure: always
-  login: admin
-
-- url: /storedata
-  script: history_upload.endpoint.APP
-  secure: always
-  login: admin
-
 - url: .*
   script: c3po.http_handler.APP
   secure: always
