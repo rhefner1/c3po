@@ -15,6 +15,7 @@ You can address me as `c3po` or `C-3PO`. There are some commands that I will onl
 
 | Command                                        | Response                                  |
 |:-----------------------------------------------|:------------------------------------------|
+| c3po analytics                                 | See the Analytics section                 |
 | c3po choose cheddar, swiss or gouda            | I'll pick one of the choices at random.   |
 | c3po who created you?                          | Tribute to the authors.                   |
 | c3po hi/hello                                  | I'll greet you.                           |
@@ -54,6 +55,13 @@ You can address me as `c3po` or `C-3PO`. There are some commands that I will onl
 | Command | Response |
 |:--------|:---------|
 |         |          |
+
+## Analytics
+- Total message count
+- Messages per user (and their count/total to get % of messages)
+- Username changes over time
+- Most common words
+- Wordcloud
 
 ## Codebase Structure
 The C-3PO codebase is laid out as follows:

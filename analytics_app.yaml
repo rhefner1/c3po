@@ -8,3 +8,6 @@ threadsafe: true
 handlers:
 - url: /analytics/.*
   script: analytics.http_handler.APP
+
+- url: /static
+  static_dir: static

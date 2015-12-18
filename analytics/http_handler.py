@@ -8,10 +8,10 @@ APP.config['DEBUG'] = True
 SUCCESS = ('', 200)
 
 
-@APP.route('/analytics/hi')
-def ping():
-    """Sample web handler to see if the server is alive."""
-    return 'hello'
+@APP.route('/analytics/<settings_key>')
+def analytics(settings_key):
+    """Analytics."""
+    return flask.render_template('index.html', name='Beasts of the East')
 
 
 @APP.errorhandler(404)
