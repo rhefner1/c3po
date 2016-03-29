@@ -56,3 +56,8 @@ TRUMP_CLARK = [
     "If you elect me president, I will construct a Clark so YUGE, it will "
     "blow your mind."
 ]
+
+TRUMP_MEXICO = [
+    "The Mexican government forces many bad people into our country. "
+    "Because they're smart. They're smarter than our leaders."
+]

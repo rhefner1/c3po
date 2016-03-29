@@ -16,6 +16,7 @@ class TrumpPersona(object):
         self.not_mentioned_map = {
             r'america': self.america,
             r'clark(|.+)\?': self.clark,
+            r'mexico': self.mexico,
             r'wom(a|e)n': self.women,
         }
 
@@ -34,6 +35,12 @@ class TrumpPersona(object):
             return
 
         return random.choice(text_chunks.TRUMP_CLARK)
+
+    @staticmethod
+    @util.should_mention(False)
+    def mexico(_msg):
+        """What Trump says about Mexico."""
+        return random.choice(text_chunks.TRUMP_MEXICO)
 
     @staticmethod
     @util.should_mention(False)
