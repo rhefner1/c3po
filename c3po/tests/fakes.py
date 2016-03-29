@@ -8,6 +8,7 @@ from c3po.persona import beasts
 from c3po.persona import eastside
 from c3po.persona import small_group
 from c3po.persona import sara_lane
+from c3po.persona import trump
 
 BIBLE_GENESIS_1 = '<div class="esv-text"><p class="chapter-first" ' \
                   'id="p01001001.06-1"><span class="chapter-num" ' \
@@ -204,3 +205,16 @@ class FakeSaraLaneSettings(mock.Mock):
     @staticmethod
     def get_persona():
         return sara_lane.SaraLanePersona()
+
+class FakeTrumpSettings(mock.Mock):
+    def __init__(self):
+        super(FakeTrumpSettings, self).__init__()
+        self.groupme_conf = mock.Mock()
+        self.groupme_conf.bot_id = BOT_ID
+
+        self.bot_name = 'TrumpBot'
+        self.bot_mentioned_regex = 'trump'
+
+    @staticmethod
+    def get_persona():
+        return trump.TrumpPersona()

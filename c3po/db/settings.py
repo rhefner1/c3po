@@ -10,6 +10,7 @@ from c3po.persona import beasts
 from c3po.persona import eastside
 from c3po.persona import sara_lane
 from c3po.persona import small_group
+from c3po.persona import trump
 
 PERSONA_MAP = {
     'base': base.BasePersona,
@@ -17,6 +18,7 @@ PERSONA_MAP = {
     'eastside': eastside.EastsidePersona,
     'saralane': sara_lane.SaraLanePersona,
     'small_group': small_group.SmallGroupPersona,
+    'trump': trump.TrumpPersona
 }
 
 
