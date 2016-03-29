@@ -1,6 +1,12 @@
 import unittest
 import mock
+from c3po import text_chunks
 from c3po.tests import fakes
+
+
+def _random_se(*args, **_):
+    if args[0] == text_chunks.TRUMP_CLARK:
+        return 'Clark is what makes America great.'
 
 
 class TestTrumpResponders(unittest.TestCase):
@@ -24,6 +30,18 @@ class TestTrumpResponders(unittest.TestCase):
 
         self.mock_send.assert_called_with(
             'MAKE AMERICA GREAT AGAIN!')
+
+    @mock.patch('c3po.persona.util.rate_limit')
+    @mock.patch('random.choice')
+    def test_clark(self, mock_random, fake_rate_limit):
+        mock_random.side_effect = _random_se
+        fake_rate_limit.return_value = False
+
+        self.msg.text = 'clark?'
+        self.msg.process_message()
+
+        self.mock_send.assert_called_with(
+            'Clark is what makes America great.')
 
 
 if __name__ == '__main__':

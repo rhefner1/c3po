@@ -206,6 +206,7 @@ class FakeSaraLaneSettings(mock.Mock):
     def get_persona():
         return sara_lane.SaraLanePersona()
 
+
 class FakeTrumpSettings(mock.Mock):
     def __init__(self):
         super(FakeTrumpSettings, self).__init__()
@@ -214,6 +215,8 @@ class FakeTrumpSettings(mock.Mock):
 
         self.bot_name = 'TrumpBot'
         self.bot_mentioned_regex = 'trump'
+
+        self.key = ndb.Key(settings.Settings, "ABC123")
 
     @staticmethod
     def get_persona():
