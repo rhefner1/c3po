@@ -43,6 +43,15 @@ class TestTrumpResponders(unittest.TestCase):
         self.mock_send.assert_called_with(
             'Clark is what makes America great.')
 
+    def test_women(self):
+        self.msg.text = 'I love women'
+        self.msg.process_message()
+
+        self.mock_send.assert_called_with(
+            "I cherish women. I want to help women. I'm going to be "
+            "able to do things for women that no other candidate would "
+            "be able to do...")
+
 
 if __name__ == '__main__':
     unittest.main()
