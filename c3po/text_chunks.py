@@ -50,3 +50,9 @@ THANKS_RESPONSES = [
     "No problem. Thank you for asking!",
     "Sure thing",
 ]
+
+TRUMP_CLARK = [
+    "Clark is what makes America great.",
+    "If you elect me president, I will construct a Clark so YUGE, it will "
+    "blow your mind."
+]
