@@ -51,6 +51,14 @@ THANKS_RESPONSES = [
     "Sure thing",
 ]
 
+TRUMP_CHINA = [
+    "I know the Chinese. I've made a lot of money with the Chinese. I "
+    "understand the Chinese mind.",
+    "I did very well with Chinese people. Very well. Believe me.",
+    "The concept of global warming was created by and for the Chinese in "
+    "order to make U.S. manufacturing non-competitive."
+]
+
 TRUMP_CLARK = [
     "Clark is what makes America great.",
     "If you elect me president, I will construct a Clark so YUGE, it will "

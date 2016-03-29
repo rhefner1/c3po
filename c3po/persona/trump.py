@@ -15,6 +15,7 @@ class TrumpPersona(object):
 
         self.not_mentioned_map = {
             r'america': self.america,
+            r'china': self.china,
             r'clark(|.+)\?': self.clark,
             r'wom(a|e)n': self.women,
         }
@@ -24,6 +25,12 @@ class TrumpPersona(object):
     def america(_msg):
         """'Murica."""
         return 'MAKE AMERICA GREAT AGAIN!'
+
+    @staticmethod
+    @util.should_mention(False)
+    def china(_msg):
+        """Trump on China."""
+        return random.choice(text_chunks.TRUMP_CHINA)
 
     @staticmethod
     @util.should_mention(False)
@@ -42,3 +49,5 @@ class TrumpPersona(object):
         return "I cherish women. I want to help women. I'm going to be " \
                "able to do things for women that no other candidate would " \
                "be able to do..."
+
+

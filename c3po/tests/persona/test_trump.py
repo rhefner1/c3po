@@ -7,6 +7,9 @@ from c3po.tests import fakes
 def _random_se(*args, **_):
     if args[0] == text_chunks.TRUMP_CLARK:
         return 'Clark is what makes America great.'
+    elif args[0] == text_chunks.TRUMP_CHINA:
+        return "I know the Chinese. I've made a lot of money with the " \
+               "Chinese. I understand the Chinese mind."
 
 
 class TestTrumpResponders(unittest.TestCase):
@@ -30,6 +33,17 @@ class TestTrumpResponders(unittest.TestCase):
 
         self.mock_send.assert_called_with(
             'MAKE AMERICA GREAT AGAIN!')
+
+    @mock.patch('random.choice')
+    def test_china(self, mock_random):
+        mock_random.side_effect = _random_se
+
+        self.msg.text = 'china'
+        self.msg.process_message()
+
+        self.mock_send.assert_called_with(
+            "I know the Chinese. I've made a lot of money with the Chinese. "
+            "I understand the Chinese mind.")
 
     @mock.patch('c3po.persona.util.rate_limit')
     @mock.patch('random.choice')
