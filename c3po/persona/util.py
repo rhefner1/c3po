@@ -1,23 +1,19 @@
 """Utility functions for personas"""
-from datetime import datetime
-from datetime import timedelta
 import logging
 import random
+from datetime import datetime
+from datetime import timedelta
+
+from c3po.db import stored_message
 from google.appengine.api import memcache
 from google.appengine.ext import ndb
-from c3po.db import stored_message
 
 ONE_DAY = timedelta(days=1)
 DATE_FORMAT = "%Y-%m-%d %H:%M:%S.%f"
 
 
-def random_date(start, end, msg):
+def random_date(start, end):
     """Returns a random date between two given dates."""
-    memcache_key = "throwback-%s" % msg.settings.key.urlsafe()
-    date = memcache.get(memcache_key)
-    if date:
-        return datetime.strptime(date, DATE_FORMAT)
-
     # Courtesy of http://stackoverflow.com/questions/553303
     delta = end - start
     int_delta = (delta.days * 24 * 60 * 60) + delta.seconds
@@ -27,11 +23,16 @@ def random_date(start, end, msg):
 
 def random_message(msg):
     """Returns a random StoredMessage from the datastore."""
+    memcache_key = "throwback-%s" % msg.settings.key.urlsafe()
+    msg_urlsafe = memcache.get(memcache_key)
+    if msg_urlsafe:
+        memcache.delete(memcache_key)
+        return ndb.Key(urlsafe=msg_urlsafe).get()
+
     # Get a random target date
     random_target_date = random_date(
         msg.settings.throwback_first_date + ONE_DAY,
-        datetime.utcnow() - ONE_DAY,
-        msg
+        datetime.utcnow() - ONE_DAY
     )
 
     # Run the query finding the first message near the random date

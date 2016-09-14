@@ -1,6 +1,8 @@
-from datetime import datetime
 import unittest
+from datetime import datetime
+
 import mock
+
 from c3po import text_chunks
 from c3po.tests import fakes
 
@@ -159,7 +161,12 @@ class TestBaseResponders(unittest.TestCase):
 
     @mock.patch('c3po.db.stored_message.StoredMessage.query')
     @mock.patch('c3po.persona.util.random_date')
-    def test_throwback_no_picture(self, mock_rnd_date, mock_query):
+    @mock.patch('google.appengine.api.memcache.delete')
+    @mock.patch('google.appengine.api.memcache.get')
+    def test_throwback_no_picture(self, mock_memcache_get, mock_memcache_del,
+                                  mock_rnd_date, mock_query):
+        mock_memcache_get.return_value = None
+        mock_memcache_del.return_value = True
         mock_rnd_date.return_value = datetime(2015, 9, 19)
         mock_query.return_value = fakes.FakeNDBQuery()
 
@@ -171,7 +178,12 @@ class TestBaseResponders(unittest.TestCase):
 
     @mock.patch('c3po.db.stored_message.StoredMessage.query')
     @mock.patch('c3po.persona.util.random_date')
-    def test_throwback_picture(self, mock_rnd_date, mock_query):
+    @mock.patch('google.appengine.api.memcache.delete')
+    @mock.patch('google.appengine.api.memcache.get')
+    def test_throwback_picture(self, mock_memcache_get, mock_memcache_del,
+                               mock_rnd_date, mock_query):
+        mock_memcache_get.return_value = None
+        mock_memcache_del.return_value = True
         mock_rnd_date.return_value = datetime(2015, 9, 19)
         mock_query.return_value = fakes.FakeNDBQuery(picture=True)
 
