@@ -2,6 +2,7 @@
 
 from c3po.persona import small_group
 from c3po.persona import util
+import random
 
 
 class BeastsPersona(small_group.SmallGroupPersona):
@@ -17,6 +18,7 @@ class BeastsPersona(small_group.SmallGroupPersona):
             r'babe wait': self.babe_wait,
             r'cool beans': self.cool_beans,
             r'gods of war': self.gods_of_war,
+            r'knock knock': self.knock_knock,
             r'legit': self.legit,
             r'i like to party': self.like_to_party,
             r'safe word': self.safe_word,
@@ -45,6 +47,16 @@ class BeastsPersona(small_group.SmallGroupPersona):
         if util.rate_limit(msg.settings, 'gods_of_war'):
             return
         return 'May your hammer be mighty.'
+
+    @staticmethod
+    @util.should_mention(False)
+    def knock_knock(msg):
+        """Knock knock jokes?"""
+        if random.random() > 0.25:
+            return
+        if util.rate_limit(msg.settings, 'knock_knock'):
+            return
+        return "Who's there?"
 
     @staticmethod
     @util.should_mention(False)

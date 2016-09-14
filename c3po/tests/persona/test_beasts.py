@@ -50,6 +50,17 @@ class TestBeastsResponders(unittest.TestCase):
         self.mock_send.assert_called_with('May your hammer be mighty.')
 
     @mock.patch('c3po.persona.util.rate_limit')
+    @mock.patch('random.random')
+    def test_knock_knock(self, mock_rnd, mock_rate):
+        mock_rnd.return_value = 0.1
+        mock_rate.return_value = False
+
+        self.msg.text = 'knock knock'
+        self.msg.process_message()
+
+        self.mock_send.assert_called_with("Who's there?")
+
+    @mock.patch('c3po.persona.util.rate_limit')
     def test_legit(self, mock_rate):
         mock_rate.return_value = False
 
