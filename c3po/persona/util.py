@@ -11,8 +11,13 @@ ONE_DAY = timedelta(days=1)
 DATE_FORMAT = "%Y-%m-%d %H:%M:%S.%f"
 
 
-def random_date(start, end):
+def random_date(start, end, msg):
     """Returns a random date between two given dates."""
+    memcache_key = "throwback-%s" % msg.settings.key.urlsafe()
+    date = memcache.get(memcache_key)
+    if date:
+        return datetime.strptime(date, DATE_FORMAT)
+
     # Courtesy of http://stackoverflow.com/questions/553303
     delta = end - start
     int_delta = (delta.days * 24 * 60 * 60) + delta.seconds
@@ -25,7 +30,8 @@ def random_message(msg):
     # Get a random target date
     random_target_date = random_date(
         msg.settings.throwback_first_date + ONE_DAY,
-        datetime.utcnow() - ONE_DAY
+        datetime.utcnow() - ONE_DAY,
+        msg
     )
 
     # Run the query finding the first message near the random date
