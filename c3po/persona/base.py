@@ -105,6 +105,9 @@ class BasePersona(object):
 
         if random_msg.picture_url:
             msg.picture_url_to_send = random_msg.picture_url
+            if random_msg.text:
+                return 'Throwback! On %s, %s posted this photo saying, "%s".' % (
+                    time_sent, random_msg.name, random_msg.text)
             return 'Throwback! On %s, %s posted this photo.' % (
                 time_sent, random_msg.name)
 

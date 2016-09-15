@@ -191,7 +191,7 @@ class TestBaseResponders(unittest.TestCase):
         self.msg.process_message()
 
         self.mock_send.assert_called_with(
-            'Throwback! On 09/20/2015, Billy posted this photo.')
+            'Throwback! On 09/20/2015, Billy posted this photo saying, "hi".')
 
     @mock.patch('google.appengine.api.urlfetch.fetch')
     def test_weather(self, mock_fetch):
