@@ -52,7 +52,7 @@ class BeastsPersona(small_group.SmallGroupPersona):
     @util.should_mention(False)
     def knock_knock(msg):
         """Knock knock jokes?"""
-        if random.random() > 0.5:
+        if random.random() > 0.8:
             return
         if util.rate_limit(msg.settings, 'knock_knock'):
             return
