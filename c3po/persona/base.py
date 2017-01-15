@@ -2,9 +2,10 @@
 
 import json
 import random
-from google.appengine.api import urlfetch
+
 from c3po import text_chunks
 from c3po.persona import util
+from google.appengine.api import urlfetch
 
 FORECAST_API_ENDPOINT = "https://api.forecast.io/forecast/%s/%s,%s?units=auto"
 

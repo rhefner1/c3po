@@ -1,13 +1,15 @@
 """Responder specifically for small groups."""
 
-from datetime import datetime
 import json
 import urllib
+from datetime import datetime
+
 import pytz
 from bs4 import BeautifulSoup
-from google.appengine.api import urlfetch
+
 from c3po.persona import base
 from c3po.persona import util
+from google.appengine.api import urlfetch
 
 BIBLE_API = "http://www.esvapi.org/v2/rest/verse?key=IP&passage=%s&include-" \
             "footnotes=false&include-passage-references=false&include-verse-" \

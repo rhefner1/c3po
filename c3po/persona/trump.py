@@ -2,8 +2,9 @@
 
 import random
 
-from c3po import text_chunks
 from c3po.persona import util
+
+TRUMP_TWITTER_USERNAME = "realDonaldTrump"
 
 
 class TrumpPersona(object):
@@ -15,9 +16,7 @@ class TrumpPersona(object):
 
         self.not_mentioned_map = {
             r'america': self.america,
-            r'clark(|.+)\?': self.clark,
-            r'mexico': self.mexico,
-            r'wom(a|e)n': self.women,
+            r'trump': self.trump,
         }
 
     @staticmethod
@@ -28,24 +27,9 @@ class TrumpPersona(object):
 
     @staticmethod
     @util.should_mention(False)
-    def clark(msg):
-        """What Trump says about Clark."""
-
-        if util.rate_limit(msg.settings, 'trump-clark', minutes=4320):
-            return
-
-        return random.choice(text_chunks.TRUMP_CLARK)
-
-    @staticmethod
-    @util.should_mention(False)
-    def mexico(_msg):
-        """What Trump says about Mexico."""
-        return random.choice(text_chunks.TRUMP_MEXICO)
-
-    @staticmethod
-    @util.should_mention(False)
-    def women(_msg):
-        """What Trump says about women."""
-        return "I cherish women. I want to help women. I'm going to be " \
-               "able to do things for women that no other candidate would " \
-               "be able to do..."
+    def trump(msg):
+        """When you mention Trump, you get a Trump tweet."""
+        api = util.get_twitter_client(msg)
+        recent_tweets = api.GetUserTimeline(screen_name=TRUMP_TWITTER_USERNAME, include_rts=False)
+        tweet = random.choice(recent_tweets)
+        return '%s, I tweeted: "%s"' % (util.pretty_twitter_date(tweet), tweet.text)

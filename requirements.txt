@@ -11,4 +11,5 @@ freezegun
 mock
 nose
 pylint
+python-twitter
 pytz

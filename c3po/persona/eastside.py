@@ -4,10 +4,9 @@ import json
 import random
 import urllib
 
-from google.appengine.api import urlfetch
-
 from c3po.persona import small_group
 from c3po.persona import util
+from google.appengine.api import urlfetch
 
 TRELLO_CARD_ENDPOINT = 'https://trello.com/1/boards/%s/cards?%s'
 
