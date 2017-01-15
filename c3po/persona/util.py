@@ -26,7 +26,7 @@ def get_twitter_client(msg):
     conf = msg.settings.twitter_conf
     return twitter.Api(consumer_key=conf.consumer_key,
                        consumer_secret=conf.consumer_secret,
-                       access_token_key=conf.access_token,
+                       access_token_key=conf.access_token_key,
                        access_token_secret=conf.access_token_secret)
 
 
