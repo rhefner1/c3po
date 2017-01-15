@@ -39,8 +39,8 @@ DINING_MENU = """
         "type": "Entree"
     },
     "key_2":{
-        "description": "Potato",
-        "type": "Side"
+        "description": "Soup Du Jour",
+        "type": "Soup"
     }
 }
 """
