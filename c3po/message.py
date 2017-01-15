@@ -87,7 +87,7 @@ class Message(object):
             self.store_message(False)
             return
 
-        self.text_chunks = re.split(regex, self.text)
+        self.text_chunks = re.split(regex, self.text, flags=re.IGNORECASE)
         response, should_mention = responder(self)
         if response:
             if should_mention:
