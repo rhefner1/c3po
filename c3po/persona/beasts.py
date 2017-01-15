@@ -1,8 +1,9 @@
 """Responder specifically for for Beasts of the East."""
 
+import random
+
 from c3po.persona import small_group
 from c3po.persona import util
-import random
 
 
 class BeastsPersona(small_group.SmallGroupPersona):

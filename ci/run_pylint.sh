@@ -8,6 +8,6 @@ then
     echo "Current PYTHONPATH: ${PYTHONPATH}"
 
     echo -e "\n### Running pylint"
-    pylint c3po --ignore tests --disable=no-member --disable too-few-public-methods --disable unused-argument
+    pylint c3po --ignore tests --disable=no-member --disable too-few-public-methods --disable unused-argument --disable too-many-return-statements
     pylint c3po/tests --disable=no-member --disable too-few-public-methods --disable unused-argument --disable missing-docstring --disable protected-access --disable duplicate-code
 fi

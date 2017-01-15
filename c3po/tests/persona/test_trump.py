@@ -1,15 +1,8 @@
 import unittest
+
 import mock
-from c3po import text_chunks
+
 from c3po.tests import fakes
-
-
-def _random_se(*args, **_):
-    if args[0] == text_chunks.TRUMP_CLARK:
-        return 'Clark is what makes America great.'
-    elif args[0] == text_chunks.TRUMP_MEXICO:
-        return "The Mexican government forces many bad people into our " \
-               "country. Because they're smart. They're smarter than our leaders."
 
 
 class TestTrumpResponders(unittest.TestCase):
@@ -34,37 +27,17 @@ class TestTrumpResponders(unittest.TestCase):
         self.mock_send.assert_called_with(
             'MAKE AMERICA GREAT AGAIN!')
 
-    @mock.patch('c3po.persona.util.rate_limit')
-    @mock.patch('random.choice')
-    def test_clark(self, mock_random, fake_rate_limit):
-        mock_random.side_effect = _random_se
-        fake_rate_limit.return_value = False
+    @mock.patch('c3po.persona.util.pretty_twitter_date')
+    @mock.patch('c3po.persona.util.get_twitter_client')
+    def test_clark(self, fake_twitter, fake_date):
+        fake_twitter.return_value = fakes.FakeTwitter()
+        fake_date.return_value = "1 hour ago"
 
-        self.msg.text = 'clark?'
+        self.msg.text = 'trump'
         self.msg.process_message()
 
         self.mock_send.assert_called_with(
-            'Clark is what makes America great.')
-
-    @mock.patch('random.choice')
-    def test_mexico(self, mock_random):
-        mock_random.side_effect = _random_se
-
-        self.msg.text = 'mexico is cool'
-        self.msg.process_message()
-
-        self.mock_send.assert_called_with(
-            "The Mexican government forces many bad people into our country. "
-            "Because they're smart. They're smarter than our leaders.")
-
-    def test_women(self):
-        self.msg.text = 'I love women'
-        self.msg.process_message()
-
-        self.mock_send.assert_called_with(
-            "I cherish women. I want to help women. I'm going to be "
-            "able to do things for women that no other candidate would "
-            "be able to do...")
+            '1 hour ago, I tweeted: "I am Donald Trump."')
 
 
 if __name__ == '__main__':

@@ -1,14 +1,16 @@
 from datetime import datetime
+
 import mock
-from google.appengine.ext import ndb
+
 from c3po import message
 from c3po.db import settings
 from c3po.persona import base
 from c3po.persona import beasts
 from c3po.persona import eastside
-from c3po.persona import small_group
 from c3po.persona import sara_lane
+from c3po.persona import small_group
 from c3po.persona import trump
+from google.appengine.ext import ndb
 
 BIBLE_GENESIS_1 = '<div class="esv-text"><p class="chapter-first" ' \
                   'id="p01001001.06-1"><span class="chapter-num" ' \
@@ -221,3 +223,21 @@ class FakeTrumpSettings(mock.Mock):
     @staticmethod
     def get_persona():
         return trump.TrumpPersona()
+
+
+class FakeTweet(mock.Mock):
+    def __init__(self):
+        super(FakeTweet, self).__init__()
+        self.created_at = None
+        self.text = "I am Donald Trump."
+
+
+class FakeTwitter(mock.Mock):
+    def __init__(self):
+        super(FakeTwitter, self).__init__()
+
+    @staticmethod
+    def GetUserTimeline(**_):  # pylint: disable=invalid-name
+        return [
+            FakeTweet()
+        ]

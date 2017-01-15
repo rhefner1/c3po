@@ -3,6 +3,7 @@
 from google.appengine.ext import ndb
 
 from c3po.db import groupme_conf  # pylint: disable=unused-import
+from c3po.db import twitter_conf  # pylint: disable=unused-import
 from c3po.db import trello_conf  # pylint: disable=unused-import
 from c3po.db import weather_conf  # pylint: disable=unused-import
 from c3po.persona import base
@@ -41,6 +42,7 @@ class Settings(ndb.Model):
 
     # Service Configuration
     groupme_conf = ndb.StructuredProperty(groupme_conf.GroupmeConf)
+    twitter_conf = ndb.StructuredProperty(twitter_conf.TwitterConf)
     trello_conf = ndb.StructuredProperty(trello_conf.TrelloConf)
     weather_conf = ndb.StructuredProperty(weather_conf.WeatherConf)
 
