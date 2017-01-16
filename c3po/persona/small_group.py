@@ -22,6 +22,27 @@ def get_current_meal():
         return 'dinner'
 
 
+def handle_bible_lookup(msg, version):
+    """Handles looking up a Bible passage in a specific version"""
+    # Determining what kind of verse we have
+    book, chapter, verse1, verse2 = parse_passage(msg.text_chunks)
+
+    # If verse2 is greater than verse1, ignore request
+    if int(verse2) < int(verse1):
+        return
+
+    # Fetching the verse contents
+    passage_text = api.get_bible_passage(msg.settings.bible_api_key, version, book, chapter,
+                                         verse1, verse2)
+
+    # Limiting the response length to a constant
+    if len(passage_text) > variables.BIBLE_RSP_LENGTH:
+        verses_content = passage_text[:variables.BIBLE_RSP_LENGTH]
+        verses_content += ' [...]'
+
+    return passage_text
+
+
 def is_dining_closed(dining_hall):
     """Based on time and the Dining API, determine if Clark is closed."""
     current_time = datetime.now(pytz.timezone('US/Eastern'))
@@ -64,6 +85,7 @@ class SmallGroupPersona(base.BasePersona):
         })
 
         self.not_mentioned_map.update({
+            r'hawaiian %s' % variables.REGEX_BIBLE: self.hawaiian_bible,
             variables.REGEX_BIBLE: self.bible,
             r'case(|.+)\?': self.case,
             r'clark(|.+)\?': self.clark,
@@ -71,25 +93,15 @@ class SmallGroupPersona(base.BasePersona):
 
     @staticmethod
     @message.should_mention(False)
+    def hawaiian_bible(msg):
+        """If a Bible reference is detected, return it in HWCNT."""
+        return handle_bible_lookup(msg, variables.BIBLE_HWCNT)
+
+    @staticmethod
+    @message.should_mention(False)
     def bible(msg):
         """If a Bible reference is detected, return it in ESV."""
-        # Determining what kind of verse we have
-        book, chapter, verse1, verse2 = parse_passage(msg.text_chunks)
-
-        # If verse2 is greater than verse1, ignore request
-        if int(verse2) < int(verse1):
-            return
-
-        # Fetching the verse contents
-        passage_text = api.get_bible_passage(msg.settings.bible_api_key, variables.BIBLE_ESV,
-                                             book, chapter, verse1, verse2)
-
-        # Limiting the response length to a constant
-        if len(passage_text) > variables.BIBLE_RSP_LENGTH:
-            verses_content = passage_text[:variables.BIBLE_RSP_LENGTH]
-            verses_content += ' [...]'
-
-        return passage_text
+        return handle_bible_lookup(msg, variables.BIBLE_ESV)
 
     @staticmethod
     @message.should_mention(False)

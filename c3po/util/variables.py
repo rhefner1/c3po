@@ -99,6 +99,7 @@ BIBLE_BOOK_ABBR = {
     "2 samuel": "2Sam"
 }
 BIBLE_ESV = 'eng-ESV'
+BIBLE_HWCNT = 'hwc-HWCNT'
 BIBLE_RSP_LENGTH = 750
 
 # Dining Hall Hours
