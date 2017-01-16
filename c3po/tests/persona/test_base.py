@@ -3,12 +3,12 @@ from datetime import datetime
 
 import mock
 
-from c3po import text_chunks
+from c3po import util
 from c3po.tests import fakes
 
 
 def _random_se(*args, **_):
-    if args[0] == text_chunks.CHOOSE:
+    if args[0] == util.text_chunks.CHOOSE:
         return 'Hmm... I choose %s.'
     elif args[0] == ['cheddar', 'swiss', 'gouda']:
         return 'gouda'
@@ -170,7 +170,7 @@ class TestBaseResponders(unittest.TestCase):
             "You're welcome!")
 
     @mock.patch('c3po.db.stored_message.StoredMessage.query')
-    @mock.patch('c3po.persona.util.random_date')
+    @mock.patch('c3po.util.throwback.random_date')
     @mock.patch('google.appengine.api.memcache.delete')
     @mock.patch('google.appengine.api.memcache.get')
     def test_throwback_no_picture(self, mock_memcache_get, mock_memcache_del,
@@ -187,7 +187,7 @@ class TestBaseResponders(unittest.TestCase):
             'Throwback! On 09/20/2015, Billy said, "hi".')
 
     @mock.patch('c3po.db.stored_message.StoredMessage.query')
-    @mock.patch('c3po.persona.util.random_date')
+    @mock.patch('c3po.util.throwback.random_date')
     @mock.patch('google.appengine.api.memcache.delete')
     @mock.patch('google.appengine.api.memcache.get')
     def test_throwback_picture(self, mock_memcache_get, mock_memcache_del,

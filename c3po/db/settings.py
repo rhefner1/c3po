@@ -1,10 +1,8 @@
 """Defines the Settings model"""
 
-from google.appengine.ext import ndb
-
 from c3po.db import groupme_conf  # pylint: disable=unused-import
-from c3po.db import twitter_conf  # pylint: disable=unused-import
 from c3po.db import trello_conf  # pylint: disable=unused-import
+from c3po.db import twitter_conf  # pylint: disable=unused-import
 from c3po.db import weather_conf  # pylint: disable=unused-import
 from c3po.persona import base
 from c3po.persona import beasts
@@ -12,6 +10,7 @@ from c3po.persona import eastside
 from c3po.persona import sara_lane
 from c3po.persona import small_group
 from c3po.persona import trump
+from google.appengine.ext import ndb
 
 PERSONA_MAP = {
     'base': base.BasePersona,
@@ -41,6 +40,7 @@ class Settings(ndb.Model):
     throwback_first_date = ndb.DateTimeProperty(auto_now_add=True)
 
     # Service Configuration
+    bible_api_key = ndb.StringProperty()
     groupme_conf = ndb.StructuredProperty(groupme_conf.GroupmeConf)
     twitter_conf = ndb.StructuredProperty(twitter_conf.TwitterConf)
     trello_conf = ndb.StructuredProperty(trello_conf.TrelloConf)

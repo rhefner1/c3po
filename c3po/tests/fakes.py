@@ -12,12 +12,16 @@ from c3po.persona import small_group
 from c3po.persona import trump
 from google.appengine.ext import ndb
 
-BIBLE_GENESIS_1 = '<div class="esv-text"><p class="chapter-first" ' \
-                  'id="p01001001.06-1"><span class="chapter-num" ' \
-                  'id="v01001001-1">1:1&nbsp;</span>In the beginning, ' \
-                  'God created the heavens and the earth.  (<a ' \
-                  'href="http://www.esv.org" class="copyright">ESV</a>)' \
-                  '</p></div>'
+BIBLE_GENESIS_1 = {
+    'response': {
+        'verses': [
+            {
+                'text': '<p class=\"p\"><sup id=\"1Cor.2.5\" class=\"v\">5</sup>In the beginning, '
+                        'God created the heavens and the earth.</p>'
+            }
+        ]
+    }
+}
 BOT_ID = '123'
 NAME = 'Billy'
 PICTURE_URL = 'https://example.com/image.jpg'
@@ -158,6 +162,8 @@ class FakeBaseSettings(mock.Mock):
 class FakeSmallGroupSettings(FakeBaseSettings):
     def __init__(self):
         super(FakeSmallGroupSettings, self).__init__()
+
+        self.bible_api_key = '1234'
 
         fake_key = mock.Mock()
         fake_key.urlsafe.return_value = "1234"

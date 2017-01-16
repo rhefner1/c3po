@@ -50,6 +50,12 @@ You can address me as `c3po` or `C-3PO`. There are some commands that I will onl
 |:------------------|:----------------------------------|
 | c3po nathan quote | Gives a random quote from Nathan! |
 
+### Trump
+| Command | Response                                  |
+|:--------|:------------------------------------------|
+| america | Trump's famous campaign slogan            |
+| trump   | Random recent tweet from @realDonaldTrump |
+
 ### Sara Lane
 | Command | Response |
 |:--------|:---------|
@@ -62,12 +68,14 @@ The C-3PO codebase is laid out as follows:
 ├── app.yaml: Google App Engine routing info
 ├── c3po: core code files
 │   ├── db: data models stored in the database
+|   ├── persona: defines the different 'personas' that C-3PO can
 │   ├── provider: handlers to communicate with a messaging service
-│   ├── persona: defines the different 'personas' that C-3PO can
+│   |── tests: unit tests
+|   └── util: utiliites
 ├── ci: scripts used by CI
 ├── cron.yaml: regularly scheduled cron jobs
-├── README.md: the file you're currently reading
-└── tests: unit tests
+└── README.md: the file you're currently reading
+
 ```
 
 Most code contributions will go into `c3po/persona` with tests in `tests/persona` and documentation in `README.md`. Additions to `db` may be necessary if there is a need for persistent data.

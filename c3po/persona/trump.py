@@ -2,7 +2,8 @@
 
 import random
 
-from c3po.persona import util
+from c3po.util import message
+from c3po.util import twitter_api
 
 TRUMP_TWITTER_USERNAME = "realDonaldTrump"
 
@@ -20,16 +21,16 @@ class TrumpPersona(object):
         }
 
     @staticmethod
-    @util.should_mention(False)
+    @message.should_mention(False)
     def america(_msg):
         """'Murica."""
         return 'MAKE AMERICA GREAT AGAIN!'
 
     @staticmethod
-    @util.should_mention(False)
+    @message.should_mention(False)
     def trump(msg):
         """When you mention Trump, you get a Trump tweet."""
-        api = util.get_twitter_client(msg)
+        api = twitter_api.get_twitter_client(msg)
         recent_tweets = api.GetUserTimeline(screen_name=TRUMP_TWITTER_USERNAME, include_rts=False)
         tweet = random.choice(recent_tweets)
-        return '%s, I tweeted: "%s"' % (util.pretty_twitter_date(tweet), tweet.text)
+        return '%s, I tweeted: "%s"' % (twitter_api.pretty_twitter_date(tweet), tweet.text)
