@@ -20,7 +20,7 @@ class TestBeastsResponders(unittest.TestCase):
 
         self.msg = fakes.FakeMessage(fakes.NAME, None, '', fakes.TIME_SENT)
 
-    @mock.patch('c3po.persona.util.rate_limit')
+    @mock.patch('c3po.util.message.rate_limit')
     def test_babe_wait(self, mock_rate):
         mock_rate.return_value = False
 
@@ -30,7 +30,7 @@ class TestBeastsResponders(unittest.TestCase):
         self.mock_send.assert_called_with('Babe! Wait! Babe! No!! BABE! NO! '
                                           'BAAAAAAAAABE!!!')
 
-    @mock.patch('c3po.persona.util.rate_limit')
+    @mock.patch('c3po.util.message.rate_limit')
     def test_cool_beans(self, mock_rate):
         mock_rate.return_value = False
 
@@ -40,7 +40,7 @@ class TestBeastsResponders(unittest.TestCase):
         self.mock_send.assert_called_with('Cool cool beans beans. Cool '
                                           'be-be-be-beans. Cool beans?')
 
-    @mock.patch('c3po.persona.util.rate_limit')
+    @mock.patch('c3po.util.message.rate_limit')
     def test_gods_of_war(self, mock_rate):
         mock_rate.return_value = False
 
@@ -49,7 +49,7 @@ class TestBeastsResponders(unittest.TestCase):
 
         self.mock_send.assert_called_with('May your hammer be mighty.')
 
-    @mock.patch('c3po.persona.util.rate_limit')
+    @mock.patch('c3po.util.message.rate_limit')
     @mock.patch('random.random')
     def test_knock_knock(self, mock_rnd, mock_rate):
         mock_rnd.return_value = 0.1
@@ -60,7 +60,7 @@ class TestBeastsResponders(unittest.TestCase):
 
         self.mock_send.assert_called_with("Who's there?")
 
-    @mock.patch('c3po.persona.util.rate_limit')
+    @mock.patch('c3po.util.message.rate_limit')
     def test_legit(self, mock_rate):
         mock_rate.return_value = False
 
@@ -71,7 +71,7 @@ class TestBeastsResponders(unittest.TestCase):
                                           "legit. Too legit to quit. But now, "
                                           "I'm not legit.")
 
-    @mock.patch('c3po.persona.util.rate_limit')
+    @mock.patch('c3po.util.message.rate_limit')
     def test_like_to_party(self, mock_rate):
         mock_rate.return_value = False
 
@@ -81,7 +81,7 @@ class TestBeastsResponders(unittest.TestCase):
         self.mock_send.assert_called_with("Billy, I know for a fact you don't "
                                           "party. You do *not* party.")
 
-    @mock.patch('c3po.persona.util.rate_limit')
+    @mock.patch('c3po.util.message.rate_limit')
     def test_negative(self, mock_rate):
         mock_rate.return_value = False
 
@@ -90,7 +90,7 @@ class TestBeastsResponders(unittest.TestCase):
 
         self.assertFalse(self.mock_send.called)
 
-    @mock.patch('c3po.persona.util.rate_limit')
+    @mock.patch('c3po.util.message.rate_limit')
     def test_safe_word(self, mock_rate):
         mock_rate.return_value = False
 

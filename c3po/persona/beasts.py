@@ -3,7 +3,7 @@
 import random
 
 from c3po.persona import small_group
-from c3po.persona import util
+from c3po.util import message
 
 
 class BeastsPersona(small_group.SmallGroupPersona):
@@ -26,61 +26,61 @@ class BeastsPersona(small_group.SmallGroupPersona):
         })
 
     @staticmethod
-    @util.should_mention(False)
+    @message.should_mention(False)
     def babe_wait(msg):
         """Babe wait!."""
-        if util.rate_limit(msg.settings, 'babe_wait'):
+        if message.rate_limit(msg.settings, 'babe_wait'):
             return
         return 'Babe! Wait! Babe! No!! BABE! NO! BAAAAAAAAABE!!!'
 
     @staticmethod
-    @util.should_mention(False)
+    @message.should_mention(False)
     def cool_beans(msg):
         """Cool beans."""
-        if util.rate_limit(msg.settings, 'cool_beans'):
+        if message.rate_limit(msg.settings, 'cool_beans'):
             return
         return 'Cool cool beans beans. Cool be-be-be-beans. Cool beans?'
 
     @staticmethod
-    @util.should_mention(False)
+    @message.should_mention(False)
     def gods_of_war(msg):
         """GODS OF WAR."""
-        if util.rate_limit(msg.settings, 'gods_of_war'):
+        if message.rate_limit(msg.settings, 'gods_of_war'):
             return
         return 'May your hammer be mighty.'
 
     @staticmethod
-    @util.should_mention(False)
+    @message.should_mention(False)
     def knock_knock(msg):
         """Knock knock jokes?"""
         if random.random() > 0.8:
             return
-        if util.rate_limit(msg.settings, 'knock_knock'):
+        if message.rate_limit(msg.settings, 'knock_knock'):
             return
         return "Who's there?"
 
     @staticmethod
-    @util.should_mention(False)
+    @message.should_mention(False)
     def legit(msg):
         """This is legit."""
-        if util.rate_limit(msg.settings, 'legit'):
+        if message.rate_limit(msg.settings, 'legit'):
             return
         return "I used to be legit. I was too legit. Too legit to quit. But " \
                "now, I'm not legit."
 
     @staticmethod
-    @util.should_mention(False)
+    @message.should_mention(False)
     def like_to_party(msg):
         """No, I like to party!"""
-        if util.rate_limit(msg.settings, 'like_to_party'):
+        if message.rate_limit(msg.settings, 'like_to_party'):
             return
         return "%s, I know for a fact you don't party. You do *not* party." \
                % msg.name
 
     @staticmethod
-    @util.should_mention(False)
+    @message.should_mention(False)
     def safe_word(msg):
         """The safe word is whiskey."""
-        if util.rate_limit(msg.settings, 'safe_word'):
+        if message.rate_limit(msg.settings, 'safe_word'):
             return
         return 'The safe word is: Whhhiskey.'

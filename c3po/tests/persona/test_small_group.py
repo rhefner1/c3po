@@ -1,9 +1,11 @@
 import json
 import unittest
+
 import freezegun
 import mock
-from c3po.tests import fakes
+
 from c3po.persona import small_group
+from c3po.tests import fakes
 
 
 class TestDiningGetCurrentMeal(unittest.TestCase):
@@ -73,7 +75,7 @@ class TestSmallGroupResponders(unittest.TestCase):
     @mock.patch('google.appengine.api.urlfetch.fetch')
     def test_bible_0(self, fake_fetch):
         fake_api_return = mock.Mock()
-        fake_api_return.content = fakes.BIBLE_GENESIS_1
+        fake_api_return.content = json.dumps(fakes.BIBLE_GENESIS_1)
         fake_fetch.return_value = fake_api_return
 
         self.msg.text = 'Genesis 1:1'
@@ -86,7 +88,7 @@ class TestSmallGroupResponders(unittest.TestCase):
     @mock.patch('google.appengine.api.urlfetch.fetch')
     def test_bible_1(self, fake_fetch):
         fake_api_return = mock.Mock()
-        fake_api_return.content = fakes.BIBLE_GENESIS_1
+        fake_api_return.content = json.dumps(fakes.BIBLE_GENESIS_1)
         fake_fetch.return_value = fake_api_return
 
         self.msg.text = 'My favorite verse is genesis 1:1. Yours?'
@@ -108,8 +110,8 @@ class TestSmallGroupResponders(unittest.TestCase):
 
         self.mock_send.assert_not_called()
 
-    @mock.patch('c3po.persona.util.rate_limit')
-    @mock.patch('c3po.persona.small_group.get_menu_items')
+    @mock.patch('c3po.util.message.rate_limit')
+    @mock.patch('c3po.util.api.get_dining_menu')
     @mock.patch('c3po.persona.small_group.get_current_meal')
     @mock.patch('c3po.persona.small_group.is_dining_closed')
     def test_case(self, fake_dining_closed, fake_current_meal, fake_dining_menu,
@@ -125,8 +127,8 @@ class TestSmallGroupResponders(unittest.TestCase):
         response = "CaseAlert for dinner: Chicken."
         self.mock_send.assert_called_with(response)
 
-    @mock.patch('c3po.persona.util.rate_limit')
-    @mock.patch('c3po.persona.small_group.get_menu_items')
+    @mock.patch('c3po.util.message.rate_limit')
+    @mock.patch('c3po.util.api.get_dining_menu')
     @mock.patch('c3po.persona.small_group.get_current_meal')
     @mock.patch('c3po.persona.small_group.is_dining_closed')
     def test_clark(self, fake_dining_closed, fake_current_meal,
