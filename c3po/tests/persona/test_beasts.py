@@ -50,9 +50,9 @@ class TestBeastsResponders(unittest.TestCase):
         self.mock_send.assert_called_with('May your hammer be mighty.')
 
     @mock.patch('c3po.util.message.rate_limit')
-    @mock.patch('random.random')
+    @mock.patch('random.choice')
     def test_knock_knock(self, mock_rnd, mock_rate):
-        mock_rnd.return_value = 0.1
+        mock_rnd.return_value = "Who's there?"
         mock_rate.return_value = False
 
         self.msg.text = 'knock knock'

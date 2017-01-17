@@ -4,6 +4,7 @@ import random
 
 from c3po.persona import small_group
 from c3po.util import message
+from c3po.util import text_chunks
 
 
 class BeastsPersona(small_group.SmallGroupPersona):
@@ -53,11 +54,9 @@ class BeastsPersona(small_group.SmallGroupPersona):
     @message.should_mention(False)
     def knock_knock(msg):
         """Knock knock jokes?"""
-        if random.random() > 0.8:
+        if message.rate_limit(msg.settings, 'knock_knock', minutes=10):
             return
-        if message.rate_limit(msg.settings, 'knock_knock'):
-            return
-        return "Who's there?"
+        return random.choice(text_chunks.KNOCK_KNOCK)
 
     @staticmethod
     @message.should_mention(False)
