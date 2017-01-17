@@ -54,10 +54,13 @@ def get_bible_passage(api_key, version, book, chapter, verse1, verse2):
     """Get a passage from bibles.org API."""
     book_abbr = variables.BIBLE_BOOK_ABBR[book]
     url = variables.BIBLE_ENDPIONT % (version, book_abbr, chapter, verse1, verse2)
-    passage_json = urlfetch.fetch(url, headers={
+    response = urlfetch.fetch(url, headers={
         "Authorization": "Basic %s" % base64.b64encode("%s:X" % api_key)
     })
-    verses = json.loads(passage_json.content)['response']['verses']
+    if response.status_code == 404:
+        return "Sorry, I can't find that passage in the %s version." % version
+
+    verses = json.loads(response.content)['response']['verses']
     passage_text = []
     for verse in verses:
         passage_text.append(verse['text'])
