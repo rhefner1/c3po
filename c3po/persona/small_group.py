@@ -139,7 +139,7 @@ class SmallGroupPersona(base.BasePersona):
 
         # Filter down some of the options
         entrees = [item['description'] for _, item in all_menu_items.items()
-                   if item['type'] not in ['Soup', 'Side']
+                   if item['type'] in ['Entree', 'Grill']
                    if 'pizza' not in item['description'].lower()]
 
         return "ClarkAlert for %s: %s." \
