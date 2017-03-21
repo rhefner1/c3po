@@ -38,14 +38,12 @@ DINING_CLOSED = """
 """
 DINING_MENU = """
 {
-    "key_1":{
-        "description": "Chicken",
-        "type": "Entree"
-    },
-    "key_2":{
-        "description": "Soup Du Jour",
-        "type": "Soup"
-    }
+    "grill": [
+        {"name": "Chicken"}
+    ],
+    "soup": [
+        {"name": "Soup Du Jour"}
+    ]
 }
 """
 DINING_OPEN = """

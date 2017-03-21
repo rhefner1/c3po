@@ -76,17 +76,10 @@ def get_bible_passage(api_key, version, book, chapter, verse1, verse2):
 
 def get_dining_menu(dining_hall, current_meal):
     """Get the current menu at a dining hall."""
-    url = variables.NCSU_DINING_ENDPOINT % ('getMenu', dining_hall)
+    url = variables.NCSU_DINING_ENDPOINT % ('menu', dining_hall)
     clark_menu_json = urlfetch.fetch(url)
     clark_menu = json.loads(clark_menu_json.content)
-    return clark_menu['Remote']['getMenu']['meals'][current_meal]
-
-
-def get_dining_hours(dining_hall):
-    """Get current hours of a dining hall"""
-    url = variables.NCSU_DINING_ENDPOINT % ('getHours', dining_hall)
-    hours_json = urlfetch.fetch(url)
-    return json.loads(hours_json.content)['Remote']['getHours']
+    return clark_menu['data']['today'][current_meal]
 
 
 def get_trello_cards(key, token, board_id):
