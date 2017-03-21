@@ -38,16 +38,6 @@ class TestDiningClosed(unittest.TestCase):
 
     @mock.patch('google.appengine.api.urlfetch.fetch')
     @freezegun.freeze_time('2015-01-01 12:00:00', tz_offset=+5)
-    def test_closed_all_day(self, fake_fetch):
-        fake_api_return = mock.Mock()
-        fake_api_return.content = fakes.DINING_CLOSED
-        fake_fetch.return_value = fake_api_return
-
-        expected = True
-        self.assertEqual(small_group.is_dining_closed('clark'), expected)
-
-    @mock.patch('google.appengine.api.urlfetch.fetch')
-    @freezegun.freeze_time('2015-01-01 12:00:00', tz_offset=+5)
     def test_open(self, fake_fetch):
         fake_api_return = mock.Mock()
         fake_api_return.content = fakes.DINING_OPEN

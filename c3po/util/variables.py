@@ -3,7 +3,7 @@
 # API Endpoints
 BIBLE_ENDPIONT = 'https://bibles.org/v2/chapters/%s:%s.%s/verses.js?start=%s&end=%s'
 NCSU_DINING_ENDPOINT = \
-    'http://www.ncsudining.com/diningapi/?method=%s&location=%s&format=json'
+    'https://dining.ncsu.edu/ipad/feed/?type=%s&buildingId=%s'
 TRELLO_CARD_ENDPOINT = 'https://trello.com/1/boards/%s/cards?%s'
 WEATHER_ENDPOINT = 'https://api.forecast.io/forecast/%s/%s,%s?units=auto'
 

@@ -9,6 +9,9 @@ from c3po.util import api
 from c3po.util import message
 from c3po.util import variables
 
+CLARK = 2
+CASE = 3
+
 
 def get_current_meal():
     """Gets the current meal based on the time of day."""
@@ -57,10 +60,6 @@ def is_dining_closed(dining_hall):
 
     else:
         raise ValueError("Dining hall not supported.")
-
-    hours = api.get_dining_hours(dining_hall)
-    if hours['closed'] == '1':
-        return True
 
     return False
 
@@ -114,12 +113,13 @@ class SmallGroupPersona(base.BasePersona):
             return "Uh oh! Case is closed right now."
 
         current_meal = get_current_meal()
-        all_menu_items = api.get_dining_menu('case', current_meal)
+        all_items = api.get_dining_menu(CASE, current_meal)
 
         # Filter down some of the options
-        entrees = [item['description'] for _, item in all_menu_items.items()
-                   if item['type'] not in ['Soup', 'Side']
-                   if 'pizza' not in item['description'].lower()]
+        entrees = []
+        for dish_type, dishes in all_items.items():
+            if dish_type in ['grill', 'entree']:
+                entrees += [d['name'] for d in dishes]
 
         return "CaseAlert for %s: %s." \
                % (current_meal, ', '.join(entrees))
@@ -135,12 +135,13 @@ class SmallGroupPersona(base.BasePersona):
             return "Uh oh! Clark is closed right now."
 
         current_meal = get_current_meal()
-        all_menu_items = api.get_dining_menu('clark', current_meal)
+        all_items = api.get_dining_menu(CLARK, current_meal)
 
         # Filter down some of the options
-        entrees = [item['description'] for _, item in all_menu_items.items()
-                   if item['type'] in ['Entree', 'Grill']
-                   if 'pizza' not in item['description'].lower()]
+        entrees = []
+        for dish_type, dishes in all_items.items():
+            if dish_type in ['grill', 'entree']:
+                entrees += [d['name'] for d in dishes]
 
         return "ClarkAlert for %s: %s." \
                % (current_meal, ', '.join(entrees))
