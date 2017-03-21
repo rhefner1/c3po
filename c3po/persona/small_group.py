@@ -119,7 +119,7 @@ class SmallGroupPersona(base.BasePersona):
         entrees = []
         for dish_type, dishes in all_items.items():
             if dish_type in ['grill', 'entree']:
-                entrees += [d['name'] for d in dishes]
+                entrees += [d['name'] for d in dishes if 'pizza' not in d['name'].lower()]
 
         return "CaseAlert for %s: %s." \
                % (current_meal, ', '.join(entrees))
@@ -141,7 +141,7 @@ class SmallGroupPersona(base.BasePersona):
         entrees = []
         for dish_type, dishes in all_items.items():
             if dish_type in ['grill', 'entree']:
-                entrees += [d['name'] for d in dishes]
+                entrees += [d['name'] for d in dishes if 'pizza' not in d['name'].lower()]
 
         return "ClarkAlert for %s: %s." \
                % (current_meal, ', '.join(entrees))
