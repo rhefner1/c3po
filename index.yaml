@@ -22,3 +22,8 @@ indexes:
   - name: settings
   - name: time_sent
     direction: desc
+
+- kind: StoredMessage
+  properties:
+  - name: settings
+  - name: picture_url
