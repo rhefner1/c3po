@@ -45,5 +45,4 @@ def pretty_date(date):
         return '{} minutes ago'.format(seconds / 60)
     elif seconds < 7200:
         return '1 hour ago'
-    else:
-        return '{} hours ago'.format(seconds / 3600)
+    return '{} hours ago'.format(seconds / 3600)

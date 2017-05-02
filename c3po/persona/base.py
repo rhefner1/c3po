@@ -38,7 +38,7 @@ class BasePersona(object):
                  for a in msg.text_chunks[1].split(' or ')
                  for b in a.split(' and ')
                  for c in b.split(',')
-                 if c is not '']
+                 if c != '']
 
         # Check for only one item
         if len(items) <= 1:

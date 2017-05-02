@@ -21,8 +21,8 @@ def get_current_meal():
         return 'breakfast'
     elif current_time.hour < variables.CLARK_LUNCH_END:
         return 'lunch'
-    else:
-        return 'dinner'
+
+    return 'dinner'
 
 
 def handle_bible_lookup(msg, version):
