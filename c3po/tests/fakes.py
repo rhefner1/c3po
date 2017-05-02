@@ -177,9 +177,6 @@ class FakeSmallGroupSettings(FakeBaseSettings):
 
 
 class FakeBeastsSettings(FakeSmallGroupSettings):
-    def __init__(self):
-        super(FakeBeastsSettings, self).__init__()
-
     @staticmethod
     def get_persona():
         return beasts.BeastsPersona()
@@ -237,9 +234,6 @@ class FakeTweet(mock.Mock):
 
 
 class FakeTwitter(mock.Mock):
-    def __init__(self):
-        super(FakeTwitter, self).__init__()
-
     @staticmethod
     def GetUserTimeline(**_):  # pylint: disable=invalid-name
         return [
