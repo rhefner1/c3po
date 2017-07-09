@@ -20,16 +20,9 @@ class TestTrumpResponders(unittest.TestCase):
 
         self.msg = fakes.FakeMessage(fakes.NAME, None, '', fakes.TIME_SENT)
 
-    def test_america(self):
-        self.msg.text = 'america is bad'
-        self.msg.process_message()
-
-        self.mock_send.assert_called_with(
-            'MAKE AMERICA GREAT AGAIN!')
-
     @mock.patch('c3po.util.twitter_api.pretty_twitter_date')
     @mock.patch('c3po.util.twitter_api.get_twitter_client')
-    def test_clark(self, fake_twitter, fake_date):
+    def test_trump(self, fake_twitter, fake_date):
         fake_twitter.return_value = fakes.FakeTwitter()
         fake_date.return_value = "1 hour ago"
 

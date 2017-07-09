@@ -16,15 +16,8 @@ class TrumpPersona(object):
         }
 
         self.not_mentioned_map = {
-            r'america': self.america,
             r'trump': self.trump,
         }
-
-    @staticmethod
-    @message.should_mention(False)
-    def america(_msg):
-        """'Murica."""
-        return 'MAKE AMERICA GREAT AGAIN!'
 
     @staticmethod
     @message.should_mention(False)
